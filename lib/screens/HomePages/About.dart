@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class About extends StatelessWidget {
-  const About({Key key}) : super(key: key);
+  About({Key key}) : super(key: key);
 
   _getage() {
     var birthdate = DateTime(2000, 5, 12);
@@ -13,28 +13,41 @@ class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(20),
-          child: Container(
-            child: FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Text(
-                'Laith Shono',
-                style: Theme.of(context).textTheme.headline1,
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Container(
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Text(
+                      'Laith Shono',
+                      style: Theme.of(context).textTheme.headline1,
+                    ),
+                  ),
+                ),
               ),
-            ),
+              Container(
+                constraints: BoxConstraints(maxWidth: 700),
+                padding: EdgeInsets.all(20),
+                child: Text(
+                  "I'm a ${_getage()} years old full-stack developer based in Riyadh, Saudi Arabia.\n" +
+                      'I study Information Technology and Computing and have been coding for 6+ years.',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+              ),
+            ],
           ),
         ),
-        Container(
-          constraints: BoxConstraints(maxWidth: 700),
-          padding: EdgeInsets.all(20),
-          child: Text(
-            "I'm a ${_getage()} years old full-stack developer based in Riyadh, Saudi Arabia.\n" +
-                'I study Information Technology and Computing and have been coding for 6+ years.',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.subtitle1,
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: Icon(
+            Icons.keyboard_arrow_down,
+            size: 30,
           ),
         ),
       ],
