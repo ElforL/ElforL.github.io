@@ -80,7 +80,10 @@ class MyHomePage extends StatelessWidget {
                   physics: NeverScrollableScrollPhysics(),
                   children: [
                     About(),
-                    Tools(),
+                    Tools(
+                      onTopOverscroll: () => _scroll(-1),
+                      onBottomOverscroll: () => _scroll(1),
+                    ),
                     ContactPage(),
                   ],
                 ),
