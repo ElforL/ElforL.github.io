@@ -54,8 +54,11 @@ class MyHomePage extends StatelessWidget {
           },
           // calculate and scroll
           onVerticalDragEnd: (endDetails) {
+            if (startVerticalDragDetails == null || updateVerticalDragDetails == null) return;
             double dy = updateVerticalDragDetails.globalPosition.dy - startVerticalDragDetails.globalPosition.dy;
             _scroll(-dy);
+            startVerticalDragDetails = null;
+            updateVerticalDragDetails = null;
           },
           // build child
           child: Listener(
