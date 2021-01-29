@@ -52685,7 +52685,7 @@ return P.a6($async$ij,r)},
 R:function(a,b){var s=this,r=null,q=T.mc(H.c([L.nV("Tools",K.bA(b).a9.b,r),T.i1(r,40,r),new S.o5(U.a2z("assets/flutter logo.png"),"Flutter is Google\u2019s UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase.",new S.W1(s),r),T.i1(r,20,r),new S.o5(U.a2z("assets/firebase-logo.png"),"Firebase helps you build and run successful apps.\nBacked by Google and loved by app development teams - from startups to global enterprises.",new S.W2(s),r),T.i1(r,20,r),new S.o5(U.a2z("assets/figma-logo.png"),"Figma is a vector graphics editor and prototyping tool which is primarily web-based, with additional offline features.",new S.W3(s),r)],t.b),C.bT,C.fD)
 return new U.dS(T.xf(new E.Cb(!0,new T.el(C.oW,q,r),r),r,r),new S.W4(s),r,t.wB)}}
 S.W4.prototype={
-$1:function(a){if(a instanceof G.fQ)if(a.e>0&&!0)this.a.c.$0()
+$1:function(a){if(a instanceof G.fQ&&a.d!=null)if(a.e>0&&!0)this.a.c.$0()
 else this.a.d.$0()},
 $S:4}
 S.W1.prototype={
