@@ -19,7 +19,7 @@ class Tools extends StatelessWidget {
   Widget build(BuildContext context) {
     return NotificationListener(
       onNotification: (notification) {
-        if (notification is OverscrollNotification) {
+        if (notification is OverscrollNotification && notification.dragDetails != null) {
           if (notification.overscroll > 0 && onBottomOverscroll != null) {
             onBottomOverscroll();
           } else {
