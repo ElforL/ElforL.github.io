@@ -10,6 +10,7 @@ class ContactPage extends StatelessWidget {
   final githubURL = 'https://github.com/ElforL/';
   final stackOFURL = 'https://stackoverflow.com/users/12571630/elfor';
   final fiverrURL = 'https://www.fiverr.com/elfor4';
+  final buttonsWidth = 250.0;
 
   _launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -25,7 +26,7 @@ class ContactPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(40),
           child: Text(
             'Contact',
             style: Theme.of(context).textTheme.headline2,
@@ -37,28 +38,28 @@ class ContactPage extends StatelessWidget {
             MyButton(
               child: Icon(Icons.email),
               label: 'Email',
-              width: 200,
+              width: buttonsWidth,
               onPressed: () => _launchURL('mailto:$emailAddress'),
             ),
             SizedBox(height: 10),
             MyButton(
               child: ImageIcon(AssetImage('assets/fiverr-Logo.png')),
               label: 'Fiverr',
-              width: 200,
+              width: buttonsWidth,
               onPressed: () => _launchURL(fiverrURL),
             ),
             SizedBox(height: 10),
             MyButton(
               child: Icon(AntDesign.github),
               label: 'Github',
-              width: 200,
+              width: buttonsWidth,
               onPressed: () => _launchURL(githubURL),
             ),
             SizedBox(height: 10),
             MyButton(
               child: Icon(FontAwesome.stack_overflow),
               label: 'Stackoverflow',
-              width: 200,
+              width: buttonsWidth,
               onPressed: () => _launchURL(stackOFURL),
             ),
           ],
