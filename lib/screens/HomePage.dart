@@ -11,10 +11,10 @@ class MyHomePage extends StatelessWidget {
   var scrollDuration = Duration(milliseconds: 300);
   var scrollCurve = Curves.linear;
 
-  _scroll(pointerSignal) async {
-    if (pointerSignal.scrollDelta.dy > 0) {
+  _scroll(dy) async {
+    if (dy > 0) {
       await _scrollDown();
-    } else if (pointerSignal.scrollDelta.dy < 0) {
+    } else if (dy < 0) {
       await _scrollUp();
     }
   }
@@ -35,6 +35,7 @@ class MyHomePage extends StatelessWidget {
     (pageKey.currentState as PageIndicatorState).changePage(pageCntrler.page.toInt());
   }
 
+  // used to calculate the delta y to detect vertical swipes
   DragStartDetails startVerticalDragDetails;
   DragUpdateDetails updateVerticalDragDetails;
 
@@ -43,31 +44,25 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: GestureDetector(
+          // set the start point
           onVerticalDragStart: (dragDetails) {
             startVerticalDragDetails = dragDetails;
           },
+          // set the end point
           onVerticalDragUpdate: (dragDetails) {
             updateVerticalDragDetails = dragDetails;
           },
+          // calculate and scroll
           onVerticalDragEnd: (endDetails) {
-            double dx = updateVerticalDragDetails.globalPosition.dx - startVerticalDragDetails.globalPosition.dx;
             double dy = updateVerticalDragDetails.globalPosition.dy - startVerticalDragDetails.globalPosition.dy;
-            double velocity = endDetails.primaryVelocity;
-
-            //Convert values to be positive
-            if (dx < 0) dx = -dx;
-            if (dy < 0) dy = -dy;
-
-            if (velocity < 0) {
-              _scrollDown();
-            } else {
-              _scrollUp();
-            }
+            _scroll(-dy);
           },
+          // build child
           child: Listener(
+            // read mouse scrolls
             onPointerSignal: (pointerSignal) {
               if (pointerSignal is PointerScrollEvent) {
-                _scroll(pointerSignal);
+                _scroll(pointerSignal.scrollDelta.dy);
               }
             },
             child: Stack(
