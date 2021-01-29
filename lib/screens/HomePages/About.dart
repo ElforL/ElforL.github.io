@@ -31,7 +31,7 @@ class About extends StatelessWidget {
           constraints: BoxConstraints(maxWidth: 700),
           padding: EdgeInsets.all(20),
           child: Text(
-            "I'm a ${_getage()} years old full-stack apps developer based in Riyadh, Saudi Arabia.\n" +
+            "I'm a ${_getage()} years old full-stack developer based in Riyadh, Saudi Arabia.\n" +
                 'I study Information Technology and Computing and have been coding for 6+ years.',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.subtitle1,
