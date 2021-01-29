@@ -10,10 +10,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  url_launcher: ^5.7.10
+  flutter_icons: ^1.1.0
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 flutter:
+  assets:
+    - assets/
   uses-material-design: true                                     
