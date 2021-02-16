@@ -2,14 +2,14 @@
     {
         "title": "AOU Schedule Manager",
         "description": "An Android app for Arab Open University students to help them track thier courses' lectures, Quizzes, TMAs, MTAs, and Finals",
-        "image": null,
+        "image": "assets/projects_previews/AOUSM.png",
         "codeURL": "https://github.com/ElforL/AOU_schedule_manager",
         "viewURL": "https://github.com/ElforL/AOU_schedule_manager/releases"
     },
     {
         "title": "ElfChat",
         "description": "A chat app",
-        "image": null,
+        "image": "assets/projects_previews/ElfChat.png",
         "codeURL": "https://github.com/ElforL/ElfChat",
         "viewURL": null
     },
