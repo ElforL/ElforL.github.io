@@ -3,13 +3,15 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "assets/AssetManifest.json": "a88b3947e9857b721224b7dea096eecf",
+  "assets/AssetManifest.json": "fc6def96637b5d652842f072fb0bf674",
 "assets/assets/figma-logo.png": "a2398fce9e832aa9e62e7d3330f54e7f",
 "assets/assets/firebase-logo.png": "b94bab8881c812999fa3e7bff1473c80",
 "assets/assets/fiverr-Logo.png": "c72f74b0262d4c8cbd73c76e2cae4e1f",
 "assets/assets/flutter%2520logo.png": "d874aaea841825127fb0d54e8a7c573b",
 "assets/assets/no_image.png": "1398d45824f598ab354fc69edfc90245",
-"assets/assets/projects.json": "6eea50b1301866c3e4fa82d0fba69189",
+"assets/assets/projects.json": "ea8661ed6cbb120e7e2028c0927b0037",
+"assets/assets/projects_previews/AOUSM.png": "cb6c67ce5713253a6df015aa4193c184",
+"assets/assets/projects_previews/ElfChat.png": "deb74c48d79453094659b1fd50b510d9",
 "assets/FontManifest.json": "f67cebcedcf99eaf92fab8686f965661",
 "assets/fonts/MaterialIcons-Regular.otf": "1288c9e28052e028aba623321f7826ac",
 "assets/NOTICES": "13117715ea703c37e09e3e7d7217e100",
@@ -32,9 +34,9 @@ const RESOURCES = {
 "favicon.png": "cbf46b3fc0e80a6cd9c2ba0eab302150",
 "icons/Icon-192.png": "9e413c6109b2473535624f3df27d70e1",
 "icons/Icon-512.png": "275e7ec50064b03e4cb9679248a98987",
-"index.html": "d1a3b7d4c8f1fa55cdb1d20f3f941e4f",
-"/": "d1a3b7d4c8f1fa55cdb1d20f3f941e4f",
-"main.dart.js": "d2dea52ed261a49877dc7945ca8fc028",
+"index.html": "0455e1003413f90bebbe723c8d0b61f7",
+"/": "0455e1003413f90bebbe723c8d0b61f7",
+"main.dart.js": "c5a07be3b0ac1381dee393c317a8c563",
 "manifest.json": "5a2c0526f1fe73e6f211bc7a9d15c210",
 "version.json": "d995b3f231549985076126a1ceabbdf0"
 };
