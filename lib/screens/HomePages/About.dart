@@ -69,7 +69,7 @@ class About extends StatelessWidget {
                   child: Container(
                     child: FittedBox(
                       fit: BoxFit.fitWidth,
-                      child: SelectableText(
+                      child: Text(
                         'Laith Shono',
                         style: Theme.of(context).textTheme.headline1,
                       ),
