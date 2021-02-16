@@ -35,6 +35,15 @@ class MyHomePage extends StatelessWidget {
     (pageKey.currentState as PageIndicatorState).changePage(pageCntrler.page.toInt());
   }
 
+  _scrollTo(int page) async {
+    await pageCntrler.animateToPage(
+      page,
+      duration: scrollDuration,
+      curve: scrollCurve,
+    );
+    (pageKey.currentState as PageIndicatorState).changePage(pageCntrler.page.toInt());
+  }
+
   // used to calculate the delta y to detect vertical swipes
   DragStartDetails startVerticalDragDetails;
   DragUpdateDetails updateVerticalDragDetails;
@@ -79,7 +88,7 @@ class MyHomePage extends StatelessWidget {
                   scrollDirection: Axis.vertical,
                   physics: NeverScrollableScrollPhysics(),
                   children: [
-                    About(),
+                    About(scrollTo: _scrollTo),
                     Tools(
                       onTopOverscroll: () => _scroll(-1),
                       onBottomOverscroll: () => _scroll(1),
