@@ -6,11 +6,12 @@ import 'package:portfolio/widgets/ProjectTile.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class Projects extends StatelessWidget {
-  List<Project> projects;
+  List<Project> projects = [];
 
   Future<String> loadProjects() async {
     var string = await rootBundle.loadString('assets/projects.json');
     var json = jsonDecode(string);
+    projects = [for (var project in json) Project.fromJson(project)];
   }
 
   @override
@@ -31,16 +32,14 @@ class Projects extends StatelessWidget {
           child: FutureBuilder(
               future: loadProjects(),
               builder: (context, snapshot) {
+                if (snapshot.connectionState != ConnectionState.done) return CircularProgressIndicator();
                 return Wrap(
                   spacing: 10,
                   runSpacing: 10,
                   children: [
-                    for (var i = 0; i < 7; i++)
+                    for (var project in projects)
                       ProjectTile(
-                        project: Project(
-                          'Title of my project is so long like wth',
-                          null,
-                        ),
+                        project: project,
                       ),
                   ],
                 );
