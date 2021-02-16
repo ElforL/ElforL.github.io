@@ -2,102 +2,46 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/screens/HomePages/About.dart';
 import 'package:portfolio/screens/HomePages/Contact.dart';
+import 'package:portfolio/screens/HomePages/Projects.dart';
 import 'package:portfolio/screens/HomePages/Tools.dart';
-import 'package:portfolio/widgets/PageIndicator.dart';
 
 class MyHomePage extends StatelessWidget {
-  final pageCntrler = PageController();
-  final pageKey = GlobalKey();
-  var scrollDuration = Duration(milliseconds: 300);
-  var scrollCurve = Curves.linear;
+  final _scrollController = ScrollController();
 
-  _scroll(dy) async {
-    if (dy > 0) {
-      await _scrollDown();
-    } else if (dy < 0) {
-      await _scrollUp();
-    }
-  }
+  final projectsKey = GlobalKey();
+  final toolsKey = GlobalKey();
+  final contactKey = GlobalKey();
 
-  _scrollDown() async {
-    await pageCntrler.nextPage(
-      duration: scrollDuration,
-      curve: scrollCurve,
-    );
-    (pageKey.currentState as PageIndicatorState).changePage(pageCntrler.page.toInt());
-  }
-
-  _scrollUp() async {
-    await pageCntrler.previousPage(
-      duration: scrollDuration,
-      curve: scrollCurve,
-    );
-    (pageKey.currentState as PageIndicatorState).changePage(pageCntrler.page.toInt());
-  }
-
-  _scrollTo(int page) async {
-    await pageCntrler.animateToPage(
-      page,
-      duration: scrollDuration,
-      curve: scrollCurve,
-    );
-    (pageKey.currentState as PageIndicatorState).changePage(pageCntrler.page.toInt());
-  }
-
-  // used to calculate the delta y to detect vertical swipes
-  DragStartDetails startVerticalDragDetails;
-  DragUpdateDetails updateVerticalDragDetails;
+  MyHomePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: GestureDetector(
-          // set the start point
-          onVerticalDragStart: (dragDetails) {
-            startVerticalDragDetails = dragDetails;
-          },
-          // set the end point
-          onVerticalDragUpdate: (dragDetails) {
-            updateVerticalDragDetails = dragDetails;
-          },
-          // calculate and scroll
-          onVerticalDragEnd: (endDetails) {
-            if (startVerticalDragDetails == null || updateVerticalDragDetails == null) return;
-            double dy = updateVerticalDragDetails.globalPosition.dy - startVerticalDragDetails.globalPosition.dy;
-            _scroll(-dy);
-            startVerticalDragDetails = null;
-            updateVerticalDragDetails = null;
-          },
-          // build child
-          child: Listener(
-            // read mouse scrolls
-            onPointerSignal: (pointerSignal) {
-              if (pointerSignal is PointerScrollEvent) {
-                _scroll(pointerSignal.scrollDelta.dy);
-              }
-            },
-            child: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: PageIndicator(key: pageKey, pagesCount: 3),
-                ),
-                PageView(
-                  controller: pageCntrler,
-                  scrollDirection: Axis.vertical,
-                  physics: NeverScrollableScrollPhysics(),
-                  children: [
-                    About(scrollTo: _scrollTo),
-                    Tools(
-                      onTopOverscroll: () => _scroll(-1),
-                      onBottomOverscroll: () => _scroll(1),
-                    ),
-                    ContactPage(),
-                  ],
-                ),
-              ],
-            ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              About(
+                contactPress: () => Scrollable.ensureVisible(contactKey.currentContext),
+                projectsPress: () => Scrollable.ensureVisible(projectsKey.currentContext),
+                toolsPress: () => Scrollable.ensureVisible(toolsKey.currentContext),
+              ),
+              Padding(
+                key: projectsKey,
+                padding: const EdgeInsets.symmetric(vertical: 100),
+                child: Projects(),
+              ),
+              Padding(
+                key: toolsKey,
+                padding: const EdgeInsets.symmetric(vertical: 100),
+                child: Tools(),
+              ),
+              Padding(
+                key: contactKey,
+                padding: const EdgeInsets.symmetric(vertical: 100),
+                child: ContactPage(),
+              ),
+            ],
           ),
         ),
       ),

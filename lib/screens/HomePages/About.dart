@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class About extends StatelessWidget {
-  About({Key key, this.scrollTo}) : super(key: key);
+  About({Key key, this.projectsPress, this.toolsPress, this.contactPress}) : super(key: key);
+
+  final Function projectsPress;
+  final Function toolsPress;
+  final Function contactPress;
 
   static const double topBarSpace = 20;
-  final Function scrollTo;
 
   _getage() {
     var birthdate = DateTime(2000, 5, 12);
@@ -26,65 +29,75 @@ class About extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: topBarSpace),
-                child: _buildTopButton(Text('My Work'), onPressed: () => scrollTo(1)),
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        children: [
+          Align(
+            alignment: Alignment.centerRight,
+            child: FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: topBarSpace),
+                      child: _buildTopButton(Text('My Work'), onPressed: () => projectsPress()),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: topBarSpace),
+                      child: _buildTopButton(Text('Tools'), onPressed: () => toolsPress()),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: topBarSpace),
+                      child: _buildTopButton(Text('Contact'), onPressed: () => contactPress()),
+                    ),
+                  ],
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: topBarSpace),
-                child: _buildTopButton(Text('Tools'), onPressed: () => scrollTo(2)),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: topBarSpace),
-                child: _buildTopButton(Text('Contact'), onPressed: () => scrollTo(3)),
-              ),
-            ],
+            ),
           ),
-        ),
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Container(
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: SelectableText(
-                      'Laith Shono',
-                      style: Theme.of(context).textTheme.headline1,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Container(
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: SelectableText(
+                        'Laith Shono',
+                        style: Theme.of(context).textTheme.headline1,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Container(
-                constraints: BoxConstraints(maxWidth: 700),
-                padding: EdgeInsets.all(20),
-                child: Text(
-                  "I'm a ${_getage()} years old full-stack developer based in Riyadh, Saudi Arabia.\n" +
-                      'I study Information Technology and Computing and have been coding for 6+ years.',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.subtitle1,
+                Container(
+                  constraints: BoxConstraints(maxWidth: 700),
+                  padding: EdgeInsets.all(20),
+                  child: Text(
+                    "I'm a ${_getage()} years old full-stack developer based in Riyadh, Saudi Arabia.\n" +
+                        'I study Information Technology and Computing and have been coding for 6+ years.',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(10),
-          child: Icon(
-            Icons.keyboard_arrow_down,
-            size: 30,
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Icon(
+              Icons.keyboard_arrow_down,
+              size: 30,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
