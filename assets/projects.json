@@ -16,7 +16,7 @@
     {
         "title": "SpotifyMuteAds",
         "description": "a windows C# script that mutes Spotify when an ad's playing",
-        "image": null,
+        "image": "assets/projects_previews/SpotifyMuteAds.png",
         "codeURL": "https://github.com/ElforL/SpotifyMuteAds",
         "viewURL": "https://github.com/ElforL/SpotifyMuteAds/releases"
     }
