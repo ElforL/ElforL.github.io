@@ -29,21 +29,52 @@ class Projects extends StatelessWidget {
             maxWidth: 1200,
           ),
           child: FutureBuilder(
-              future: loadProjects(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState != ConnectionState.done) return CircularProgressIndicator();
-                projects = snapshot.data;
-                return Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
-                  children: [
-                    for (var project in projects)
-                      ProjectTile(
-                        project: project,
-                      ),
-                  ],
-                );
-              }),
+            future: loadProjects(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState != ConnectionState.done) return CircularProgressIndicator();
+              projects = snapshot.data;
+              return Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 40),
+                    child: Text(
+                      'Full Apps',
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                  ),
+                  Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: [
+                      for (var project in projects)
+                        if (!project.isSmall)
+                          ProjectTile(
+                            project: project,
+                          ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 40),
+                    child: Text(
+                      'Fun Projects',
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                  ),
+                  Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: [
+                      for (var project in projects)
+                        if (project.isSmall)
+                          ProjectTile(
+                            project: project,
+                          ),
+                    ],
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ],
     );
