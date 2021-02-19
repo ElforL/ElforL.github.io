@@ -6,16 +6,15 @@ import 'package:portfolio/widgets/ProjectTile.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class Projects extends StatelessWidget {
-  List<Project> projects = [];
-
-  Future<String> loadProjects() async {
+  Future<List<Project>> loadProjects() async {
     var string = await rootBundle.loadString('assets/projects.json');
     var json = jsonDecode(string);
-    projects = [for (var project in json) Project.fromJson(project)];
+    return [for (var project in json) Project.fromJson(project)];
   }
 
   @override
   Widget build(BuildContext context) {
+    List<Project> projects = [];
     return Column(
       children: [
         Padding(
@@ -33,6 +32,7 @@ class Projects extends StatelessWidget {
               future: loadProjects(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) return CircularProgressIndicator();
+                projects = snapshot.data;
                 return Wrap(
                   spacing: 10,
                   runSpacing: 10,

@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/screens/HomePages/About.dart';
 import 'package:portfolio/screens/HomePages/Contact.dart';
@@ -6,8 +5,6 @@ import 'package:portfolio/screens/HomePages/Projects.dart';
 import 'package:portfolio/screens/HomePages/Tools.dart';
 
 class MyHomePage extends StatelessWidget {
-  final _scrollController = ScrollController();
-
   final projectsKey = GlobalKey();
   final toolsKey = GlobalKey();
   final contactKey = GlobalKey();
