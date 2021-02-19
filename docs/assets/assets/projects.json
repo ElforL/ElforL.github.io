@@ -3,13 +3,15 @@
         "title": "AOU Schedule Manager",
         "description": "An Android app for Arab Open University students to help them track thier courses' lectures, Quizzes, TMAs, MTAs, and Finals",
         "image": "assets/projects_previews/AOUSM.png",
+        "isSmall": false,
         "codeURL": "https://github.com/ElforL/AOU_schedule_manager",
-        "viewURL": "https://github.com/ElforL/AOU_schedule_manager/releases"
+        "viewURL": "https://github.com/ElforL/AOU_schedule_manager/blob/master/README.md"
     },
     {
         "title": "ElfChat",
         "description": "A chat app",
         "image": "assets/projects_previews/ElfChat.png",
+        "isSmall": false,
         "codeURL": "https://github.com/ElforL/ElfChat",
         "viewURL": null
     },
@@ -17,6 +19,7 @@
         "title": "SpotifyMuteAds",
         "description": "a windows C# script that mutes Spotify when an ad's playing",
         "image": "assets/projects_previews/SpotifyMuteAds.png",
+        "isSmall": true,
         "codeURL": "https://github.com/ElforL/SpotifyMuteAds",
         "viewURL": "https://github.com/ElforL/SpotifyMuteAds/releases"
     }
