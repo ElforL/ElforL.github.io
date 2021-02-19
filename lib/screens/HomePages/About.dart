@@ -100,9 +100,13 @@ class About extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(10),
-            child: Icon(
-              Icons.keyboard_arrow_down,
-              size: 30,
+            child: IconButton(
+              iconSize: 30,
+              splashRadius: 20,
+              onPressed: () => projectsPress(Duration(milliseconds: 500)),
+              icon: Icon(
+                Icons.keyboard_arrow_down,
+              ),
             ),
           ),
         ],
