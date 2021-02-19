@@ -45,15 +45,24 @@ class About extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: topBarSpace),
-                      child: _buildTopButton(Text('My Work'), onPressed: () => projectsPress()),
+                      child: _buildTopButton(
+                        Text('My Work'),
+                        onPressed: () => projectsPress(Duration(milliseconds: 200)),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: topBarSpace),
-                      child: _buildTopButton(Text('Tools'), onPressed: () => toolsPress()),
+                      child: _buildTopButton(
+                        Text('Tools'),
+                        onPressed: () => toolsPress(Duration(milliseconds: 200)),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: topBarSpace),
-                      child: _buildTopButton(Text('Contact'), onPressed: () => contactPress()),
+                      child: _buildTopButton(
+                        Text('Contact'),
+                        onPressed: () => contactPress(Duration(milliseconds: 200)),
+                      ),
                     ),
                   ],
                 ),

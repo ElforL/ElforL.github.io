@@ -19,9 +19,18 @@ class MyHomePage extends StatelessWidget {
           child: Column(
             children: [
               About(
-                contactPress: () => Scrollable.ensureVisible(contactKey.currentContext),
-                projectsPress: () => Scrollable.ensureVisible(projectsKey.currentContext),
-                toolsPress: () => Scrollable.ensureVisible(toolsKey.currentContext),
+                contactPress: (duration) => Scrollable.ensureVisible(
+                  contactKey.currentContext,
+                  duration: duration,
+                ),
+                projectsPress: (duration) => Scrollable.ensureVisible(
+                  projectsKey.currentContext,
+                  duration: duration,
+                ),
+                toolsPress: (duration) => Scrollable.ensureVisible(
+                  toolsKey.currentContext,
+                  duration: duration,
+                ),
               ),
               Padding(
                 key: projectsKey,
