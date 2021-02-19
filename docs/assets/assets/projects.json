@@ -22,5 +22,21 @@
         "isSmall": true,
         "codeURL": "https://github.com/ElforL/SpotifyMuteAds",
         "viewURL": "https://github.com/ElforL/SpotifyMuteAds/releases"
+    },
+    {
+        "title": "Maze Generator",
+        "description": "a maze generator using a recursive backtracking algorithm.",
+        "image": "assets/projects_previews/maze.gif",
+        "isSmall": true,
+        "codeURL": "https://github.com/ElforL/MazeGenerator",
+        "viewURL": null
+    },
+    {
+        "title": "Conway's Game of Life",
+        "description": "Implementation of the famous Conway's game of life. It is a cellular automaton, that was invented by Cambridge mathematician John Conway.",
+        "image": "assets/projects_previews/gol.gif",
+        "isSmall": true,
+        "codeURL": "https://github.com/ElforL/GameOfLife",
+        "viewURL": null
     }
 ]
