@@ -9,7 +9,6 @@ class ContactPage extends StatelessWidget {
   final emailAddress = 'elforDev@gmail.com';
   final githubURL = 'https://github.com/ElforL/';
   final stackOFURL = 'https://stackoverflow.com/users/12571630/elfor';
-  final fiverrURL = 'https://www.fiverr.com/elfor4';
   final buttonsWidth = 250.0;
 
   _launchURL(String url) async {
@@ -40,13 +39,6 @@ class ContactPage extends StatelessWidget {
               label: 'Email',
               width: buttonsWidth,
               onPressed: () => _launchURL('mailto:$emailAddress'),
-            ),
-            SizedBox(height: 10),
-            MyButton(
-              child: ImageIcon(AssetImage('assets/fiverr-Logo.png')),
-              label: 'Fiverr',
-              width: buttonsWidth,
-              onPressed: () => _launchURL(fiverrURL),
             ),
             SizedBox(height: 10),
             MyButton(
