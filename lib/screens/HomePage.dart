@@ -1,8 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/screens/HomePages/About.dart';
 import 'package:portfolio/screens/HomePages/Contact.dart';
 import 'package:portfolio/screens/HomePages/Projects.dart';
 import 'package:portfolio/screens/HomePages/Tools.dart';
+import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -59,29 +61,14 @@ class MyHomePage extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 100, bottom: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'This website is an open source project ',
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                    TextButton(
-                      onPressed: () => _launchURL(githubPageURL),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.transparent),
-                        overlayColor: MaterialStateProperty.all(Colors.transparent),
-                        shadowColor: MaterialStateProperty.all(Colors.transparent),
-                      ),
-                      child: Text(
-                        'available on my GitHub.',
-                        style: Theme.of(context).textTheme.caption.copyWith(
-                              color: Colors.blue,
-                              decoration: TextDecoration.underline,
-                            ),
-                      ),
-                    )
-                  ],
+                child: Text.rich(
+                  TextSpan(
+                    text: 'Website source code available on GitHub',
+                    style: Theme.of(context).textTheme.caption,
+                    recognizer: TapGestureRecognizer()..onTap = () => _launchURL(githubPageURL),
+                    onEnter: (event) {},
+                    onExit: (event) {},
+                  ),
                 ),
               )
             ],
