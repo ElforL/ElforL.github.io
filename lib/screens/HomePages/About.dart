@@ -1,20 +1,7 @@
 import 'package:flutter/material.dart';
 
 class About extends StatelessWidget {
-  About({Key key, this.projectsPress, this.toolsPress, this.contactPress}) : super(key: key);
-
-  final Function projectsPress;
-  final Function toolsPress;
-  final Function contactPress;
-
-  static const double topBarSpace = 20;
-
-  _getage() {
-    var birthdate = DateTime(2000, 5, 12);
-    var today = DateTime.now();
-    var isBefore = today.isBefore(DateTime(today.year, birthdate.month, birthdate.day));
-    return today.year - birthdate.year - (isBefore ? 1 : 0);
-  }
+  About({Key key}) : super(key: key);
 
   Widget _buildTopButton(Text text, {Function onPressed}) {
     return TextButton(
@@ -27,89 +14,52 @@ class About extends StatelessWidget {
     );
   }
 
+  _textWidth(double screenWidth) {
+    var out = screenWidth;
+    if (screenWidth > 850) {
+      out *= 0.25;
+    } else if (screenWidth > 600) {
+      out *= 0.15;
+    } else {
+      out *= 0.05;
+    }
+    return out;
+  }
+
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      child: Column(
-        children: [
-          Align(
-            alignment: Alignment.centerRight,
-            child: FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: topBarSpace),
-                      child: _buildTopButton(
-                        Text('My Work'),
-                        onPressed: () => projectsPress(Duration(milliseconds: 200)),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: topBarSpace),
-                      child: _buildTopButton(
-                        Text('Tools'),
-                        onPressed: () => toolsPress(Duration(milliseconds: 200)),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: topBarSpace),
-                      child: _buildTopButton(
-                        Text('Contact'),
-                        onPressed: () => contactPress(Duration(milliseconds: 200)),
-                      ),
-                    ),
-                  ],
+      height: height,
+      width: width,
+      // padding: EdgeInsets.symmetric(horizontal: 300),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: _textWidth(width)),
+          constraints: BoxConstraints(maxWidth: 450),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Hi there 👋, I'm",
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
+              FittedBox(
+                child: Text(
+                  'Laith',
+                  style: Theme.of(context).textTheme.headline1.copyWith(fontWeight: FontWeight.w500),
                 ),
               ),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Container(
-                    child: FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: Text(
-                        'Laith Shono',
-                        style: Theme.of(context).textTheme.headline1,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  constraints: BoxConstraints(maxWidth: 700),
-                  padding: EdgeInsets.all(20),
-                  child: Text(
-                    "I'm a ${_getage()} years old full-stack developer based in Riyadh, Saudi Arabia.\n" +
-                        'I study Information Technology and Computing and have been coding for 6+ years.',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.subtitle1,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: IconButton(
-              iconSize: 30,
-              splashRadius: 20,
-              onPressed: () => projectsPress(Duration(milliseconds: 500)),
-              icon: Icon(
-                Icons.keyboard_arrow_down,
+              Text(
+                "I build beautiful and powerful apps across various platforms and devices.",
+                style: Theme.of(context).textTheme.subtitle1,
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
