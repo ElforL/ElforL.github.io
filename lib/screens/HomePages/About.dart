@@ -31,7 +31,7 @@ class About extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Container(
-      height: height,
+      constraints: BoxConstraints(minHeight: height),
       width: width,
       // padding: EdgeInsets.symmetric(horizontal: 300),
       child: Align(
