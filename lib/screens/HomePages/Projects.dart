@@ -3,18 +3,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:portfolio/models/Project.dart';
 import 'package:portfolio/widgets/ProjectTile.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
 class Projects extends StatelessWidget {
-  Future<List<Project>> loadProjects() async {
-    var string = await rootBundle.loadString('assets/projects.json');
-    var json = jsonDecode(string);
-    return [for (var project in json) Project.fromJson(project)];
-  }
+  final List<Project> projects;
+
+  const Projects({Key key, @required this.projects}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<Project> projects = [];
     return Column(
       children: [
         Padding(

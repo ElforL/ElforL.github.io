@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:portfolio/main.dart';
 import 'package:portfolio/screens/HomePages/About.dart';
 import 'package:portfolio/screens/HomePages/Contact.dart';
 import 'package:portfolio/screens/HomePages/Projects.dart';
@@ -11,7 +12,7 @@ class MyHomePage extends StatelessWidget {
   final projectsKey = GlobalKey();
   final toolsKey = GlobalKey();
   final contactKey = GlobalKey();
-  static const githubPageURL = 'https://github.com/ElforL/ElforL.github.io';
+  final githubPageURL = dbServices.gitHubURL;
 
   MyHomePage({Key key}) : super(key: key);
 
@@ -35,8 +36,7 @@ class MyHomePage extends StatelessWidget {
   }
 
   Widget _topBar(context) {
-    const githubURL = 'https://github.com/ElforL/';
-    const linkedInURL = 'https://www.linkedin.com/in/laith-shono-a88159214';
+    final linkedInURL = dbServices.linkedInURL;
     const duration = Duration(milliseconds: 600);
     final siteMap = <String, GlobalKey>{
       'Projects': projectsKey,
@@ -57,7 +57,7 @@ class MyHomePage extends StatelessWidget {
             splashRadius: 0.001,
             hoverColor: Colors.transparent,
             icon: Icon(AntDesign.github),
-            onPressed: () => _launchURL(githubURL),
+            onPressed: () => _launchURL(githubPageURL),
           ),
           Spacer(),
           for (var i = 0; i < siteMap.length; i++)
@@ -85,24 +85,11 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           children: [
             _topBar(context),
-            About(
-                // contactPress: (duration) => Scrollable.ensureVisible(
-                //   contactKey.currentContext,
-                //   duration: duration,
-                // ),
-                // projectsPress: (duration) => Scrollable.ensureVisible(
-                //   projectsKey.currentContext,
-                //   duration: duration,
-                // ),
-                // toolsPress: (duration) => Scrollable.ensureVisible(
-                //   toolsKey.currentContext,
-                //   duration: duration,
-                // ),
-                ),
+            About(),
             Padding(
               key: projectsKey,
               padding: const EdgeInsets.symmetric(vertical: 100),
-              child: Projects(),
+              child: Projects(projects: dbServices.projects),
             ),
             Padding(
               key: toolsKey,

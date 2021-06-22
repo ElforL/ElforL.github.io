@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:portfolio/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactPage extends StatelessWidget {
   ContactPage({Key key}) : super(key: key);
 
-  final emailAddress = 'elforDev@gmail.com';
-  final githubURL = 'https://github.com/ElforL/';
-  final stackOFURL = 'https://stackoverflow.com/users/12571630/elfor';
-  final linkedInURL = 'https://www.linkedin.com/in/laith-shono-a88159214';
-  final cv_url = 'https://www.linkedin.com/in/laith-shono-a88159214';
+  final emailAddress = dbServices.emailAddress;
+  final githubURL = dbServices.gitHubURL;
+  final stackOFURL = dbServices.stackOverflowURL;
+  final linkedInURL = dbServices.linkedInURL;
+  final cvURL = dbServices.cvURL;
   final buttonsWidth = 250.0;
 
-  final _showCV = false;
+  bool get _showCV => cvURL != null;
 
   _launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -75,7 +76,7 @@ class ContactPage extends StatelessWidget {
                         foregroundColor: MaterialStateProperty.all(Colors.black),
                       ),
                       onPressed: () {
-                        _launchURL(cv_url);
+                        _launchURL(cvURL);
                       },
                     ),
                   ),
