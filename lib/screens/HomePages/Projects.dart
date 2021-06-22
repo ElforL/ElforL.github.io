@@ -20,7 +20,7 @@ class Projects extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 40),
           child: Text(
-            'Work',
+            'Projects',
             style: Theme.of(context).textTheme.headline2,
           ),
         ),
