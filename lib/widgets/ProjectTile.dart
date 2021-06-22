@@ -48,9 +48,12 @@ class _ProjectTileState extends State<ProjectTile> {
             image: DecorationImage(
               fit: BoxFit.cover,
               alignment: Alignment.center,
-              image: AssetImage(
-                widget.project.imagePath == null ? 'assets/no_image.png' : widget.project.imagePath,
-              ),
+              onError: (exception, stackTrace) => AssetImage('assets/no_image.png'),
+              image: widget.project.imagePath == null
+                  ? AssetImage('assets/no_image.png')
+                  : NetworkImage(
+                      widget.project.imagePath,
+                    ),
             ),
           ),
           child: AnimatedSwitcher(

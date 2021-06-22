@@ -26,5 +26,4 @@ dev_dependencies:
 flutter:
   assets:
     - assets/
-    - assets/projects_previews/
   uses-material-design: true                                     
