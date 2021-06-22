@@ -64,10 +64,8 @@ class MyHomePage extends StatelessWidget {
                 child: Text.rich(
                   TextSpan(
                     text: 'Website source code available on GitHub',
-                    style: Theme.of(context).textTheme.caption,
+                  style: Theme.of(context).textTheme.caption.copyWith(color: Colors.grey.shade800),
                     recognizer: TapGestureRecognizer()..onTap = () => _launchURL(githubPageURL),
-                    onEnter: (event) {},
-                    onExit: (event) {},
                   ),
                 ),
               )
