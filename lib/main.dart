@@ -3,8 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:portfolio/screens/HomePage.dart';
+import 'package:portfolio/services/firestore.dart';
+
+FirestoreServices dbServices;
 
 void main() {
+  dbServices = FirestoreServices();
   runApp(MyApp());
 }
 
@@ -26,7 +30,18 @@ class MyApp extends StatelessWidget {
           subtitle1: TextStyle(color: Colors.white),
         ),
       ),
-      home: MyHomePage(),
+      home: FutureBuilder(
+          future: dbServices.load(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              return Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(color: Colors.white),
+                ),
+              );
+            }
+            return MyHomePage();
+          }),
     );
   }
 }
