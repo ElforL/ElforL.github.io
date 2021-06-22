@@ -13,6 +13,12 @@ class MyHomePage extends StatelessWidget {
   final toolsKey = GlobalKey();
   final contactKey = GlobalKey();
   final githubPageURL = dbServices.gitHubURL;
+  final linkedInURL = dbServices.linkedInURL;
+  get siteMap => <String, GlobalKey>{
+        'Projects': projectsKey,
+        'Tools': toolsKey,
+        'Contact': contactKey,
+      };
 
   MyHomePage({Key key}) : super(key: key);
 
@@ -36,13 +42,8 @@ class MyHomePage extends StatelessWidget {
   }
 
   Widget _topBar(context) {
-    final linkedInURL = dbServices.linkedInURL;
     const duration = Duration(milliseconds: 600);
-    final siteMap = <String, GlobalKey>{
-      'Projects': projectsKey,
-      'Tools': toolsKey,
-      'Contact': contactKey,
-    };
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -60,16 +61,62 @@ class MyHomePage extends StatelessWidget {
             onPressed: () => _launchURL(githubPageURL),
           ),
           Spacer(),
-          for (var i = 0; i < siteMap.length; i++)
-            _buildTopButton(
-              Text(
-                siteMap.keys.elementAt(i),
-                style: Theme.of(context).textTheme.subtitle1,
-              ),
+          if (MediaQuery.of(context).size.width > 600)
+            for (var i = 0; i < siteMap.length; i++)
+              _buildTopButton(
+                Text(
+                  siteMap.keys.elementAt(i),
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+                onPressed: () {
+                  Scrollable.ensureVisible(
+                    siteMap.entries.elementAt(i).value.currentContext,
+                    duration: duration * (i > 0 ? 1.5 * i : 1),
+                  );
+                },
+              )
+          else
+            IconButton(
+              icon: Icon(Icons.menu),
               onPressed: () {
-                Scrollable.ensureVisible(
-                  siteMap.entries.elementAt(i).value.currentContext,
-                  duration: duration * (i > 0 ? 1.5 * i : 1),
+                showGeneralDialog(
+                  context: context,
+                  pageBuilder: (context, animation, secondaryAnimation) {
+                    return Dialog(
+                      backgroundColor: Colors.white,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: IconButton(
+                              onPressed: () => Navigator.pop(context),
+                              color: Colors.black,
+                              icon: Icon(Icons.close),
+                            ),
+                          ),
+                          for (var i = 0; i < siteMap.length; i++)
+                            ListTile(
+                              title: Center(
+                                child: FittedBox(
+                                  child: Text(
+                                    siteMap.keys.elementAt(i),
+                                    style: Theme.of(context).textTheme.subtitle1.apply(color: Colors.black),
+                                  ),
+                                ),
+                              ),
+                              onTap: () {
+                                Navigator.pop(context);
+                                Scrollable.ensureVisible(
+                                  siteMap.entries.elementAt(i).value.currentContext,
+                                  duration: duration * (i > 0 ? 1.5 * i : 1),
+                                );
+                              },
+                            )
+                        ],
+                      ),
+                    );
+                  },
                 );
               },
             ),

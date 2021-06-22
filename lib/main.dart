@@ -31,17 +31,18 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: FutureBuilder(
-          future: dbServices.load(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState != ConnectionState.done) {
-              return Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(color: Colors.white),
-                ),
-              );
-            }
-            return MyHomePage();
-          }),
+        future: dbServices.load(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(color: Colors.white),
+              ),
+            );
+          }
+          return MyHomePage();
+        },
+      ),
     );
   }
 }
