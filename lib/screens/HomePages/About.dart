@@ -3,17 +3,6 @@ import 'package:flutter/material.dart';
 class About extends StatelessWidget {
   About({Key key}) : super(key: key);
 
-  Widget _buildTopButton(Text text, {Function onPressed}) {
-    return TextButton(
-      child: text,
-      onPressed: onPressed,
-      style: ButtonStyle(
-        overlayColor: MaterialStateProperty.all(Colors.transparent),
-        foregroundColor: MaterialStateProperty.all(Colors.white),
-      ),
-    );
-  }
-
   _textWidth(double screenWidth) {
     var out = screenWidth;
     if (screenWidth > 850) {

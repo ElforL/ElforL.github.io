@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:portfolio/screens/HomePages/About.dart';
 import 'package:portfolio/screens/HomePages/Contact.dart';
 import 'package:portfolio/screens/HomePages/Projects.dart';
@@ -22,12 +23,68 @@ class MyHomePage extends StatelessWidget {
     }
   }
 
+  Widget _buildTopButton(Text text, {Function onPressed}) {
+    return TextButton(
+      child: text,
+      onPressed: onPressed,
+      style: ButtonStyle(
+        overlayColor: MaterialStateProperty.all(Colors.transparent),
+        foregroundColor: MaterialStateProperty.all(Colors.white),
+      ),
+    );
+  }
+
+  Widget _topBar(context) {
+    const githubURL = 'https://github.com/ElforL/';
+    const linkedInURL = 'https://www.linkedin.com/in/laith-shono-a88159214';
+    const duration = Duration(milliseconds: 600);
+    final siteMap = <String, GlobalKey>{
+      'Projects': projectsKey,
+      'Tools': toolsKey,
+      'Contact': contactKey,
+    };
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          IconButton(
+            splashRadius: 0.001,
+            hoverColor: Colors.transparent,
+            icon: Icon(AntDesign.linkedin_square),
+            onPressed: () => _launchURL(linkedInURL),
+          ),
+          IconButton(
+            splashRadius: 0.001,
+            hoverColor: Colors.transparent,
+            icon: Icon(AntDesign.github),
+            onPressed: () => _launchURL(githubURL),
+          ),
+          Spacer(),
+          for (var i = 0; i < siteMap.length; i++)
+            _buildTopButton(
+              Text(
+                siteMap.keys.elementAt(i),
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
+              onPressed: () {
+                Scrollable.ensureVisible(
+                  siteMap.entries.elementAt(i).value.currentContext,
+                  duration: duration * (i > 0 ? 1.5 * i : 1),
+                );
+              },
+            ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
+            _topBar(context),
             About(
                 // contactPress: (duration) => Scrollable.ensureVisible(
                 //   contactKey.currentContext,
