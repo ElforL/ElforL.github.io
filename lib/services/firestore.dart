@@ -19,6 +19,20 @@ class FirestoreServices {
     await _loadProjects();
   }
 
+  /// sorts the projects keeping the full apps at the start
+  List<Project> _sortProjects() {
+    for (var i = 0; i < projects.length; i++) {
+      for (var j = i + 1; j < projects.length; j++) {
+        if (projects[i].isSmall && !projects[j].isSmall) {
+          var temp = projects[i];
+          projects[i] = projects[j];
+          projects[j] = temp;
+        }
+      }
+    }
+    return projects;
+  }
+
   Future<QuerySnapshot<Object>> _loadProjects() async {
     projects ??= [];
     var result = await db.collection('projects').get();
@@ -26,6 +40,7 @@ class FirestoreServices {
       var project = Project.fromJson(doc.data());
       projects.add(project);
     }
+    _sortProjects();
     return result;
   }
 
