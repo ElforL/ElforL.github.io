@@ -20,7 +20,7 @@ class Projects extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 40),
           child: Text(
-            'My Work',
+            'Work',
             style: Theme.of(context).textTheme.headline2,
           ),
         ),
@@ -31,14 +31,15 @@ class Projects extends StatelessWidget {
           child: FutureBuilder(
             future: loadProjects(),
             builder: (context, snapshot) {
-              if (snapshot.connectionState != ConnectionState.done) return CircularProgressIndicator();
+              if (snapshot.connectionState != ConnectionState.done) return Center(child: CircularProgressIndicator());
               projects = snapshot.data;
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 40),
                     child: Text(
-                      'Full Apps',
+                      'Full apps',
                       style: Theme.of(context).textTheme.headline4,
                     ),
                   ),
@@ -56,7 +57,7 @@ class Projects extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 40),
                     child: Text(
-                      'Fun Projects',
+                      'Small fun projects',
                       style: Theme.of(context).textTheme.headline4,
                     ),
                   ),
