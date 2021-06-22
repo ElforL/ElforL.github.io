@@ -18,7 +18,8 @@ class Projects extends StatelessWidget {
             style: Theme.of(context).textTheme.headline2,
           ),
         ),
-        ConstrainedBox(
+        Container(
+          padding: EdgeInsets.all(10),
           constraints: BoxConstraints(
             maxWidth: 1200,
           ),
