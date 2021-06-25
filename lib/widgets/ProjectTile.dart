@@ -87,16 +87,16 @@ class _ProjectTileState extends State<ProjectTile> {
                           // mainAxisAlignment: MainAxisAlignment.end,
                           alignment: WrapAlignment.end,
                           children: [
-                            TextButton(
-                              child: Text('VIEW'),
-                              onPressed:
-                                  widget.project.viewURL == null ? null : () => _launchURL(widget.project.viewURL),
-                            ),
-                            TextButton(
-                              child: Text('CODE'),
-                              onPressed:
-                                  widget.project.codeURL == null ? null : () => _launchURL(widget.project.codeURL),
-                            ),
+                            if (widget.project.viewURL != null)
+                              TextButton(
+                                child: Text('VIEW'),
+                                onPressed: () => _launchURL(widget.project.viewURL),
+                              ),
+                            if (widget.project.codeURL != null)
+                              TextButton(
+                                child: Text('CODE'),
+                                onPressed: () => _launchURL(widget.project.codeURL),
+                              ),
                           ],
                         )
                       ],
