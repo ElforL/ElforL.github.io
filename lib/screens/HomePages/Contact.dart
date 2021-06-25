@@ -117,31 +117,35 @@ class ContactPage extends StatelessWidget {
                 child: IconButton(
                   splashRadius: 15,
                   icon: Icon(Icons.email),
-                  onPressed: () {
-                    Clipboard.setData(ClipboardData(text: emailAddress));
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Email address copied.'),
-                        behavior: SnackBarBehavior.floating,
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                  },
+                  onPressed: () => _launchURL('mailto:$emailAddress'),
                 ),
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: SelectableText(
-              emailAddress,
-              style: TextStyle(
-                fontSize: 18,
-                letterSpacing: 2,
+          GestureDetector(
+            onLongPress: () => _copyEmailAddress(context),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: SelectableText(
+                emailAddress,
+                style: TextStyle(
+                  fontSize: 18,
+                  letterSpacing: 2,
+                ),
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void _copyEmailAddress(BuildContext context) {
+    Clipboard.setData(ClipboardData(text: emailAddress));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Email address copied.'),
+        duration: Duration(seconds: 23),
       ),
     );
   }
