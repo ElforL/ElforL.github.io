@@ -45,6 +45,7 @@ class _ProjectTileState extends State<ProjectTile> {
           height: 200,
           width: 200,
           decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
             image: DecorationImage(
               fit: BoxFit.cover,
               alignment: Alignment.center,
