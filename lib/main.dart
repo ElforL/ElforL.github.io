@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:portfolio/screens/HomePage.dart';
 import 'package:portfolio/services/firestore.dart';
 
