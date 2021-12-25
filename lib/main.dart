@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:portfolio/screens/HomePage.dart';
 import 'package:portfolio/services/firestore.dart';
 
@@ -19,8 +16,6 @@ class MyApp extends StatelessWidget {
       title: 'Laith Shono',
       theme: ThemeData(
         brightness: Brightness.dark,
-        primarySwatch: Colors.blue,
-        accentColor: Colors.white,
         scaffoldBackgroundColor: Color(0xFF050505),
         textTheme: TextTheme(
           headline1: TextStyle(color: Colors.white),
