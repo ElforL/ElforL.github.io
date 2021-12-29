@@ -5,9 +5,9 @@ import 'package:portfolio/widgets/ProjectTile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Projects extends StatelessWidget {
-  final List<Project> projects;
+  final List<Project>? projects;
 
-  const Projects({Key key, @required this.projects}) : super(key: key);
+  const Projects({Key? key, required this.projects}) : super(key: key);
 
   _launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -38,7 +38,7 @@ class Projects extends StatelessWidget {
             spacing: 10,
             runSpacing: 10,
             children: [
-              for (var project in projects)
+              for (var project in projects!)
                 ProjectTile(
                   project: project,
                 ),
@@ -52,7 +52,7 @@ class Projects extends StatelessWidget {
             foregroundColor: MaterialStateProperty.all(Colors.grey),
           ),
           onPressed: () {
-            _launchURL(dbServices.gitHubURL);
+            _launchURL(dbServices.gitHubURL!);
           },
         )
       ],

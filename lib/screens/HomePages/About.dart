@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class About extends StatelessWidget {
-  About({Key key}) : super(key: key);
+  About({Key? key}) : super(key: key);
 
   _textWidth(double screenWidth) {
     var out = screenWidth;
@@ -39,7 +39,7 @@ class About extends StatelessWidget {
               FittedBox(
                 child: Text(
                   'Laith',
-                  style: Theme.of(context).textTheme.headline1.copyWith(fontWeight: FontWeight.w500),
+                  style: Theme.of(context).textTheme.headline1!.copyWith(fontWeight: FontWeight.w500),
                 ),
               ),
               Text(

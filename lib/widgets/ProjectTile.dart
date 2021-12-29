@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 class ProjectTile extends StatefulWidget {
   final Project project;
 
-  const ProjectTile({Key key, @required this.project}) : super(key: key);
+  const ProjectTile({Key? key, required this.project}) : super(key: key);
   @override
   _ProjectTileState createState() => _ProjectTileState();
 }
@@ -53,8 +53,8 @@ class _ProjectTileState extends State<ProjectTile> {
               image: widget.project.imagePath == null
                   ? AssetImage('assets/no_image.png')
                   : NetworkImage(
-                      widget.project.imagePath,
-                    ),
+                      widget.project.imagePath!,
+                    ) as ImageProvider,
             ),
           ),
           child: AnimatedSwitcher(
@@ -73,7 +73,7 @@ class _ProjectTileState extends State<ProjectTile> {
                               children: [
                                 Text(
                                   widget.project.title,
-                                  style: Theme.of(context).textTheme.subtitle1.copyWith(fontWeight: FontWeight.bold),
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(height: 10),
                                 Text(
@@ -91,12 +91,12 @@ class _ProjectTileState extends State<ProjectTile> {
                             if (widget.project.viewURL != null)
                               TextButton(
                                 child: Text('VIEW'),
-                                onPressed: () => _launchURL(widget.project.viewURL),
+                                onPressed: () => _launchURL(widget.project.viewURL!),
                               ),
                             if (widget.project.codeURL != null)
                               TextButton(
                                 child: Text('CODE'),
-                                onPressed: () => _launchURL(widget.project.codeURL),
+                                onPressed: () => _launchURL(widget.project.codeURL!),
                               ),
                           ],
                         )

@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/screens/HomePages/About.dart';
 import 'package:portfolio/screens/HomePages/Contact.dart';
@@ -20,7 +19,7 @@ class MyHomePage extends StatelessWidget {
         'Contact': contactKey,
       };
 
-  MyHomePage({Key key}) : super(key: key);
+  MyHomePage({Key? key}) : super(key: key);
 
   _launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -30,10 +29,10 @@ class MyHomePage extends StatelessWidget {
     }
   }
 
-  Widget _buildTopButton(Text text, {Function onPressed}) {
+  Widget _buildTopButton(Text text, {Function? onPressed}) {
     return TextButton(
       child: text,
-      onPressed: onPressed,
+      onPressed: onPressed as void Function()?,
       style: ButtonStyle(
         overlayColor: MaterialStateProperty.all(Colors.transparent),
         foregroundColor: MaterialStateProperty.all(Colors.white),
@@ -51,14 +50,14 @@ class MyHomePage extends StatelessWidget {
           IconButton(
             splashRadius: 0.001,
             hoverColor: Colors.transparent,
-            icon: Icon(AntDesign.linkedin_square),
-            onPressed: () => _launchURL(linkedInURL),
+            icon: Image.asset('assets/linkedIn_logo.png'),
+            onPressed: () => _launchURL(linkedInURL!),
           ),
           IconButton(
             splashRadius: 0.001,
             hoverColor: Colors.transparent,
-            icon: Icon(AntDesign.github),
-            onPressed: () => _launchURL(githubPageURL),
+            icon: Icon(Icons.close),
+            onPressed: () => _launchURL(githubPageURL!),
           ),
           Spacer(),
           if (MediaQuery.of(context).size.width > 600)
@@ -101,7 +100,7 @@ class MyHomePage extends StatelessWidget {
                                 child: FittedBox(
                                   child: Text(
                                     siteMap.keys.elementAt(i),
-                                    style: Theme.of(context).textTheme.subtitle1.apply(color: Colors.black),
+                                    style: Theme.of(context).textTheme.subtitle1!.apply(color: Colors.black),
                                   ),
                                 ),
                               ),
@@ -153,8 +152,8 @@ class MyHomePage extends StatelessWidget {
               child: Text.rich(
                 TextSpan(
                   text: 'Website source code available on GitHub',
-                  style: Theme.of(context).textTheme.caption.copyWith(color: Colors.grey.shade800),
-                  recognizer: TapGestureRecognizer()..onTap = () => _launchURL(githubPageURL),
+                  style: Theme.of(context).textTheme.caption!.copyWith(color: Colors.grey.shade800),
+                  recognizer: TapGestureRecognizer()..onTap = () => _launchURL(githubPageURL!),
                 ),
               ),
             )

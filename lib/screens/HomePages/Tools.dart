@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Tools extends StatelessWidget {
-  const Tools({Key key}) : super(key: key);
+  const Tools({Key? key}) : super(key: key);
 
   _launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -27,21 +28,21 @@ class Tools extends StatelessWidget {
               ),
               SizedBox(height: 40),
               ToolEntry(
-                logo: Image.asset('assets/flutter logo.png'),
+                logo: SvgPicture.asset('assets/flutter_logo_lockup.svg'),
                 description:
                     'Flutter is Google’s UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase.',
                 onLearnMore: () => _launchURL('https://flutter.dev/'),
               ),
               SizedBox(height: 20),
               ToolEntry(
-                logo: Image.asset('assets/firebase-logo.png'),
+                logo: SvgPicture.asset('assets/firebase-logo-knockout.svg'),
                 description:
                     'Firebase helps you build and run successful apps.\nBacked by Google and loved by app development teams - from startups to global enterprises.',
                 onLearnMore: () => _launchURL('https://firebase.google.com/'),
               ),
               SizedBox(height: 20),
               ToolEntry(
-                logo: Image.asset('assets/figma-logo.png'),
+                logo: SvgPicture.asset('assets/Figma-Wordmark-White.svg'),
                 description:
                     'Figma is a vector graphics editor and prototyping tool which is primarily web-based, with additional offline features.',
                 onLearnMore: () => _launchURL('https://www.figma.com/about/'),
@@ -55,11 +56,11 @@ class Tools extends StatelessWidget {
 }
 
 class ToolEntry extends StatelessWidget {
-  const ToolEntry({Key key, @required this.logo, @required this.description, this.onLearnMore}) : super(key: key);
+  const ToolEntry({Key? key, required this.logo, required this.description, this.onLearnMore}) : super(key: key);
 
   final Widget logo;
   final String description;
-  final Function onLearnMore;
+  final Function? onLearnMore;
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +92,7 @@ class ToolEntry extends StatelessWidget {
                     SizedBox(height: 5),
                     TextButton(
                       child: Text('Learn more'),
-                      onPressed: onLearnMore,
+                      onPressed: onLearnMore as void Function()?,
                     ),
                   ]
                 ],

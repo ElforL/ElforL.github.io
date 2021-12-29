@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/screens/HomePage.dart';
 import 'package:portfolio/services/firestore.dart';
 
-FirestoreServices dbServices;
+final dbServices = FirestoreServices();
 
 void main() {
-  dbServices = FirestoreServices();
   runApp(MyApp());
 }
 

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:portfolio/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactPage extends StatelessWidget {
-  ContactPage({Key key}) : super(key: key);
+  ContactPage({Key? key}) : super(key: key);
 
   final emailAddress = dbServices.emailAddress;
   final githubURL = dbServices.gitHubURL;
@@ -50,20 +49,23 @@ class ContactPage extends StatelessWidget {
                 IconButton(
                   splashRadius: _splashRadius,
                   hoverColor: Colors.transparent,
-                  icon: Icon(AntDesign.linkedin_square),
-                  onPressed: () => _launchURL(linkedInURL),
+                  // TODO
+                  icon: Icon(Icons.close),
+                  onPressed: () => _launchURL(linkedInURL!),
                 ),
                 IconButton(
                   splashRadius: _splashRadius,
                   hoverColor: Colors.transparent,
-                  icon: Icon(FontAwesome.stack_overflow),
-                  onPressed: () => _launchURL(stackOFURL),
+                  // TODO
+                  icon: Icon(Icons.close),
+                  onPressed: () => _launchURL(stackOFURL!),
                 ),
                 IconButton(
                   splashRadius: _splashRadius,
                   hoverColor: Colors.transparent,
-                  icon: Icon(AntDesign.github),
-                  onPressed: () => _launchURL(githubURL),
+                  // TODO
+                  icon: Icon(Icons.close),
+                  onPressed: () => _launchURL(githubURL!),
                 ),
                 if (_showCV)
                   Padding(
@@ -76,7 +78,7 @@ class ContactPage extends StatelessWidget {
                         foregroundColor: MaterialStateProperty.all(Colors.black),
                       ),
                       onPressed: () {
-                        _launchURL(cvURL);
+                        _launchURL(cvURL!);
                       },
                     ),
                   ),
@@ -127,7 +129,7 @@ class ContactPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: SelectableText(
-                emailAddress,
+                emailAddress!,
                 style: TextStyle(
                   fontSize: 18,
                   letterSpacing: 2,

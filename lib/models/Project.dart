@@ -1,12 +1,19 @@
 class Project {
   String title;
   String description;
-  String imagePath;
-  String codeURL;
-  String viewURL;
-  bool isSmall;
+  String? imagePath;
+  String? codeURL;
+  String? viewURL;
+  bool? isSmall;
 
-  Project(this.title, this.imagePath, {this.isSmall = true, this.description, this.codeURL, this.viewURL});
+  Project(
+    this.title,
+    this.imagePath, {
+    this.isSmall = true,
+    required this.description,
+    required this.codeURL,
+    this.viewURL,
+  });
 
   factory Project.fromJson(Map<String, dynamic> json) {
     return Project(
