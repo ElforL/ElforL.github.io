@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/screens/HomePages/About.dart';
 import 'package:portfolio/screens/HomePages/Contact.dart';
@@ -50,13 +51,19 @@ class MyHomePage extends StatelessWidget {
           IconButton(
             splashRadius: 0.001,
             hoverColor: Colors.transparent,
-            icon: Image.asset('assets/linkedIn_logo.png'),
+            icon: SvgPicture.asset(
+              'assets/linkedin-icon.svg',
+              color: Colors.white,
+            ),
             onPressed: () => _launchURL(linkedInURL!),
           ),
           IconButton(
             splashRadius: 0.001,
             hoverColor: Colors.transparent,
-            icon: Icon(Icons.close),
+            icon: SvgPicture.asset(
+              'assets/github-icon.svg',
+              color: Colors.white,
+            ),
             onPressed: () => _launchURL(githubPageURL!),
           ),
           Spacer(),

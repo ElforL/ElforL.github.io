@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portfolio/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -50,21 +51,30 @@ class ContactPage extends StatelessWidget {
                   splashRadius: _splashRadius,
                   hoverColor: Colors.transparent,
                   // TODO
-                  icon: Icon(Icons.close),
+                  icon: SvgPicture.asset(
+                    'assets/linkedin-icon.svg',
+                    color: Colors.white,
+                  ),
                   onPressed: () => _launchURL(linkedInURL!),
                 ),
                 IconButton(
                   splashRadius: _splashRadius,
                   hoverColor: Colors.transparent,
                   // TODO
-                  icon: Icon(Icons.close),
+                  icon: SvgPicture.asset(
+                    'assets/stackoverflow.svg',
+                    color: Colors.white,
+                  ),
                   onPressed: () => _launchURL(stackOFURL!),
                 ),
                 IconButton(
                   splashRadius: _splashRadius,
                   hoverColor: Colors.transparent,
                   // TODO
-                  icon: Icon(Icons.close),
+                  icon: SvgPicture.asset(
+                    'assets/github-icon.svg',
+                    color: Colors.white,
+                  ),
                   onPressed: () => _launchURL(githubURL!),
                 ),
                 if (_showCV)
