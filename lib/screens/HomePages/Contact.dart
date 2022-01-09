@@ -50,7 +50,6 @@ class ContactPage extends StatelessWidget {
                 IconButton(
                   splashRadius: _splashRadius,
                   hoverColor: Colors.transparent,
-                  // TODO
                   icon: SvgPicture.asset(
                     'assets/linkedin-icon.svg',
                     color: Colors.white,
@@ -60,7 +59,6 @@ class ContactPage extends StatelessWidget {
                 IconButton(
                   splashRadius: _splashRadius,
                   hoverColor: Colors.transparent,
-                  // TODO
                   icon: SvgPicture.asset(
                     'assets/stackoverflow.svg',
                     color: Colors.white,
@@ -70,7 +68,6 @@ class ContactPage extends StatelessWidget {
                 IconButton(
                   splashRadius: _splashRadius,
                   hoverColor: Colors.transparent,
-                  // TODO
                   icon: SvgPicture.asset(
                     'assets/github-icon.svg',
                     color: Colors.white,
