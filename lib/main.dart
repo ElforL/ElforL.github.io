@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/screens/HomePage.dart';
-import 'package:portfolio/services/firestore.dart';
+import 'package:laith_shono/screens/HomePage.dart';
+import 'package:laith_shono/services/firestore.dart';
 
 final dbServices = FirestoreServices();
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/main.dart';
-import 'package:portfolio/models/Project.dart';
-import 'package:portfolio/widgets/ProjectTile.dart';
+import 'package:laith_shono/main.dart';
+import 'package:laith_shono/models/Project.dart';
+import 'package:laith_shono/widgets/ProjectTile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Projects extends StatelessWidget {

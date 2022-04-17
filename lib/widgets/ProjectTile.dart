@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/models/Project.dart';
+import 'package:laith_shono/models/Project.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProjectTile extends StatefulWidget {

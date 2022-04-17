@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:portfolio/main.dart';
-import 'package:portfolio/screens/HomePages/About.dart';
-import 'package:portfolio/screens/HomePages/Contact.dart';
-import 'package:portfolio/screens/HomePages/Projects.dart';
-import 'package:portfolio/screens/HomePages/Tools.dart';
+import 'package:laith_shono/main.dart';
+import 'package:laith_shono/screens/HomePages/About.dart';
+import 'package:laith_shono/screens/HomePages/Contact.dart';
+import 'package:laith_shono/screens/HomePages/Projects.dart';
+import 'package:laith_shono/screens/HomePages/Tools.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyHomePage extends StatelessWidget {
