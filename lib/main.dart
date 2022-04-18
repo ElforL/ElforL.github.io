@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.standard,
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Color(0xFF181818),
+        fontFamily: 'Roboto',
         textTheme: TextTheme(
           headline1: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           headline2: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
