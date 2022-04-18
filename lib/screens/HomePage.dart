@@ -130,6 +130,16 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
+  _adaptivePadding(double screenWidth) {
+    if (screenWidth > 1200) {
+      return 225;
+    } else if (screenWidth > 850) {
+      return 100;
+    } else {
+      return 50;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     /// This map stores the text of the buttons as keys
@@ -140,24 +150,31 @@ class MyHomePage extends StatelessWidget {
       AppLocalizations.of(context)!.contact: contactKey,
     };
 
+    var width = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _topBar(context, topBarButtons),
-            Landing(),
-            Padding(
-              key: projectsKey,
-              padding: const EdgeInsets.symmetric(vertical: 100),
-              child: Projects(projects: dbServices.projects),
+      body: Stack(
+        children: [
+          _topBar(context, topBarButtons),
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: _adaptivePadding(width)),
+              child: Column(
+                children: [
+                  ContactPage(
+                    key: contactKey,
+                  ),
+                  Landing(),
+                  Padding(
+                    key: projectsKey,
+                    padding: const EdgeInsets.symmetric(vertical: 100),
+                    child: Projects(projects: dbServices.projects),
+                  ),
+                ],
+              ),
             ),
-            Padding(
-              key: contactKey,
-              padding: const EdgeInsets.symmetric(vertical: 100),
-              child: ContactPage(),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

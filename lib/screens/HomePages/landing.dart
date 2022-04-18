@@ -4,18 +4,6 @@ import 'package:flutter/material.dart';
 class Landing extends StatelessWidget {
   Landing({Key? key}) : super(key: key);
 
-  _textWidth(double screenWidth) {
-    var out = screenWidth;
-    if (screenWidth > 850) {
-      out *= 0.25;
-    } else if (screenWidth > 600) {
-      out *= 0.15;
-    } else {
-      out *= 0.05;
-    }
-    return out;
-  }
-
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -23,11 +11,9 @@ class Landing extends StatelessWidget {
     return Container(
       constraints: BoxConstraints(minHeight: height),
       width: width,
-      // padding: EdgeInsets.symmetric(horizontal: 300),
       child: Align(
         alignment: Alignment.centerLeft,
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: _textWidth(width)),
           constraints: BoxConstraints(maxWidth: 450),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
