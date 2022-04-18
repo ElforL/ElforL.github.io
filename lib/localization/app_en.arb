@@ -30,6 +30,10 @@
     "subject": "Subject",
     "message": "Message",
     "send": "Send",
+    "plz_enter_email": "Please enter your email address",
+    "plz_enter_subject": "Please enter the subject of your message",
+    "plz_enter_msg": "Please enter your message",
+    "invalid_email": "invalid email address",
 
     "linkedin": "LinkedIn",
     "github": "GitHub",
