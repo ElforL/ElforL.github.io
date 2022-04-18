@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:laith_shono/main.dart';
@@ -132,9 +133,9 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var siteMap = <String, GlobalKey>{
-      'Projects': projectsKey,
-      'Skills': skillsKey,
-      'Contact': contactKey,
+      AppLocalizations.of(context)!.projects: projectsKey,
+      AppLocalizations.of(context)!.skills: skillsKey,
+      AppLocalizations.of(context)!.contact: contactKey,
     };
 
     return Scaffold(
