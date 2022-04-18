@@ -8,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class MyHomePage extends StatelessWidget {
   final projectsKey = GlobalKey();
-  final toolsKey = GlobalKey();
+  final skillsKey = GlobalKey();
   final contactKey = GlobalKey();
   final githubPageURL = dbServices.gitHubURL;
   final linkedInURL = dbServices.linkedInURL;
@@ -133,7 +133,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var siteMap = <String, GlobalKey>{
       'Projects': projectsKey,
-      'Tools': toolsKey,
+      'Skills': skillsKey,
       'Contact': contactKey,
     };
 
