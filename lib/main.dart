@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
           headline5: TextStyle(color: Colors.white),
           caption: TextStyle(color: Colors.white),
           subtitle1: TextStyle(color: Colors.white),
+          button: TextStyle(letterSpacing: 1.25),
         ),
       ),
       home: FutureBuilder(

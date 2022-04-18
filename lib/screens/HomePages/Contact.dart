@@ -159,7 +159,7 @@ class _ContactFormState extends State<ContactForm> {
                 ),
                 child: Text(
                   AppLocalizations.of(context)!.send.toUpperCase(),
-                  style: TextStyle(fontWeight: FontWeight.w600, letterSpacing: 1),
+                  style: TextStyle(fontWeight: FontWeight.w600),
                 ),
                 onPressed: () {
                   final isValid = _formKey.currentState?.validate() ?? false;
