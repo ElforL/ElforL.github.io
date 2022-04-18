@@ -49,4 +49,13 @@ class FirestoreServices {
     urls = result.data();
     return result;
   }
+
+  Future<void> sendMessage(String emailAddress, String subject, String message) async {
+    await db.collection('messages').add({
+      'email': emailAddress,
+      'subject': subject,
+      'message': message,
+      'time': FieldValue.serverTimestamp(),
+    });
+  }
 }

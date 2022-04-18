@@ -1,160 +1,180 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:laith_shono/main.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:laith_shono/widgets/socials_wrap.dart';
 
 class ContactPage extends StatelessWidget {
   ContactPage({Key? key}) : super(key: key);
 
-  final emailAddress = dbServices.emailAddress;
-  final githubURL = dbServices.gitHubURL;
-  final stackOFURL = dbServices.stackOverflowURL;
-  final linkedInURL = dbServices.linkedInURL;
-  final cvURL = dbServices.cvURL;
   final buttonsWidth = 250.0;
-
-  bool get _showCV => cvURL != null;
-
-  _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  static const double _splashRadius = 0.001;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(40),
-          child: Text(
-            'Contact',
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+    return Container(
+      constraints: BoxConstraints(
+        minHeight: height,
+        minWidth: width,
+      ),
+      padding: EdgeInsets.symmetric(vertical: 50),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.contact_me,
             style: Theme.of(context).textTheme.headline2,
           ),
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Wrap(
-              // mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: WrapCrossAlignment.center,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconButton(
-                  splashRadius: _splashRadius,
-                  hoverColor: Colors.transparent,
-                  icon: SvgPicture.asset(
-                    'assets/linkedin-icon.svg',
-                    color: Colors.white,
-                  ),
-                  onPressed: () => _launchURL(linkedInURL!),
-                ),
-                IconButton(
-                  splashRadius: _splashRadius,
-                  hoverColor: Colors.transparent,
-                  icon: SvgPicture.asset(
-                    'assets/stackoverflow.svg',
-                    color: Colors.white,
-                  ),
-                  onPressed: () => _launchURL(stackOFURL!),
-                ),
-                IconButton(
-                  splashRadius: _splashRadius,
-                  hoverColor: Colors.transparent,
-                  icon: SvgPicture.asset(
-                    'assets/github-icon.svg',
-                    color: Colors.white,
-                  ),
-                  onPressed: () => _launchURL(githubURL!),
-                ),
-                if (_showCV)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: ElevatedButton.icon(
-                      icon: Icon(Icons.download),
-                      label: Text('RESUME (CV)'),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.white),
-                        foregroundColor: MaterialStateProperty.all(Colors.black),
-                      ),
-                      onPressed: () {
-                        _launchURL(cvURL!);
-                      },
+                Expanded(flex: 3, child: ContactForm()),
+                if (width > 650) ...[
+                  SizedBox(width: 50),
+                  Flexible(
+                    child: SvgPicture.asset(
+                      'undraw/undraw_letter.svg',
+                      height: 450,
                     ),
                   ),
+                ]
               ],
             ),
-            SizedBox(height: 20),
-            FittedBox(
-              child: _emailButton(context),
-            )
-          ],
-        )
-      ],
-    );
-  }
-
-  _emailButton(context) {
-    double height = 49;
-
-    BoxDecoration boxDecoration = BoxDecoration(
-      border: Border.all(color: Colors.white, width: 0.5),
-    );
-
-    return Container(
-      decoration: boxDecoration,
-      height: height,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            height: height,
-            width: height,
-            padding: EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              border: Border(right: BorderSide(color: Colors.white, width: 0.5)),
-            ),
-            child: Center(
-              child: FittedBox(
-                child: IconButton(
-                  splashRadius: 15,
-                  icon: Icon(Icons.email),
-                  onPressed: () => _launchURL('mailto:$emailAddress'),
-                ),
+          ),
+          // SocialsWrap(),
+          if (width <= 650)
+            Align(
+              alignment: AlignmentDirectional.topEnd,
+              child: SvgPicture.asset(
+                'undraw/undraw_letter.svg',
+                height: 200,
               ),
             ),
-          ),
-          GestureDetector(
-            onLongPress: () => _copyEmailAddress(context),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: SelectableText(
-                emailAddress!,
-                style: TextStyle(
-                  fontSize: 18,
-                  letterSpacing: 2,
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );
   }
+}
 
-  void _copyEmailAddress(BuildContext context) {
-    Clipboard.setData(ClipboardData(text: emailAddress));
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Email address copied.'),
-        duration: Duration(seconds: 23),
+class ContactForm extends StatefulWidget {
+  const ContactForm({Key? key}) : super(key: key);
+
+  @override
+  State<ContactForm> createState() => _ContactFormState();
+}
+
+class _ContactFormState extends State<ContactForm> {
+  final _formKey = GlobalKey<FormState>();
+
+  final _decoration = InputDecoration(
+    border: OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 0,
+        style: BorderStyle.none,
+      ),
+    ),
+    filled: true,
+    alignLabelWithHint: true,
+  );
+
+  final double _tfsSpacing = 15;
+
+  late final TextEditingController _emailController;
+  late final TextEditingController _subjectController;
+  late final TextEditingController _messageController;
+
+  @override
+  void initState() {
+    _emailController = TextEditingController();
+    _subjectController = TextEditingController();
+    _messageController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          // EMAIL
+          TextFormField(
+            controller: _emailController,
+            decoration: _decoration.copyWith(labelText: AppLocalizations.of(context)!.email_address),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return AppLocalizations.of(context)!.plz_enter_email;
+              }
+              // yeah it's not the best validation but it's a contact form, bad email won't break anything
+              if (value.contains('@')) return AppLocalizations.of(context)!.invalid_email;
+              return null;
+            },
+          ),
+          SizedBox(height: _tfsSpacing),
+
+          // SUBJECT
+          TextFormField(
+            controller: _subjectController,
+            decoration: _decoration.copyWith(labelText: AppLocalizations.of(context)!.subject),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return AppLocalizations.of(context)!.plz_enter_subject;
+              }
+              return null;
+            },
+          ),
+          SizedBox(height: _tfsSpacing),
+
+          // MESSAGE
+          TextFormField(
+            controller: _messageController,
+            decoration: _decoration.copyWith(labelText: AppLocalizations.of(context)!.message),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return AppLocalizations.of(context)!.plz_enter_msg;
+              }
+              return null;
+            },
+            maxLines: null,
+            minLines: 5,
+          ),
+          SizedBox(height: _tfsSpacing),
+
+          //
+          // SEND BUTTON
+
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(child: SocialsWrap()),
+              OutlinedButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 30)),
+                  side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).colorScheme.primary, width: 1.5)),
+                ),
+                child: Text(
+                  AppLocalizations.of(context)!.send.toUpperCase(),
+                  style: TextStyle(fontWeight: FontWeight.w600, letterSpacing: 1),
+                ),
+                onPressed: () {
+                  final isValid = _formKey.currentState?.validate() ?? false;
+                  if (!isValid) return;
+
+                  final email = _emailController.text.trim();
+                  final subject = _subjectController.text.trim();
+                  final message = _messageController.text.trim();
+
+                  dbServices.sendMessage(email, subject, message);
+                },
+              )
+            ],
+          )
+        ],
       ),
     );
   }
