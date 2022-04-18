@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:laith_shono/main.dart';
 import 'package:laith_shono/services/misc.dart';
@@ -29,6 +30,7 @@ class SocialsWrap extends StatelessWidget {
             IconButton(
               splashRadius: _splashRadius,
               hoverColor: Colors.transparent,
+              tooltip: AppLocalizations.of(context)!.linkedin,
               icon: SvgPicture.asset(
                 'assets/linkedin-icon.svg',
                 color: Colors.white,
@@ -38,6 +40,7 @@ class SocialsWrap extends StatelessWidget {
             IconButton(
               splashRadius: _splashRadius,
               hoverColor: Colors.transparent,
+              tooltip: AppLocalizations.of(context)!.stackoverflow,
               icon: SvgPicture.asset(
                 'assets/stackoverflow.svg',
                 color: Colors.white,
@@ -47,6 +50,7 @@ class SocialsWrap extends StatelessWidget {
             IconButton(
               splashRadius: _splashRadius,
               hoverColor: Colors.transparent,
+              tooltip: AppLocalizations.of(context)!.github,
               icon: SvgPicture.asset(
                 'assets/github-icon.svg',
                 color: Colors.white,
@@ -55,6 +59,7 @@ class SocialsWrap extends StatelessWidget {
             ),
             IconButton(
               splashRadius: _splashRadius,
+              tooltip: AppLocalizations.of(context)!.email,
               hoverColor: Colors.transparent,
               icon: Icon(Icons.email),
               onPressed: () => _copyEmailAddress(context),
