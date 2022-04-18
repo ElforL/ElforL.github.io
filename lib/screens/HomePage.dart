@@ -161,14 +161,14 @@ class MyHomePage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: _adaptivePadding(width)),
               child: Column(
                 children: [
-                  ContactPage(
-                    key: contactKey,
-                  ),
                   Landing(),
                   Padding(
                     key: projectsKey,
                     padding: const EdgeInsets.symmetric(vertical: 100),
                     child: Projects(projects: dbServices.projects),
+                  ),
+                  ContactPage(
+                    key: contactKey,
                   ),
                 ],
               ),
