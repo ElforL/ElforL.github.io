@@ -10,9 +10,6 @@
     "landing_hi": "Hi there 👋, I'm",
     "landing_about": "I’m a software developer based in Riyadh, Saudi Arabia.",
 
-    "selected_projects": "Selected Projects",
-    "view_project": "View project",
-    
     "education": "Education",
     "bsc_ITc": "BSc in Information Technology and Computing",
     "skills_n_tools": "Skills & Tools",
@@ -25,6 +22,10 @@
     "fluent": "Fluent",
     "excellent": "Excellent",
 
+    "selected_projects": "Selected Projects",
+    "view_project": "View project",
+    "more_on_gh": "More on my GitHub",
+
     "contact_me": "Contact me",
     "email_address": "Email address",
     "subject": "Subject",
@@ -34,6 +35,7 @@
     "plz_enter_subject": "Please enter the subject of your message",
     "plz_enter_msg": "Please enter your message",
     "invalid_email": "invalid email address",
+    "email_copied": "Email address copied",
 
     "linkedin": "LinkedIn",
     "github": "GitHub",

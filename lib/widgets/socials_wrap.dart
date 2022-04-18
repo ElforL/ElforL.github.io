@@ -91,9 +91,8 @@ class SocialsWrap extends StatelessWidget {
     Clipboard.setData(ClipboardData(text: emailAddress));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        // TODO localize
-        content: Text('Email address copied: ${emailAddress}'),
-        duration: Duration(seconds: 23),
+        content: Text(AppLocalizations.of(context)!.email_copied + (emailAddress == null ? '' : ': $emailAddress')),
+        duration: Duration(seconds: 2),
       ),
     );
   }
