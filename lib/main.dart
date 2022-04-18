@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
+        visualDensity: VisualDensity.standard,
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Color(0xFF181818),
         textTheme: TextTheme(
