@@ -71,8 +71,11 @@ class MyHomePage extends StatelessWidget {
             for (var i = 0; i < siteMap.length; i++)
               _buildTopButton(
                 Text(
-                  siteMap.keys.elementAt(i),
-                  style: Theme.of(context).textTheme.subtitle1,
+                  siteMap.keys.elementAt(i).toString().toUpperCase(),
+                  style: Theme.of(context).textTheme.button?.copyWith(
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1.25,
+                      ),
                 ),
                 onPressed: () {
                   Scrollable.ensureVisible(
