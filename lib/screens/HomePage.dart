@@ -132,7 +132,9 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var siteMap = <String, GlobalKey>{
+    /// This map stores the text of the buttons as keys
+    /// and a key for the widget it'll scroll to when the button is pressed
+    var topBarButtons = <String, GlobalKey>{
       AppLocalizations.of(context)!.projects: projectsKey,
       AppLocalizations.of(context)!.skills: skillsKey,
       AppLocalizations.of(context)!.contact: contactKey,
@@ -142,7 +144,7 @@ class MyHomePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _topBar(context, siteMap),
+            _topBar(context, topBarButtons),
             Landing(),
             Padding(
               key: projectsKey,
