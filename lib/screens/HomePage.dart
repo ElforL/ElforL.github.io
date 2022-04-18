@@ -5,6 +5,7 @@ import 'package:laith_shono/main.dart';
 import 'package:laith_shono/screens/HomePages/Contact.dart';
 import 'package:laith_shono/screens/HomePages/Projects.dart';
 import 'package:laith_shono/screens/HomePages/landing.dart';
+import 'package:laith_shono/screens/HomePages/skills.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -162,6 +163,7 @@ class MyHomePage extends StatelessWidget {
               child: Column(
                 children: [
                   Landing(),
+                  Skills(),
                   Padding(
                     key: projectsKey,
                     padding: const EdgeInsets.symmetric(vertical: 100),
