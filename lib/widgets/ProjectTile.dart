@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:laith_shono/models/Project.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ProjectTile extends StatefulWidget {
   final Project project;
@@ -11,102 +11,104 @@ class ProjectTile extends StatefulWidget {
   _ProjectTileState createState() => _ProjectTileState();
 }
 
-class _ProjectTileState extends State<ProjectTile> {
+class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin {
   bool isShowing = false;
+  late final AnimationController _animationController;
+  final animationDuration = Duration(milliseconds: 200);
+
+  @override
+  void initState() {
+    _animationController = AnimationController(
+      vsync: this,
+      duration: animationDuration,
+    );
+    super.initState();
+  }
+
+  @override
+  dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final tileHeight = 200.0;
+    final tileWidth = 200.0;
+    final borderRadius = BorderRadius.circular(15);
+    final errImage = Image.asset('assets/no_image.png');
+
+    return MouseRegion(
+      onEnter: (event) => _toggleShow(event),
+      onExit: (event) => _toggleShow(event),
+      child: SizedBox(
+        height: tileHeight,
+        width: tileWidth,
+        child: ClipRRect(
+          borderRadius: borderRadius,
+          child: InkWell(
+            borderRadius: borderRadius,
+            onTap: isShowing ? () {} : null,
+            child: Stack(
+              children: [
+                AnimatedBuilder(
+                  animation: _animationController,
+                  builder: (context, snapshot) {
+                    return Transform.scale(
+                      scale: 1 + .12 * _animationController.value,
+                      child: SizedBox(
+                        width: tileHeight,
+                        height: tileWidth,
+                        child: widget.project.imagePath == null
+                            ? errImage
+                            : Image.network(
+                                widget.project.imagePath!,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) => errImage,
+                              ),
+                      ),
+                    );
+                  },
+                ),
+                AnimatedSwitcher(
+                  duration: animationDuration,
+                  child: Container(
+                    color: isShowing ? Colors.white.withAlpha(30) : null,
+                    child: isShowing
+                        ? Center(
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: Text(
+                                AppLocalizations.of(context)!.view_project.toUpperCase(),
+                              ),
+                            ),
+                          )
+                        : null,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   _toggleShow([event]) {
     setState(() {
       if (event is PointerEnterEvent) {
         isShowing = true;
+        _animationController.forward();
       } else if (event is PointerExitEvent) {
         isShowing = false;
+        _animationController.reverse(from: 1);
       } else {
         isShowing = !isShowing;
+        if (isShowing)
+          _animationController.forward();
+        else
+          _animationController.reverse(from: 1);
       }
     });
-  }
-
-  _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (event) => _toggleShow(event),
-      onExit: (event) => _toggleShow(event),
-      child: GestureDetector(
-        onTap: () => _toggleShow(),
-        child: Container(
-          height: 200,
-          width: 200,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              alignment: Alignment.center,
-              onError: (exception, stackTrace) => AssetImage('assets/no_image.png'),
-              image: widget.project.imagePath == null
-                  ? AssetImage('assets/no_image.png')
-                  : NetworkImage(
-                      widget.project.imagePath!,
-                    ) as ImageProvider,
-            ),
-          ),
-          child: AnimatedSwitcher(
-            duration: Duration(milliseconds: 500),
-            child: isShowing
-                ? Container(
-                    color: Colors.black.withAlpha(230),
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.project.title,
-                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: 10),
-                                Text(
-                                  widget.project.description,
-                                  style: Theme.of(context).textTheme.caption,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Wrap(
-                          // mainAxisAlignment: MainAxisAlignment.end,
-                          alignment: WrapAlignment.end,
-                          children: [
-                            if (widget.project.viewURL != null)
-                              TextButton(
-                                child: Text('VIEW'),
-                                onPressed: () => _launchURL(widget.project.viewURL!),
-                              ),
-                            if (widget.project.codeURL != null)
-                              TextButton(
-                                child: Text('CODE'),
-                                onPressed: () => _launchURL(widget.project.codeURL!),
-                              ),
-                          ],
-                        )
-                      ],
-                    ),
-                  )
-                : null,
-          ),
-        ),
-      ),
-    );
   }
 }
