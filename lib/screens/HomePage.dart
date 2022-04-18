@@ -1,11 +1,9 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:laith_shono/main.dart';
-import 'package:laith_shono/screens/HomePages/landing.dart';
 import 'package:laith_shono/screens/HomePages/Contact.dart';
 import 'package:laith_shono/screens/HomePages/Projects.dart';
-import 'package:laith_shono/screens/HomePages/Tools.dart';
+import 'package:laith_shono/screens/HomePages/landing.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -14,11 +12,6 @@ class MyHomePage extends StatelessWidget {
   final contactKey = GlobalKey();
   final githubPageURL = dbServices.gitHubURL;
   final linkedInURL = dbServices.linkedInURL;
-  get siteMap => <String, GlobalKey>{
-        'Projects': projectsKey,
-        'Tools': toolsKey,
-        'Contact': contactKey,
-      };
 
   MyHomePage({Key? key}) : super(key: key);
 
@@ -41,7 +34,7 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  Widget _topBar(context) {
+  Widget _topBar(context, Map<String, GlobalKey> siteMap) {
     const duration = Duration(milliseconds: 600);
 
     return Padding(
@@ -78,10 +71,11 @@ class MyHomePage extends StatelessWidget {
                       ),
                 ),
                 onPressed: () {
-                  Scrollable.ensureVisible(
-                    siteMap.entries.elementAt(i).value.currentContext,
-                    duration: duration * (i > 0 ? 1.5 * i : 1),
-                  );
+                  if (siteMap.entries.elementAt(i).value.currentContext != null)
+                    Scrollable.ensureVisible(
+                      siteMap.entries.elementAt(i).value.currentContext!,
+                      duration: duration * (i > 0 ? 1.5 * i : 1),
+                    );
                 },
               )
           else
@@ -116,10 +110,11 @@ class MyHomePage extends StatelessWidget {
                               ),
                               onTap: () {
                                 Navigator.pop(context);
-                                Scrollable.ensureVisible(
-                                  siteMap.entries.elementAt(i).value.currentContext,
-                                  duration: duration * (i > 0 ? 1.5 * i : 1),
-                                );
+                                if (siteMap.entries.elementAt(i).value.currentContext != null)
+                                  Scrollable.ensureVisible(
+                                    siteMap.entries.elementAt(i).value.currentContext!,
+                                    duration: duration * (i > 0 ? 1.5 * i : 1),
+                                  );
                               },
                             )
                         ],
@@ -136,11 +131,17 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var siteMap = <String, GlobalKey>{
+      'Projects': projectsKey,
+      'Tools': toolsKey,
+      'Contact': contactKey,
+    };
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _topBar(context),
+            _topBar(context, siteMap),
             Landing(),
             Padding(
               key: projectsKey,
