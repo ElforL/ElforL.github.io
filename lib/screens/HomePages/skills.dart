@@ -106,13 +106,15 @@ class Skills extends StatelessWidget {
               ],
             ),
           ),
-          if (width > 770)
+          if (width > 770) ...[
+            SizedBox(width: 50),
             Flexible(
               child: SvgPicture.asset(
                 'undraw/undraw_programming.svg',
                 height: 350,
               ),
             ),
+          ]
         ],
       ),
     );

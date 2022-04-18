@@ -46,7 +46,6 @@ class ContactPage extends StatelessWidget {
               ],
             ),
           ),
-          // SocialsWrap(),
           if (width <= 650)
             Align(
               alignment: AlignmentDirectional.topEnd,
