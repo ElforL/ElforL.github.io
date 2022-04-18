@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class Landing extends StatelessWidget {
@@ -33,17 +34,17 @@ class Landing extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Hi there 👋, I'm",
+                AppLocalizations.of(context)!.landing_hi,
                 style: Theme.of(context).textTheme.subtitle1,
               ),
               FittedBox(
                 child: Text(
-                  'Laith',
+                  AppLocalizations.of(context)!.first_name,
                   style: Theme.of(context).textTheme.headline1!.copyWith(fontWeight: FontWeight.w500),
                 ),
               ),
               Text(
-                "I build beautiful and powerful apps across various platforms and devices.",
+                AppLocalizations.of(context)!.landing_about,
                 style: Theme.of(context).textTheme.subtitle1,
               ),
             ],
