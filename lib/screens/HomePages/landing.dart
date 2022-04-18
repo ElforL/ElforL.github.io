@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class About extends StatelessWidget {
-  About({Key? key}) : super(key: key);
+class Landing extends StatelessWidget {
+  Landing({Key? key}) : super(key: key);
 
   _textWidth(double screenWidth) {
     var out = screenWidth;
