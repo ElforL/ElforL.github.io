@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Color(0xFF181818),
         textTheme: TextTheme(
-          headline1: TextStyle(color: Colors.white),
-          headline2: TextStyle(color: Colors.white),
+          headline1: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          headline2: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           headline4: TextStyle(color: Colors.white),
           headline5: TextStyle(color: Colors.white),
           caption: TextStyle(color: Colors.white),
