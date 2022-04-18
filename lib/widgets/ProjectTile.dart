@@ -35,7 +35,7 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
   Widget build(BuildContext context) {
     final tileHeight = 200.0;
     final tileWidth = 200.0;
-    final borderRadius = BorderRadius.circular(15);
+    final borderRadius = BorderRadius.circular(5);
     final errImage = Image.asset('assets/no_image.png');
 
     return MouseRegion(
