@@ -138,7 +138,7 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           children: [
             _topBar(context),
-            About(),
+            Landing(),
             Padding(
               key: projectsKey,
               padding: const EdgeInsets.symmetric(vertical: 100),
