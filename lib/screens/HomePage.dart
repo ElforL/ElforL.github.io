@@ -145,25 +145,10 @@ class MyHomePage extends StatelessWidget {
               child: Projects(projects: dbServices.projects),
             ),
             Padding(
-              key: toolsKey,
-              padding: const EdgeInsets.symmetric(vertical: 100),
-              child: Tools(),
-            ),
-            Padding(
               key: contactKey,
               padding: const EdgeInsets.symmetric(vertical: 100),
               child: ContactPage(),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 100, bottom: 10),
-              child: Text.rich(
-                TextSpan(
-                  text: 'Website source code available on GitHub',
-                  style: Theme.of(context).textTheme.caption!.copyWith(color: Colors.grey.shade800),
-                  recognizer: TapGestureRecognizer()..onTap = () => _launchURL(githubPageURL!),
-                ),
-              ),
-            )
           ],
         ),
       ),
