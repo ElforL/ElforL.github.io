@@ -1,6 +1,7 @@
 class Project {
   String title;
   String description;
+  List<Map<String, dynamic>> screenBlocks;
   String? imagePath;
   String? codeURL;
   String? viewURL;
@@ -8,7 +9,8 @@ class Project {
 
   Project(
     this.title,
-    this.imagePath, {
+    this.imagePath,
+    this.screenBlocks, {
     this.isSmall = true,
     required this.description,
     required this.codeURL,
@@ -19,6 +21,7 @@ class Project {
     return Project(
       json['title'],
       json['image'],
+      json['screenBlocks'],
       isSmall: json['isSmall'],
       description: json['description'],
       codeURL: json['codeURL'],
@@ -30,6 +33,7 @@ class Project {
     return {
       'title': title,
       'image': imagePath,
+      'screenBlocks': screenBlocks,
       'isSmall': isSmall,
       'description': description,
       'codeURL': codeURL,
