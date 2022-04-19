@@ -30,6 +30,13 @@ class MyApp extends StatelessWidget {
           subtitle1: TextStyle(color: Colors.white),
           button: TextStyle(letterSpacing: 1.25),
         ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ButtonStyle(
+            side: MaterialStateProperty.all(
+              BorderSide(color: Theme.of(context).colorScheme.primary),
+            ),
+          ),
+        ),
       ),
       home: FutureBuilder(
         future: dbServices.load(),

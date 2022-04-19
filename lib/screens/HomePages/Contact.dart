@@ -154,7 +154,6 @@ class _ContactFormState extends State<ContactForm> {
               OutlinedButton(
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 30)),
-                  side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).colorScheme.primary, width: 1.5)),
                 ),
                 child: Text(
                   AppLocalizations.of(context)!.send.toUpperCase(),
