@@ -5,6 +5,7 @@ import 'package:laith_shono/screens/HomePages/Contact.dart';
 import 'package:laith_shono/screens/HomePages/Projects.dart';
 import 'package:laith_shono/screens/HomePages/landing.dart';
 import 'package:laith_shono/screens/HomePages/skills.dart';
+import 'package:laith_shono/services/misc.dart';
 import 'package:laith_shono/widgets/top_bar.dart';
 import 'package:laith_shono/widgets/trigger_fab.dart';
 
@@ -28,16 +29,6 @@ class MyHomePage extends StatelessWidget {
         fabKey.currentState?.setShown(false);
       }
     });
-  }
-
-  _adaptivePadding(double screenWidth) {
-    if (screenWidth > 1200) {
-      return 225;
-    } else if (screenWidth > 850) {
-      return 100;
-    } else {
-      return 50;
-    }
   }
 
   @override
@@ -69,7 +60,7 @@ class MyHomePage extends StatelessWidget {
           SingleChildScrollView(
             controller: _scrollController,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: _adaptivePadding(width)),
+              padding: EdgeInsets.symmetric(horizontal: adaptivePadding(width)),
               child: Column(
                 children: [
                   Landing(),
