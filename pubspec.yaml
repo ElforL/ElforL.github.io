@@ -20,6 +20,7 @@ dependencies:
   cloud_firestore: ^3.1.5
   firebase_analytics: ^9.0.4
   flutter_svg: ^1.0.0
+  cached_network_image: ^3.2.0
 
 
 dev_dependencies:
