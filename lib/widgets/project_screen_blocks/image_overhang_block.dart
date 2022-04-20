@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:laith_shono/models/project_block.dart';
@@ -12,8 +13,8 @@ class ImageOverhandBlockWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    final image = Image.network(
-      block.imageUrl,
+    final image = CachedNetworkImage(
+      imageUrl: block.imageUrl,
     );
 
     final text = Text(

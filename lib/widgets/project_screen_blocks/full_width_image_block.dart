@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:laith_shono/models/project_block.dart';
 
@@ -11,8 +12,8 @@ class FullWidthImageBlockWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.network(
-      block.url,
+    return CachedNetworkImage(
+      imageUrl: block.url,
       height: block.height,
       fit: BoxFit.cover,
     );

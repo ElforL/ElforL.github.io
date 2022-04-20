@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -61,10 +62,9 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
                         height: tileWidth,
                         child: widget.project.imagePath == null
                             ? errImage
-                            : Image.network(
-                                widget.project.imagePath!,
+                            : CachedNetworkImage(
+                                imageUrl: widget.project.imagePath!,
                                 fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) => errImage,
                               ),
                       ),
                     );
