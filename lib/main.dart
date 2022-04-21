@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:laith_shono/screens/home_screen.dart';
+import 'package:laith_shono/screens/main_screen.dart';
 import 'package:laith_shono/services/firestore.dart';
 
 final dbServices = FirestoreServices();
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
               ),
             );
           }
-          return HomeScreen();
+          return MainScreen();
         },
       ),
     );
