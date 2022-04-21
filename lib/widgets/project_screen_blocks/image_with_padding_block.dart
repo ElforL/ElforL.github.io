@@ -18,6 +18,7 @@ class ImageWithPaddingBlockWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         child: CachedNetworkImage(
           imageUrl: block.url,
+          fit: BoxFit.cover,
         ),
       ),
     );
