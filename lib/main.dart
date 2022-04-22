@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:laith_shono/models/Project.dart';
 import 'package:laith_shono/screens/404.dart';
 import 'package:laith_shono/screens/main_screen.dart';
@@ -11,7 +10,6 @@ import 'package:laith_shono/widgets/web_emoji_loader.dart';
 final dbServices = FirestoreServices();
 
 void main() {
-  setUrlStrategy(PathUrlStrategy());
   runApp(MyApp());
 }
 
