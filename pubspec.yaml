@@ -33,6 +33,8 @@ flutter:
   generate: true
   assets:
     - assets/
+    - assets/undraw/
+    - assets/store_badges/
     - assets/fonts/
   fonts:
     - family: Roboto
