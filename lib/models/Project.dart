@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Project {
   String title;
   String description;
@@ -18,10 +20,17 @@ class Project {
   });
 
   factory Project.fromJson(Map<String, dynamic> json) {
+    List<Map<String, dynamic>> blocks;
+    try {
+      blocks = List<Map<String, dynamic>>.from(jsonDecode(json['screenBlocks'] ?? '[]'));
+    } catch (e) {
+      blocks = [];
+    }
+
     return Project(
       json['title'],
       json['image'],
-      json['screenBlocks'],
+      blocks,
       isSmall: json['isSmall'],
       description: json['description'],
       codeURL: json['codeURL'],
