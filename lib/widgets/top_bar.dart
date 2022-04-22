@@ -19,13 +19,32 @@ class TopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        _linkedInBtn(context),
-        _gitHubBtn(context),
-        Spacer(),
-        ..._navButton(context),
-      ],
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          // transform: GradientRotation(-1.5708),
+          colors: [
+            Theme.of(context).colorScheme.background,
+            Theme.of(context).colorScheme.background.withAlpha(178),
+            Theme.of(context).colorScheme.background.withAlpha(0),
+          ],
+          stops: [
+            0,
+            0.75,
+            1,
+          ],
+          begin: AlignmentDirectional.topCenter,
+          end: AlignmentDirectional.bottomCenter,
+        ),
+      ),
+      child: Row(
+        children: [
+          _linkedInBtn(context),
+          _gitHubBtn(context),
+          Spacer(),
+          ..._navButton(context),
+        ],
+      ),
     );
   }
 
