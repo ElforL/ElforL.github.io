@@ -15,8 +15,8 @@ class FirestoreServices {
   String? get cvURL => urls!['cv'];
 
   load() async {
-    await _loadUrls();
     await _loadProjects();
+    await loadUrls();
   }
 
   /// sorts the projects keeping the full apps at the start
@@ -43,7 +43,8 @@ class FirestoreServices {
     return result;
   }
 
-  Future<DocumentSnapshot<Object>> _loadUrls() async {
+  Future<DocumentSnapshot<Object>?> loadUrls([bool? force]) async {
+    if (urls != null && force != true) return null;
     var result = await db.collection('urls').doc('socials').get();
     urls = result.data();
     return result;
