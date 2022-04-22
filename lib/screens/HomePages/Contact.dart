@@ -110,7 +110,7 @@ class _ContactFormState extends State<ContactForm> {
                 return AppLocalizations.of(context)!.plz_enter_email;
               }
               // yeah it's not the best validation but it's a contact form, bad email won't break anything
-              if (value.contains('@')) return AppLocalizations.of(context)!.invalid_email;
+              if (!value.contains('@')) return AppLocalizations.of(context)!.invalid_email;
               return null;
             },
           ),
