@@ -33,6 +33,17 @@ class FirestoreServices {
     return projects;
   }
 
+  Future<Project?> getProject(String projectTitle) async {
+    var result = await db.collection('projects').where('title', isEqualTo: projectTitle).get();
+
+    if (result.docs.isNotEmpty) {
+      final out = Project.fromJson(result.docs.first.data());
+      return out;
+    }
+
+    return null;
+  }
+
   Future<QuerySnapshot<Object>> _loadProjects() async {
     var result = await db.collection('projects').get();
     for (var doc in result.docs) {
