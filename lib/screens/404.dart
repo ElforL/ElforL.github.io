@@ -63,7 +63,9 @@ class PageNotFoundScreen extends StatelessWidget {
                       SizedBox(height: 20),
                       OutlinedButton(
                         child: Text(AppLocalizations.of(context)!.go_home.toUpperCase()),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.popUntil(context, ModalRoute.withName('/'));
+                        },
                       ),
                     ],
                   ),
