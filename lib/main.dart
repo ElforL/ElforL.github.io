@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+import 'package:laith_shono/models/Project.dart';
+import 'package:laith_shono/screens/404.dart';
 import 'package:laith_shono/screens/main_screen.dart';
+import 'package:laith_shono/screens/project_screen.dart';
 import 'package:laith_shono/services/firestore.dart';
+import 'package:laith_shono/widgets/web_emoji_loader.dart';
 
 final dbServices = FirestoreServices();
 
@@ -40,19 +44,78 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: FutureBuilder(
-        future: dbServices.load(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(color: Colors.white),
-              ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomePage(),
+      },
+      onUnknownRoute: (settings) => MaterialPageRoute(builder: (context) => const PageNotFoundScreen()),
+      onGenerateRoute: (settings) {
+        if (settings.name == null) return null;
+        final uri = Uri.parse(settings.name!);
+        if (uri.pathSegments.isEmpty) return null;
+        final firstSegments = '/${uri.pathSegments[0]}';
+
+        if (firstSegments == ProjectScreen.routeName) {
+          Project? project; // = routeSettings.arguments as Project;
+          String? projectTitle;
+
+          if (settings.arguments is Project) {
+            // If there's argument. usually when pressed by a button.
+            project = settings.arguments as Project;
+            projectTitle = project.title;
+          } else if (uri.pathSegments.length >= 2) {
+            // no argument but there's a uri project title
+            projectTitle = uri.pathSegments[1];
+            try {
+              project = dbServices.projects.firstWhere((element) => element.title == projectTitle);
+            } catch (_) {}
+          }
+
+          if (projectTitle != null) {
+            return MaterialPageRoute(
+              builder: (context) {
+                return ProjectScreen(
+                  project: project,
+                  projectTitle: projectTitle,
+                );
+              },
+              // Add the project title to the url
+              settings: settings.copyWith(name: ProjectScreen.routeName + '/$projectTitle'),
             );
           }
-          return MainScreen();
-        },
-      ),
+        }
+
+        return MaterialPageRoute(builder: (context) => const PageNotFoundScreen());
+      },
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: dbServices.load(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return Scaffold(
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(color: Colors.white),
+                  WebEmojiLoaderHack(),
+                ],
+              ),
+            ),
+          );
+        }
+        return MainScreen();
+      },
     );
   }
 }

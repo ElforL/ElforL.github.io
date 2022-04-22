@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:laith_shono/models/Project.dart';
+import 'package:laith_shono/screens/project_screen.dart';
 
 class ProjectTile extends StatefulWidget {
   final Project project;
@@ -77,7 +78,12 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
                     child: isShowing
                         ? Center(
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(
+                                  ProjectScreen.routeName,
+                                  arguments: widget.project,
+                                );
+                              },
                               child: Text(
                                 AppLocalizations.of(context)!.view_project.toUpperCase(),
                               ),
