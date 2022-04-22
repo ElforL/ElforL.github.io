@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:laith_shono/screens/main_screen.dart';
 import 'package:laith_shono/services/firestore.dart';
 
 final dbServices = FirestoreServices();
 
 void main() {
+  setUrlStrategy(PathUrlStrategy());
   runApp(MyApp());
 }
 
