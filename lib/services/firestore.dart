@@ -4,7 +4,7 @@ import 'package:laith_shono/models/Project.dart';
 class FirestoreServices {
   FirebaseFirestore get db => FirebaseFirestore.instance;
 
-  List<Project>? projects;
+  List<Project> projects = [];
   Map<String, dynamic>? /*?*/ urls;
 
   // OCD
@@ -21,12 +21,12 @@ class FirestoreServices {
 
   /// sorts the projects keeping the full apps at the start
   List<Project>? _sortProjects() {
-    for (var i = 0; i < projects!.length; i++) {
-      for (var j = i + 1; j < projects!.length; j++) {
-        if (projects![i].isSmall! && !projects![j].isSmall!) {
-          var temp = projects![i];
-          projects![i] = projects![j];
-          projects![j] = temp;
+    for (var i = 0; i < projects.length; i++) {
+      for (var j = i + 1; j < projects.length; j++) {
+        if (projects[i].isSmall! && !projects[j].isSmall!) {
+          var temp = projects[i];
+          projects[i] = projects[j];
+          projects[j] = temp;
         }
       }
     }
@@ -34,11 +34,10 @@ class FirestoreServices {
   }
 
   Future<QuerySnapshot<Object>> _loadProjects() async {
-    projects ??= [];
     var result = await db.collection('projects').get();
     for (var doc in result.docs) {
       var project = Project.fromJson(doc.data());
-      projects!.add(project);
+      projects.add(project);
     }
     _sortProjects();
     return result;
