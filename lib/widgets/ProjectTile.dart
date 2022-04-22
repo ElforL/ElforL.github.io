@@ -50,7 +50,7 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
           borderRadius: borderRadius,
           child: InkWell(
             borderRadius: borderRadius,
-            onTap: isShowing ? () {} : null,
+            onTap: navigateToProjectScreen,
             child: Stack(
               children: [
                 AnimatedBuilder(
@@ -78,12 +78,7 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
                     child: isShowing
                         ? Center(
                             child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).pushNamed(
-                                  ProjectScreen.routeName,
-                                  arguments: widget.project,
-                                );
-                              },
+                              onPressed: navigateToProjectScreen,
                               child: Text(
                                 AppLocalizations.of(context)!.view_project.toUpperCase(),
                               ),
@@ -97,6 +92,13 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
           ),
         ),
       ),
+    );
+  }
+
+  void navigateToProjectScreen() {
+    Navigator.of(context).pushNamed(
+      ProjectScreen.routeName,
+      arguments: widget.project,
     );
   }
 
