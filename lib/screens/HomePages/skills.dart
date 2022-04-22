@@ -99,7 +99,7 @@ class Skills extends StatelessWidget {
                     alignment: AlignmentDirectional.topEnd,
                     padding: const EdgeInsets.all(20),
                     child: SvgPicture.asset(
-                      'undraw/undraw_programming.svg',
+                      'assets/undraw/undraw_programming.svg',
                       height: 150,
                     ),
                   ),
@@ -110,7 +110,7 @@ class Skills extends StatelessWidget {
             SizedBox(width: 50),
             Flexible(
               child: SvgPicture.asset(
-                'undraw/undraw_programming.svg',
+                'assets/undraw/undraw_programming.svg',
                 height: 350,
               ),
             ),

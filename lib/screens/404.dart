@@ -12,7 +12,7 @@ class PageNotFoundScreen extends StatelessWidget {
 
     var image = Flexible(
       child: SvgPicture.asset(
-        'undraw/undraw_lost.svg',
+        'assets/undraw/undraw_lost.svg',
         height: 350,
       ),
     );

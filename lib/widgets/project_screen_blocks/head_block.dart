@@ -125,7 +125,7 @@ class HeadBlockWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: SvgPicture.asset(
-            'store_badges/app-store(${AppLocalizations.of(context)!.localeName}).svg',
+            'assets/store_badges/app-store(${AppLocalizations.of(context)!.localeName}).svg',
             height: 55,
           ),
         ),
@@ -138,7 +138,7 @@ class HeadBlockWidget extends StatelessWidget {
         highlightColor: Colors.transparent,
         onTap: badge['url'] == null ? null : () => launchURL(badge['url']!),
         child: Image.asset(
-          'store_badges/google-play(${AppLocalizations.of(context)!.localeName}).png',
+          'assets/store_badges/google-play(${AppLocalizations.of(context)!.localeName}).png',
           height: 80,
         ),
       );

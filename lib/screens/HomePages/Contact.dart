@@ -38,7 +38,7 @@ class ContactPage extends StatelessWidget {
                   SizedBox(width: 50),
                   Flexible(
                     child: SvgPicture.asset(
-                      'undraw/undraw_letter.svg',
+                      'assets/undraw/undraw_letter.svg',
                       height: 450,
                     ),
                   ),
@@ -50,7 +50,7 @@ class ContactPage extends StatelessWidget {
             Align(
               alignment: AlignmentDirectional.topEnd,
               child: SvgPicture.asset(
-                'undraw/undraw_letter.svg',
+                'assets/undraw/undraw_letter.svg',
                 height: 200,
               ),
             ),
