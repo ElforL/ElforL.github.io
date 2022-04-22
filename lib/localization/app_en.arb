@@ -1,0 +1,59 @@
+{
+    "@_home_page": [
+        "These are the entries for the home page"
+    ],
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact",
+    "scroll_to_top": "Scroll to the top",
+
+    "landing_hi": "Hi there 👋, I'm",
+    "landing_about": "I’m a software developer based in Riyadh, Saudi Arabia.",
+
+    "education": "Education",
+    "bsc_ITc": "BSc in Information Technology and Computing",
+    "skills_n_tools": "Skills & Tools",
+    "software_eng": "Software engineering",
+    "app_dev": "Application development",
+    "ui_design": "UI design",
+    "languages": "Languages",
+    "arabic": "Arabic",
+    "english": "English",
+    "fluent": "Fluent",
+    "excellent": "Excellent",
+
+    "selected_projects": "Selected Projects",
+    "view_project": "View project",
+    "more_on_gh": "More on my GitHub",
+
+    "contact_me": "Contact me",
+    "email_address": "Email address",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send",
+    "plz_enter_email": "Please enter your email address",
+    "plz_enter_subject": "Please enter the subject of your message",
+    "plz_enter_msg": "Please enter your message",
+    "invalid_email": "invalid email address",
+    "email_copied": "Email address copied",
+
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "stackoverflow": "StackOverflow",
+    "email": "Email",
+
+    "page_not_found": "Page not found",
+    "e404_desc": "The page you’re looking for doesn’t exist or was removed",
+    "go_home": "Go home",
+    
+    "back_home": "Back home",
+    "responsibilities": "Responsibilities",
+    "deliverables": "Deliverables",
+    "year": "Year",
+
+    "full_name": "Laith Shono",
+    "first_name": "Laith",
+
+    "ar": "عربي",
+    "en": "English"
+}
