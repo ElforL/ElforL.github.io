@@ -9,7 +9,7 @@ import 'package:laith_shono/services/misc.dart';
 import 'package:laith_shono/widgets/top_bar.dart';
 import 'package:laith_shono/widgets/trigger_fab.dart';
 
-class MainScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   final fabKey = GlobalKey<TriggerFabState>();
   final projectsKey = GlobalKey();
   final skillsKey = GlobalKey();
@@ -19,7 +19,7 @@ class MainScreen extends StatelessWidget {
 
   final scrollDuration = const Duration(milliseconds: 300);
 
-  MainScreen({Key? key}) : super(key: key) {
+  HomeScreen({Key? key}) : super(key: key) {
     _scrollController.addListener(() {
       final fabShown = fabKey.currentState?.isShown ?? false;
 

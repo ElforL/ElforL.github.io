@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:laith_shono/models/Project.dart';
 import 'package:laith_shono/screens/404.dart';
-import 'package:laith_shono/screens/main_screen.dart';
+import 'package:laith_shono/screens/home_screen.dart';
 import 'package:laith_shono/screens/project_screen.dart';
 import 'package:laith_shono/services/firestore.dart';
 import 'package:laith_shono/widgets/web_emoji_loader.dart';
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => HomePage(),
+        '/': (context) => FirstScreenWrapper(),
       },
       onUnknownRoute: (settings) => MaterialPageRoute(builder: (context) => const PageNotFoundScreen()),
       onGenerateRoute: (settings) {
@@ -89,8 +89,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({
+class FirstScreenWrapper extends StatelessWidget {
+  const FirstScreenWrapper({
     Key? key,
   }) : super(key: key);
 
@@ -112,7 +112,7 @@ class HomePage extends StatelessWidget {
             ),
           );
         }
-        return MainScreen();
+        return HomeScreen();
       },
     );
   }
