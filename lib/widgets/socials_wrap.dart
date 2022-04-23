@@ -80,23 +80,6 @@ class SocialsWrap extends StatelessWidget {
                     icon: Icon(Icons.email),
                     onPressed: () => _copyEmailAddress(context, emailAddress!),
                   ),
-                  // TODO cv
-                  // move to skills ?
-                  if (_showCV)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: ElevatedButton.icon(
-                        icon: Icon(Icons.download),
-                        label: Text('RESUME (CV)'),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.white),
-                          foregroundColor: MaterialStateProperty.all(Colors.black),
-                        ),
-                        onPressed: () {
-                          launchURL(cvURL!);
-                        },
-                      ),
-                    ),
                 ],
               ),
             ],
@@ -108,7 +91,7 @@ class SocialsWrap extends StatelessWidget {
     Clipboard.setData(ClipboardData(text: emailAddress));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(AppLocalizations.of(context)!.email_copied + (emailAddress == null ? '' : ': $emailAddress')),
+        content: Text(AppLocalizations.of(context)!.email_copied + ': $emailAddress'),
         duration: Duration(seconds: 2),
       ),
     );
