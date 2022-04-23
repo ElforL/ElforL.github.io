@@ -14,6 +14,6 @@ adaptivePadding(double screenWidth) {
   } else if (screenWidth > 850) {
     return 100;
   } else {
-    return 50;
+    return 25;
   }
 }
