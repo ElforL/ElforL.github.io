@@ -58,6 +58,7 @@ class HomeScreen extends StatelessWidget {
       body: Stack(
         children: [
           SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             controller: _scrollController,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: adaptivePadding(width)),

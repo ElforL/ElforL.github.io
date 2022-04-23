@@ -60,6 +60,7 @@ class ProjectScreen extends StatelessWidget {
             // ListView is more efficient but since the children are of different sizes the scroll
             // bar keeps changing in size as the user scrolls (due to widgets being constantly built/unbuilt)
             return SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
