@@ -9,13 +9,15 @@ class HeadlineBlockWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 100),
       alignment: AlignmentDirectional.center,
       child: FittedBox(
         child: Text(
           block.text(AppLocalizations.of(context)!.localeName),
-          style: Theme.of(context).textTheme.headline2,
+          style: screenWidth > 850 ? Theme.of(context).textTheme.headline2 : Theme.of(context).textTheme.headline3,
         ),
       ),
     );

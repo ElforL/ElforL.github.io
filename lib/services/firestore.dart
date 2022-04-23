@@ -46,6 +46,8 @@ class FirestoreServices {
 
   Future<QuerySnapshot<Object>> _loadProjects() async {
     var result = await db.collection('projects').get();
+    projects.clear();
+
     for (var doc in result.docs) {
       var project = Project.fromJson(doc.data());
       projects.add(project);
