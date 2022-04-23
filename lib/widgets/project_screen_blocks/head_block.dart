@@ -55,11 +55,11 @@ class HeadBlockWidget extends StatelessWidget {
         children: [
           Text(
             block.title(AppLocalizations.of(context)!.localeName),
-            style: Theme.of(context).textTheme.headline1,
+            style: screenWidth > 850 ? Theme.of(context).textTheme.headline1 : Theme.of(context).textTheme.headline2,
           ),
           Text(
             block.smallDescribtion(AppLocalizations.of(context)!.localeName),
-            style: Theme.of(context).textTheme.headline3,
+            style: screenWidth > 850 ? Theme.of(context).textTheme.headline3 : Theme.of(context).textTheme.headline4,
           ),
           SizedBox(height: 20),
           Row(
