@@ -10,24 +10,23 @@ class PageNotFoundScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
-    var image = Flexible(
-      child: SvgPicture.asset(
-        'assets/undraw/undraw_lost.svg',
-        height: 350,
-      ),
+    var image = SvgPicture.asset(
+      'assets/undraw/undraw_lost.svg',
+      height: 350,
     );
 
     Widget pageNotFoundText = Text(
       AppLocalizations.of(context)!.page_not_found,
       style: Theme.of(context).textTheme.headline1,
     );
-    if (width <= 400) {
+    if (width <= 490) {
       pageNotFoundText = FittedBox(child: pageNotFoundText);
     }
 
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: adaptivePadding(width)),
             child: Row(
@@ -72,7 +71,7 @@ class PageNotFoundScreen extends StatelessWidget {
                 ),
                 if (width > 930) ...[
                   SizedBox(width: 30),
-                  image,
+                  Flexible(child: image),
                 ]
               ],
             ),
