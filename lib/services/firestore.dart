@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:laith_shono/models/Project.dart';
 
 class FirestoreServices {
@@ -15,6 +16,7 @@ class FirestoreServices {
   String? get cvURL => urls?['cv'];
 
   load() async {
+    await FirebaseAuth.instance.signInAnonymously();
     await _loadProjects();
     await loadUrls();
   }
