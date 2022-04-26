@@ -159,7 +159,7 @@ class _ContactFormState extends State<ContactForm> {
                   AppLocalizations.of(context)!.send.toUpperCase(),
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   final isValid = _formKey.currentState?.validate() ?? false;
                   if (!isValid) return;
 
@@ -167,7 +167,16 @@ class _ContactFormState extends State<ContactForm> {
                   final subject = _subjectController.text.trim();
                   final message = _messageController.text.trim();
 
-                  dbServices.sendMessage(email, subject, message);
+                  await dbServices.sendMessage(email, subject, message);
+
+                  _subjectController.clear();
+                  _messageController.clear();
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(AppLocalizations.of(context)!.message_sent),
+                    ),
+                  );
                 },
               )
             ],

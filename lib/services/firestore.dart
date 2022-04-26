@@ -1,20 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:laith_shono/models/Project.dart';
 
 class FirestoreServices {
   FirebaseFirestore get db => FirebaseFirestore.instance;
 
   List<Project> projects = [];
-  Map<String, dynamic>? /*?*/ urls;
+  Map<String, dynamic>? urls;
 
   // OCD
-  String? get stackOverflowURL => urls!['stackOverflow'];
-  String? get linkedInURL => urls!['LinkedIn'];
-  String? get emailAddress => urls!['email'];
-  String? get gitHubURL => urls!['github'];
-  String? get cvURL => urls!['cv'];
+  String? get stackOverflowURL => urls?['stackOverflow'];
+  String? get linkedInURL => urls?['LinkedIn'];
+  String? get emailAddress => urls?['email'];
+  String? get gitHubURL => urls?['github'];
+  String? get cvURL => urls?['cv'];
 
   load() async {
+    await FirebaseAuth.instance.signInAnonymously();
     await _loadProjects();
     await loadUrls();
   }

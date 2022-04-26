@@ -31,6 +31,7 @@
     "subject": "Subject",
     "message": "Message",
     "send": "Send",
+    "message_sent": "Message sent",
     "plz_enter_email": "Please enter your email address",
     "plz_enter_subject": "Please enter the subject of your message",
     "plz_enter_msg": "Please enter your message",
