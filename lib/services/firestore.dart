@@ -5,14 +5,14 @@ class FirestoreServices {
   FirebaseFirestore get db => FirebaseFirestore.instance;
 
   List<Project> projects = [];
-  Map<String, dynamic>? /*?*/ urls;
+  Map<String, dynamic>? urls;
 
   // OCD
-  String? get stackOverflowURL => urls!['stackOverflow'];
-  String? get linkedInURL => urls!['LinkedIn'];
-  String? get emailAddress => urls!['email'];
-  String? get gitHubURL => urls!['github'];
-  String? get cvURL => urls!['cv'];
+  String? get stackOverflowURL => urls?['stackOverflow'];
+  String? get linkedInURL => urls?['LinkedIn'];
+  String? get emailAddress => urls?['email'];
+  String? get gitHubURL => urls?['github'];
+  String? get cvURL => urls?['cv'];
 
   load() async {
     await _loadProjects();
