@@ -15,8 +15,8 @@ class FirestoreServices {
   String? get gitHubURL => urls?['github'];
   String? get cvURL => urls?['cv'];
 
-  load() async {
-    await FirebaseAuth.instance.signInAnonymously();
+  load([bool? signInAnonymously]) async {
+    if (signInAnonymously ?? true) await FirebaseAuth.instance.signInAnonymously();
     await _loadProjects();
     await loadUrls();
   }
