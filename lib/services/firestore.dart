@@ -65,8 +65,8 @@ class FirestoreServices {
     return result;
   }
 
-  Future<void> sendMessage(String emailAddress, String subject, String message) async {
-    await db.collection('messages').add({
+  Future<DocumentReference<Map<String, dynamic>>> sendMessage(String emailAddress, String subject, String message) {
+    return db.collection('messages').add({
       'email': emailAddress,
       'subject': subject,
       'message': message,
