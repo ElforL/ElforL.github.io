@@ -21,76 +21,77 @@ class SocialsWrap extends StatelessWidget {
     }
 
     return FutureBuilder(
-        future: future,
-        builder: (context, snapshot) {
-          if (dbServices.urls == null) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-
-          final emailAddress = dbServices.emailAddress;
-          final githubURL = dbServices.gitHubURL;
-          final stackOFURL = dbServices.stackOverflowURL;
-          final linkedInURL = dbServices.linkedInURL;
-          final cvURL = dbServices.cvURL;
-          final _showCV = cvURL != null;
-
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Wrap(
-                // mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  IconButton(
-                    splashRadius: _splashRadius,
-                    hoverColor: Colors.transparent,
-                    tooltip: AppLocalizations.of(context)!.linkedin,
-                    icon: SvgPicture.asset(
-                      'assets/linkedin-icon.svg',
-                      color: Colors.white,
-                    ),
-                    onPressed: () async => await _onPressed(linkedInURL!, 'LinkedIn'),
-                  ),
-                  IconButton(
-                    splashRadius: _splashRadius,
-                    hoverColor: Colors.transparent,
-                    tooltip: AppLocalizations.of(context)!.stackoverflow,
-                    icon: SvgPicture.asset(
-                      'assets/stackoverflow.svg',
-                      color: Colors.white,
-                    ),
-                    onPressed: () async => await _onPressed(stackOFURL!, 'StackOverflow'),
-                  ),
-                  IconButton(
-                    splashRadius: _splashRadius,
-                    hoverColor: Colors.transparent,
-                    tooltip: AppLocalizations.of(context)!.github,
-                    icon: SvgPicture.asset(
-                      'assets/github-icon.svg',
-                      color: Colors.white,
-                    ),
-                    onPressed: () async => await _onPressed(githubURL!, 'GitHub'),
-                  ),
-                  IconButton(
-                    splashRadius: _splashRadius,
-                    tooltip: AppLocalizations.of(context)!.email,
-                    hoverColor: Colors.transparent,
-                    icon: Icon(Icons.email),
-                    onPressed: () async {
-                      _copyEmailAddress(context, emailAddress!);
-                      await FirebaseAnalytics.instance.logEvent(
-                        name: 'email_copied',
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ],
+      future: future,
+      builder: (context, snapshot) {
+        if (dbServices.urls == null) {
+          return Center(
+            child: CircularProgressIndicator(),
           );
-        });
+        }
+
+        final emailAddress = dbServices.emailAddress;
+        final githubURL = dbServices.gitHubURL;
+        final stackOFURL = dbServices.stackOverflowURL;
+        final linkedInURL = dbServices.linkedInURL;
+        final cvURL = dbServices.cvURL;
+        final _showCV = cvURL != null;
+
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Wrap(
+              // mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                IconButton(
+                  splashRadius: _splashRadius,
+                  hoverColor: Colors.transparent,
+                  tooltip: AppLocalizations.of(context)!.linkedin,
+                  icon: SvgPicture.asset(
+                    'assets/linkedin-icon.svg',
+                    color: Colors.white,
+                  ),
+                  onPressed: () async => await _onPressed(linkedInURL!, 'LinkedIn'),
+                ),
+                IconButton(
+                  splashRadius: _splashRadius,
+                  hoverColor: Colors.transparent,
+                  tooltip: AppLocalizations.of(context)!.stackoverflow,
+                  icon: SvgPicture.asset(
+                    'assets/stackoverflow.svg',
+                    color: Colors.white,
+                  ),
+                  onPressed: () async => await _onPressed(stackOFURL!, 'StackOverflow'),
+                ),
+                IconButton(
+                  splashRadius: _splashRadius,
+                  hoverColor: Colors.transparent,
+                  tooltip: AppLocalizations.of(context)!.github,
+                  icon: SvgPicture.asset(
+                    'assets/github-icon.svg',
+                    color: Colors.white,
+                  ),
+                  onPressed: () async => await _onPressed(githubURL!, 'GitHub'),
+                ),
+                IconButton(
+                  splashRadius: _splashRadius,
+                  tooltip: AppLocalizations.of(context)!.email,
+                  hoverColor: Colors.transparent,
+                  icon: Icon(Icons.email),
+                  onPressed: () async {
+                    _copyEmailAddress(context, emailAddress!);
+                    await FirebaseAnalytics.instance.logEvent(
+                      name: 'email_copied',
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
   }
 
   _onPressed(String url, String name) async {
