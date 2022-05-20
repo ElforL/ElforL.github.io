@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:laith_shono/models/Project.dart';
@@ -7,9 +8,14 @@ import 'package:laith_shono/screens/project_screen.dart';
 import 'package:laith_shono/services/firestore.dart';
 import 'package:laith_shono/widgets/web_emoji_loader.dart';
 
+import 'firebase_options.dart';
+
 final dbServices = FirestoreServices();
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
