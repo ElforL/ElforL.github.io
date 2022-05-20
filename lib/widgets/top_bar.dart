@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -133,7 +134,15 @@ class TopBar extends StatelessWidget {
         'assets/github-icon.svg',
         color: Colors.white,
       ),
-      onPressed: () => launchURL(githubPageURL!),
+      onPressed: () async {
+        await launchURL(githubPageURL!);
+        await FirebaseAnalytics.instance.logEvent(
+          name: 'social_tap',
+          parameters: {
+            'social': 'GitHub',
+          },
+        );
+      },
     );
   }
 
@@ -146,7 +155,15 @@ class TopBar extends StatelessWidget {
         'assets/linkedin-icon.svg',
         color: Colors.white,
       ),
-      onPressed: () => launchURL(linkedInURL!),
+      onPressed: () async {
+        await launchURL(linkedInURL!);
+        await FirebaseAnalytics.instance.logEvent(
+          name: 'social_tap',
+          parameters: {
+            'social': 'LinkedIn',
+          },
+        );
+      },
     );
   }
 }

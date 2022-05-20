@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -51,7 +52,7 @@ class SocialsWrap extends StatelessWidget {
                       'assets/linkedin-icon.svg',
                       color: Colors.white,
                     ),
-                    onPressed: () => launchURL(linkedInURL!),
+                    onPressed: () async => await _onPressed(linkedInURL!, 'LinkedIn'),
                   ),
                   IconButton(
                     splashRadius: _splashRadius,
@@ -61,7 +62,7 @@ class SocialsWrap extends StatelessWidget {
                       'assets/stackoverflow.svg',
                       color: Colors.white,
                     ),
-                    onPressed: () => launchURL(stackOFURL!),
+                    onPressed: () async => await _onPressed(stackOFURL!, 'StackOverflow'),
                   ),
                   IconButton(
                     splashRadius: _splashRadius,
@@ -71,20 +72,35 @@ class SocialsWrap extends StatelessWidget {
                       'assets/github-icon.svg',
                       color: Colors.white,
                     ),
-                    onPressed: () => launchURL(githubURL!),
+                    onPressed: () async => await _onPressed(githubURL!, 'GitHub'),
                   ),
                   IconButton(
                     splashRadius: _splashRadius,
                     tooltip: AppLocalizations.of(context)!.email,
                     hoverColor: Colors.transparent,
                     icon: Icon(Icons.email),
-                    onPressed: () => _copyEmailAddress(context, emailAddress!),
+                    onPressed: () async {
+                      _copyEmailAddress(context, emailAddress!);
+                      await FirebaseAnalytics.instance.logEvent(
+                        name: 'email_copied',
+                      );
+                    },
                   ),
                 ],
               ),
             ],
           );
         });
+  }
+
+  _onPressed(String url, String name) async {
+    await launchURL(url);
+    await FirebaseAnalytics.instance.logEvent(
+      name: 'social_tap',
+      parameters: {
+        'social': name,
+      },
+    );
   }
 
   void _copyEmailAddress(BuildContext context, String emailAddress) {
