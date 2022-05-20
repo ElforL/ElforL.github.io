@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -167,7 +168,7 @@ class _ContactFormState extends State<ContactForm> {
                   final subject = _subjectController.text.trim();
                   final message = _messageController.text.trim();
 
-                  await dbServices.sendMessage(email, subject, message);
+                  final msgDoc = await dbServices.sendMessage(email, subject, message);
 
                   _subjectController.clear();
                   _messageController.clear();
@@ -177,6 +178,11 @@ class _ContactFormState extends State<ContactForm> {
                       content: Text(AppLocalizations.of(context)!.message_sent),
                     ),
                   );
+
+                  await FirebaseAnalytics.instance.logEvent(name: 'contact_form_sent', parameters: {
+                    'email': email,
+                    'doc_id': msgDoc.id,
+                  });
                 },
               )
             ],
