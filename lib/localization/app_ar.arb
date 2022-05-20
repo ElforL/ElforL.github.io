@@ -44,6 +44,9 @@
     "e404_desc": "الصفحة المطلوية غير موجودة أو تم حذفها",
     "go_home": "العودة للرئيسية",
     
+    "under_maintenance": "قيد الصيانة",
+    "under_maintenance_desc": "الموقع قيد الصيانة. يرجى إعادة المحاولة لاحقا.",
+    
     "back_home": "العودة",
     "responsibilities": "المسؤوليات",
     "deliverables": "الإنجازات",

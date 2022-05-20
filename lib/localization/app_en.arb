@@ -46,6 +46,9 @@
     "page_not_found": "Page not found",
     "e404_desc": "The page you’re looking for doesn’t exist or was removed",
     "go_home": "Go home",
+
+    "under_maintenance": "Under Maintenance",
+    "under_maintenance_desc": "The site is currently under maintenance. Please try again later.",
     
     "back_home": "Back home",
     "responsibilities": "Responsibilities",
