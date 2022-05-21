@@ -40,35 +40,11 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('flutter-first-frame', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js?v=765102808');
+        navigator.serviceWorker.register('flutter_service_worker.js?v=2613360014');
       });
     }
   </script>
 
-  <!-- Firebase -->
-  <!-- The core Firebase JS SDK  -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-
-  <!-- SDKs for Firebase products
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-
-  <script>
-    var firebaseConfig = {
-      apiKey: "AIzaSyDP2A3siornJq3oOBiFamx3Y9f8KaxC5fE",
-      authDomain: "elfor-dev.firebaseapp.com",
-      projectId: "elfor-dev",
-      storageBucket: "elfor-dev.appspot.com",
-      messagingSenderId: "157754800390",
-      appId: "1:157754800390:web:9f406452d0789de84d4687",
-      measurementId: "G-8GH7B95C6C"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-  </script>
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
 
