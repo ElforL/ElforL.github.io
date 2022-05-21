@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -95,11 +96,21 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
     );
   }
 
-  void navigateToProjectScreen() {
-    Navigator.of(context).pushNamed(
+  void navigateToProjectScreen() async {
+    await FirebaseAnalytics.instance.logEvent(
+      name: 'project_clicked',
+      parameters: {
+        'project_title': widget.project.title,
+      },
+    );
+
+    await FirebaseAnalytics.instance.logScreenView(screenName: 'Project: ${widget.project.title}');
+    await Navigator.of(context).pushNamed(
       ProjectScreen.routeName,
       arguments: widget.project,
     );
+    // Assuming project tiles only appear on home page, set the name back to 'Laith Shono'
+    await FirebaseAnalytics.instance.logScreenView(screenName: 'Laith Shono');
   }
 
   _toggleShow([event]) {

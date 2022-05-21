@@ -15,8 +15,8 @@ class FirestoreServices {
   String? get gitHubURL => urls?['github'];
   String? get cvURL => urls?['cv'];
 
-  load() async {
-    await FirebaseAuth.instance.signInAnonymously();
+  load([bool? signInAnonymously]) async {
+    if (signInAnonymously ?? true) await FirebaseAuth.instance.signInAnonymously();
     await _loadProjects();
     await loadUrls();
   }
@@ -65,8 +65,8 @@ class FirestoreServices {
     return result;
   }
 
-  Future<void> sendMessage(String emailAddress, String subject, String message) async {
-    await db.collection('messages').add({
+  Future<DocumentReference<Map<String, dynamic>>> sendMessage(String emailAddress, String subject, String message) {
+    return db.collection('messages').add({
       'email': emailAddress,
       'subject': subject,
       'message': message,
