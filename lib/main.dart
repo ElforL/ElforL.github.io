@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +22,17 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  await analytics.setAnalyticsCollectionEnabled(kReleaseMode);
+
+  if (!kReleaseMode) {
+    try {
+      await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(false);
+
+      String host = !kIsWeb && Platform.isAndroid ? '10.0.2.2' : 'localhost';
+
+      await FirebaseAuth.instance.useAuthEmulator(host, 9099);
+      FirebaseFirestore.instance.useFirestoreEmulator(host, 8080);
+    } catch (_) {}
+  }
 
   runApp(MyApp());
 }
