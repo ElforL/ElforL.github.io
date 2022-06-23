@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  	match /{document=**} {
+      allow read,write: if request.auth.uid == 'Hja7jzJdZgSxxvowQvqPu05vfgO2';
+    }
+  
+    match /projects/{projectTitle} {
+      allow read: if request.auth != null;
+    }
+    match /urls/{docId} {
+      allow read: if request.auth != null;
+    }
+    match /messages/{docId} {
+    	function isMessageValid(){
+      	return request.resource.data.keys().hasOnly(['email', 'subject', 'message', 'time']) &&
+        request.resource.data.email is string &&
+        request.resource.data.subject is string &&
+        request.resource.data.message is string &&
+        request.resource.data.time == request.time;
+      }
+    
+      allow create: if request.auth != null && isMessageValid();
+    }
+  }
+}
