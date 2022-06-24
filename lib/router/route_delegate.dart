@@ -39,7 +39,7 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
   set initiated(bool value) {
     if (_initiated && !value) {
       // It is a logout!
-      // Shoudln't happen tho
+      // Shouldn't happen tho
       _clear();
       debugPrint('⚠ User Logged out');
     }
@@ -59,6 +59,10 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
 
   @override
   Widget build(BuildContext context) {
+    /// TODO Log current screen for Analytics
+    /// use this 👇 to see if it should be in different place
+    /// print('Building in delgate');
+
     List<Page> stack;
     if (_show404) {
       stack = _unknownStack;
