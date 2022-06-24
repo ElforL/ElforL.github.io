@@ -3,6 +3,10 @@ import 'package:laith_shono/models/Project.dart';
 import 'package:laith_shono/services/firestore.dart';
 
 import 'elfor_configuration.dart';
+import 'pages/home_page.dart';
+import 'pages/loading_page.dart';
+import 'pages/project_page.dart';
+import 'pages/unknown_page.dart';
 
 class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
@@ -74,16 +78,16 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     );
   }
 
-  List<Page> get _unknownStack => [/* UnknownPage() */];
+  List<Page> get _unknownStack => [UnknownPage()];
 
-  List<Page> get _loadingStack => [/* SplashPage() */];
+  List<Page> get _loadingStack => [LoadingPage()];
 
   List<Page> get _initiatedStack {
     return [
-      /// HomePage(
-      ///   onProjectTab: (Project project) => selectedProject = project,
-      /// ),
-      // if(_selectedProject != null) ProjectPage(project)
+      HomePage(
+        onProjectTab: (Project project) => selectedProject = project,
+      ),
+      if (_selectedProject != null) ProjectPage(project: _selectedProject!)
     ];
   }
 
