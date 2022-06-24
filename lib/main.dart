@@ -7,12 +7,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:laith_shono/models/Project.dart';
-import 'package:laith_shono/screens/404.dart';
-import 'package:laith_shono/screens/home_screen.dart';
-import 'package:laith_shono/screens/project_screen.dart';
+import 'package:laith_shono/router/route_delegate.dart';
 import 'package:laith_shono/services/firestore.dart';
-import 'package:laith_shono/widgets/web_emoji_loader.dart';
 
 import 'firebase_options.dart';
 
@@ -37,7 +33,20 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late ElforRouterDelegate routerDelegate;
+
+  @override
+  void initState() {
+    routerDelegate = ElforRouterDelegate(dbServices);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -66,79 +75,15 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
+        pageTransitionsTheme: PageTransitionsTheme(
+          builders: {
+            for (var platform in TargetPlatform.values) platform: ZoomPageTransitionsBuilder(),
+          },
+        ),
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => FirstScreenWrapper(),
-      },
-      onUnknownRoute: (settings) => MaterialPageRoute(builder: (context) => const PageNotFoundScreen()),
-      onGenerateRoute: (settings) {
-        if (settings.name == null) return null;
-        final uri = Uri.parse(settings.name!);
-        if (uri.pathSegments.isEmpty) return null;
-        final firstSegments = '/${uri.pathSegments[0]}';
-
-        if (firstSegments == ProjectScreen.routeName) {
-          Project? project; // = routeSettings.arguments as Project;
-          String? projectTitle;
-
-          if (settings.arguments is Project) {
-            // If there's argument. usually when pressed by a button.
-            project = settings.arguments as Project;
-            projectTitle = project.title;
-          } else if (uri.pathSegments.length >= 2) {
-            // no argument but there's a uri project title
-            projectTitle = uri.pathSegments[1];
-            try {
-              project = dbServices.projects.firstWhere((element) => element.title == projectTitle);
-            } catch (_) {}
-          }
-
-          if (projectTitle != null) {
-            return MaterialPageRoute(
-              builder: (context) {
-                return ProjectScreen(
-                  project: project,
-                  projectTitle: projectTitle,
-                );
-              },
-              // Add the project title to the url
-              settings: settings.copyWith(name: ProjectScreen.routeName + '/$projectTitle'),
-            );
-          }
-        }
-
-        return MaterialPageRoute(builder: (context) => const PageNotFoundScreen());
-      },
-    );
-  }
-}
-
-class FirstScreenWrapper extends StatelessWidget {
-  const FirstScreenWrapper({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: dbServices.load(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          return Scaffold(
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(color: Colors.white),
-                  WebEmojiLoaderHack(),
-                ],
-              ),
-            ),
-          );
-        }
-        return HomeScreen();
-      },
+      home: Router(
+        routerDelegate: routerDelegate,
+      ),
     );
   }
 }
