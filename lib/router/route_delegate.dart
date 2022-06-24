@@ -10,7 +10,7 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
   ElforRouterDelegate() : _navigatorKey = GlobalKey<NavigatorState>();
 
   bool _show404 = false;
-  bool? _loggedIn;
+  bool _initiated = false;
   Project? _selectedProject;
 
   set show404(bool value) {
@@ -21,13 +21,15 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     notifyListeners();
   }
 
-  set loggedIn(bool? value) {
-    if (_loggedIn == true && value == false) {
+  set initiated(bool value) {
+    if (_initiated && !value) {
       // It is a logout!
+      // Shoudln't happen tho
       _clear();
+      debugPrint('⚠ User Logged out');
     }
 
-    _loggedIn = value;
+    _initiated = value;
 
     notifyListeners();
   }
@@ -45,10 +47,10 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     List<Page> stack;
     if (_show404) {
       stack = _unknownStack;
-    } else if (_loggedIn == null || _loggedIn == false) {
+    } else if (!_initiated) {
       stack = _loadingStack;
     } else {
-      stack = _allGoodStack;
+      stack = _initiatedStack;
     }
     return Navigator(
       key: navigatorKey,
@@ -63,19 +65,9 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
 
   List<Page> get _unknownStack => [/* UnknownPage() */];
 
-  List<Page> get _loadingStack {
-    String? process;
-    if (_loggedIn == null) {
-      process = 'Checking login state...';
-    } else if (!_loggedIn!) {
-      process = 'Logging in as anonymous...';
-    } else {
-      process = "Fetching Data";
-    }
-    return [/* SplashPage(process: process) */];
-  }
+  List<Page> get _loadingStack => [/* SplashPage() */];
 
-  List<Page> get _allGoodStack {
+  List<Page> get _initiatedStack {
     return [
       /// HomePage(
       ///   onProjectTab: (Project project) => selectedProject = project,
