@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:laith_shono/main.dart';
-import 'package:laith_shono/screens/HomePages/Contact.dart';
-import 'package:laith_shono/screens/HomePages/Projects.dart';
-import 'package:laith_shono/screens/HomePages/landing.dart';
-import 'package:laith_shono/screens/HomePages/skills.dart';
+import 'package:laith_shono/screens/home_screen_sections/Contact.dart';
+import 'package:laith_shono/screens/home_screen_sections/Projects.dart';
+import 'package:laith_shono/screens/home_screen_sections/landing.dart';
+import 'package:laith_shono/screens/home_screen_sections/skills.dart';
 import 'package:laith_shono/services/misc.dart';
 import 'package:laith_shono/widgets/top_bar.dart';
 import 'package:laith_shono/widgets/trigger_fab.dart';
