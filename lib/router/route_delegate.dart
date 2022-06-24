@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:laith_shono/models/Project.dart';
+import 'package:laith_shono/services/firestore.dart';
 
 import 'elfor_configuration.dart';
 
@@ -7,11 +8,21 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
   final GlobalKey<NavigatorState> _navigatorKey;
 
-  ElforRouterDelegate() : _navigatorKey = GlobalKey<NavigatorState>();
+  ElforRouterDelegate(this.dbServices) : _navigatorKey = GlobalKey<NavigatorState>() {
+    _init();
+  }
+
+  final FirestoreServices dbServices;
 
   bool _show404 = false;
   bool _initiated = false;
   Project? _selectedProject;
+
+  _init() async {
+    await dbServices.load();
+
+    initiated = dbServices.initiated;
+  }
 
   set show404(bool value) {
     _show404 = value;
