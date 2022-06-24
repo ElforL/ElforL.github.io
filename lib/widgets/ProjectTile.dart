@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -51,7 +52,7 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
           borderRadius: borderRadius,
           child: InkWell(
             borderRadius: borderRadius,
-            onTap: () => widget.onProjectTab(widget.project),
+            onTap: _tab,
             child: Stack(
               children: [
                 AnimatedBuilder(
@@ -79,7 +80,7 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
                     child: isShowing
                         ? Center(
                             child: ElevatedButton(
-                              onPressed: () => widget.onProjectTab(widget.project),
+                              onPressed: _tab,
                               child: Text(
                                 AppLocalizations.of(context)!.view_project.toUpperCase(),
                               ),
@@ -94,6 +95,17 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
         ),
       ),
     );
+  }
+
+  void _tab() async {
+    FirebaseAnalytics.instance.logEvent(
+      name: 'project_clicked',
+      parameters: {
+        'project_title': widget.project.title,
+      },
+    );
+
+    widget.onProjectTab(widget.project);
   }
 
   _toggleShow([event]) {
