@@ -75,11 +75,6 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ),
-        pageTransitionsTheme: PageTransitionsTheme(
-          builders: {
-            for (var platform in TargetPlatform.values) platform: ZoomPageTransitionsBuilder(),
-          },
-        ),
       ),
       home: Router(
         routerDelegate: routerDelegate,
