@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:laith_shono/main.dart';
+import 'package:laith_shono/models/Project.dart';
 import 'package:laith_shono/screens/home_screen_sections/Contact.dart';
 import 'package:laith_shono/screens/home_screen_sections/Projects.dart';
 import 'package:laith_shono/screens/home_screen_sections/landing.dart';
@@ -15,11 +16,13 @@ class HomeScreen extends StatelessWidget {
   final skillsKey = GlobalKey();
   final contactKey = GlobalKey();
 
+  final void Function(Project) onProjectTab;
+
   final _scrollController = ScrollController();
 
   final scrollDuration = const Duration(milliseconds: 300);
 
-  HomeScreen({Key? key}) : super(key: key) {
+  HomeScreen({Key? key, required this.onProjectTab}) : super(key: key) {
     _scrollController.addListener(() {
       final fabShown = fabKey.currentState?.isShown ?? false;
 
@@ -71,7 +74,10 @@ class HomeScreen extends StatelessWidget {
                   Padding(
                     key: projectsKey,
                     padding: const EdgeInsets.symmetric(vertical: 100),
-                    child: Projects(projects: dbServices.projects),
+                    child: Projects(
+                      projects: dbServices.projects,
+                      onProjectTab: onProjectTab,
+                    ),
                   ),
                   ContactPage(
                     key: contactKey,

@@ -14,6 +14,8 @@ class HomePage extends Page {
     return MaterialPageRoute(
       settings: this,
       builder: (context) => HomeScreen(
+        key: ValueKey('Home'),
+        onProjectTab: onProjectTab,
       ),
     );
   }

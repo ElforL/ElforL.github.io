@@ -7,8 +7,9 @@ import 'package:laith_shono/widgets/ProjectTile.dart';
 
 class Projects extends StatelessWidget {
   final List<Project>? projects;
+  final void Function(Project) onProjectTab;
 
-  const Projects({Key? key, required this.projects}) : super(key: key);
+  const Projects({Key? key, required this.projects, required this.onProjectTab}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +40,7 @@ class Projects extends StatelessWidget {
                 for (var project in projects!)
                   FittedBox(
                     child: ProjectTile(
+                      onProjectTab: onProjectTab,
                       project: project,
                     ),
                   ),
