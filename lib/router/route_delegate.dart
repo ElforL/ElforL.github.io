@@ -13,9 +13,12 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
   final GlobalKey<NavigatorState> _navigatorKey;
 
   ElforRouterDelegate(this.dbServices) : _navigatorKey = GlobalKey<NavigatorState>() {
+    heroController = HeroController();
     _init();
   }
 
+  /// Needed for hero widgets to work
+  late HeroController heroController;
   final FirestoreServices dbServices;
 
   bool _show404 = false;
@@ -74,6 +77,7 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     return Navigator(
       key: navigatorKey,
       pages: stack,
+      observers: [heroController],
       onPopPage: (route, result) {
         if (!route.didPop(result)) return false;
         if (_selectedProject != null) _selectedProject = null;

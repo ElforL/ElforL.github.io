@@ -27,9 +27,14 @@ class Landing extends StatelessWidget {
               // When the screen width is < 360 the name letters starts to wrap so a fitted box will keep
               // the name as one line but shrinks it as the screen gets smaller
               FittedBox(
-                child: Text(
-                  AppLocalizations.of(context)!.first_name,
-                  style: Theme.of(context).textTheme.headline1!.copyWith(color: Theme.of(context).colorScheme.primary),
+                child: Hero(
+                  key: ValueKey('Name'),
+                  tag: 'Name',
+                  child: Text(
+                    AppLocalizations.of(context)!.first_name,
+                    style:
+                        Theme.of(context).textTheme.headline1!.copyWith(color: Theme.of(context).colorScheme.primary),
+                  ),
                 ),
               ),
 
