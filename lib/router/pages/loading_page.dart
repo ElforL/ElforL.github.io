@@ -7,7 +7,8 @@ class LoadingPage extends Page {
   @override
   Route createRoute(BuildContext context) {
     return MaterialPageRoute(
-      builder: (context) => LoadingScreen(),
+      settings: this,
+      builder: (context) => LoadingScreen(key: ValueKey('loading')),
     );
   }
 }

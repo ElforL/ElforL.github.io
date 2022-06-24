@@ -7,7 +7,8 @@ class UnknownPage extends Page {
   @override
   Route createRoute(BuildContext context) {
     return MaterialPageRoute(
-      builder: (context) => PageNotFoundScreen(),
+      settings: this,
+      builder: (context) => PageNotFoundScreen(key: ValueKey('404')),
     );
   }
 }
