@@ -23,12 +23,32 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
 
   bool _show404 = false;
   bool _initiated = false;
+
+  /// This one is used for projects before db init
+  ///
+  /// if the app was on startup with a url to a project
+  /// [setNewRoutePath] would try to set [_selectedProject] but can't because
+  /// the projects aren't loaded yet, so it'll set it to null and if the project the user is looking for doesn't exist
+  /// then it's a 404.
+  ///
+  /// [_selectedProjectTitle] helps by keeping track of the title of the selected project.
+  /// in [_init] After [dbServices.load] is finished, it checks if [_selectedProjectTitle] is not null and looks for the project
+  String? _selectedProjectTitle;
   Project? _selectedProject;
 
   _init() async {
     await dbServices.load();
 
     initiated = dbServices.initiated;
+    if (_selectedProjectTitle != null) {
+      final project = getProjectOfTitle(_selectedProjectTitle!);
+      if (project != null) {
+        selectedProject = project;
+      } else {
+        show404 = true;
+        selectedProject = null;
+      }
+    }
   }
 
   set show404(bool value) {
@@ -53,7 +73,15 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
   }
 
   set selectedProject(Project? value) {
+    if (dbServices.initiated) {
+      if (value != null) {
+        show404 = !dbServices.projects.contains(value);
+      } else {
+        show404 = true;
+      }
+    }
     _selectedProject = value;
+    _selectedProjectTitle = value?.title;
     notifyListeners();
   }
 
@@ -127,10 +155,9 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
       show404 = false;
       selectedProject = null;
     } else if (configuration.isProjectPage) {
-      final tempProject = getProjectOfTitle(configuration.selectedProjectTitle!);
-
-      show404 = tempProject == null;
-      selectedProject = tempProject;
+      show404 = false;
+      selectedProject = getProjectOfTitle(configuration.selectedProjectTitle!);
+      _selectedProjectTitle = configuration.selectedProjectTitle;
     } else {
       debugPrint("Couldn't set a new route for config $configuration");
     }
