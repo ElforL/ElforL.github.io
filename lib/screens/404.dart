@@ -6,6 +6,7 @@ import 'package:laith_shono/services/misc.dart';
 class PageNotFoundScreen extends StatelessWidget {
   const PageNotFoundScreen({Key? key, required this.toHomePage}) : super(key: key);
 
+  /// Function to trigger when the 'Go Home' button is pressed.
   final void Function() toHomePage;
 
   @override

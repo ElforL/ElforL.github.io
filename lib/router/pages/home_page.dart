@@ -7,6 +7,7 @@ class HomePage extends Page {
     required this.onProjectTab,
   }) : super(key: ValueKey('Home'));
 
+  /// Function to trigger when a ProjectTile is pressed in the [HomeScreen]
   final void Function(Project) onProjectTab;
 
   @override

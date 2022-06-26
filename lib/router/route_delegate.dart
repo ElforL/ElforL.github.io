@@ -24,14 +24,14 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
   bool _show404 = false;
   bool _initiated = false;
 
-  /// This one is used for projects before db init
+  /// This one is used for a project selected before db init
   ///
   /// if the app was on startup with a url to a project
   /// [setNewRoutePath] would try to set [_selectedProject] but can't because
   /// the projects aren't loaded yet, so it'll set it to null and if the project the user is looking for doesn't exist
   /// then it's a 404.
   ///
-  /// [_selectedProjectTitle] helps by keeping track of the title of the selected project.
+  /// [_selectedProjectTitle] fixes this by keeping track of the title of the selected project.
   /// in [_init] After [dbServices.load] is finished, it checks if [_selectedProjectTitle] is not null and looks for the project
   String? _selectedProjectTitle;
   Project? _selectedProject;
@@ -40,6 +40,8 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     await dbServices.load();
 
     initiated = dbServices.initiated;
+
+    /// Read the documentation of [_selectedProjectTitle] to understand why this is here
     if (_selectedProjectTitle != null) {
       final project = getProjectOfTitle(_selectedProjectTitle!);
       if (project != null) {
@@ -93,6 +95,7 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     /// TODO Log current screen for Analytics
     /// use this 👇 to see if it should be in different place
     /// print('Building in delgate');
+    /// suggest creating a class for analytics that keeps track of current screen to prevent spam
 
     List<Page> stack;
     if (_show404) {

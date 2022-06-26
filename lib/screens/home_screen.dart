@@ -16,6 +16,7 @@ class HomeScreen extends StatelessWidget {
   final skillsKey = GlobalKey();
   final contactKey = GlobalKey();
 
+  /// Function to trigger when a ProjectTile is pressed.
   final void Function(Project) onProjectTab;
 
   final _scrollController = ScrollController();

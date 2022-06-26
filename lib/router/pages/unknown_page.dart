@@ -4,6 +4,7 @@ import 'package:laith_shono/screens/404.dart';
 class UnknownPage extends Page {
   UnknownPage(this.toHomePage) : super(key: ValueKey('404'));
 
+  /// Function to trigger when the 'Go Home' button is pressed in the 404 screen
   final void Function() toHomePage;
 
   @override
