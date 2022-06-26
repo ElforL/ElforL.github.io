@@ -3,52 +3,52 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "main.dart.js": "9e795a499c7eacdc2840d4b74588b2d1",
-"canvaskit/canvaskit.wasm": "4b83d89d9fecbea8ca46f2f760c5a9ba",
-"canvaskit/profiling/canvaskit.wasm": "95e736ab31147d1b2c7b25f11d4c32cd",
-"canvaskit/profiling/canvaskit.js": "ae2949af4efc61d28a4a80fffa1db900",
-"canvaskit/canvaskit.js": "c2b4e5f3d7a3d82aed024e7249a78487",
-"flutter.js": "0816e65a103ba8ba51b174eeeeb2cb67",
-"index.html": "dbbc4ced82e175986201fb15f3cfd113",
-"/": "dbbc4ced82e175986201fb15f3cfd113",
-"favicon.png": "cbf46b3fc0e80a6cd9c2ba0eab302150",
+  "favicon.png": "cbf46b3fc0e80a6cd9c2ba0eab302150",
+"canvaskit/canvaskit.js": "9d49083c3442cfc15366562eb578b5f3",
+"canvaskit/profiling/canvaskit.js": "dfb57a8542220c772374503baaf2632c",
+"canvaskit/profiling/canvaskit.wasm": "2c16ab2af3d4fbad52da379264e260e8",
+"canvaskit/canvaskit.wasm": "e58017ff67dd1419dbd7b720458fb1af",
+"index.html": "39d4bb63e7f9905e1271886b80f1aff1",
+"/": "39d4bb63e7f9905e1271886b80f1aff1",
+"flutter.js": "f85e6fb278b0fd20c349186fb46ae36d",
+"icons/Icon-512.png": "275e7ec50064b03e4cb9679248a98987",
+"icons/Icon-192.png": "9e413c6109b2473535624f3df27d70e1",
+"manifest.json": "e6d3e69d2cfffc866b0dd2b974aa7180",
 "version.json": "bbe2580d7a14b8d8bf4b57c7eaa39783",
+"assets/FontManifest.json": "c4bc5e13eb41846abc4ca8e4605d1bac",
+"assets/fonts/MaterialIcons-Regular.otf": "95db9098c58fd6db106f1116bae85a0b",
 "assets/AssetManifest.json": "5be218f0bc8f3057b5607dd9e6360c03",
-"assets/shaders/ink_sparkle.frag": "3e9b888fde77b75e86c9de5b770e1c7f",
-"assets/assets/undraw/undraw_lost.svg": "8d97381772459c95e6923fc6ac2b462c",
-"assets/assets/undraw/undraw_programming.svg": "b35d5fa1405ea8843f7832fa7d560185",
-"assets/assets/undraw/undraw_letter.svg": "c0692282a0659d7d68719345a37677cb",
-"assets/assets/undraw/undraw_maintenance.svg": "c7356df19d6bce69792e041697664c5a",
-"assets/assets/Figma-Wordmark-White.svg": "e7f628a67202e42b44d4cd1774b94db0",
-"assets/assets/firebase-logo-knockout.svg": "c5532066deaf1dd61407cf33aa7eeebf",
 "assets/assets/flutter_logo_lockup.svg": "2c6df60e6aef7243d8beacb4759afec8",
 "assets/assets/stackoverflow.svg": "3e9718d9819a4ce63c9a2883b48ea381",
-"assets/assets/linkedin-icon.svg": "84c7a50f79b32fc80e2e1d7a9052846f",
+"assets/assets/undraw/undraw_letter.svg": "c0692282a0659d7d68719345a37677cb",
+"assets/assets/undraw/undraw_programming.svg": "b35d5fa1405ea8843f7832fa7d560185",
+"assets/assets/undraw/undraw_lost.svg": "8d97381772459c95e6923fc6ac2b462c",
+"assets/assets/undraw/undraw_maintenance.svg": "c7356df19d6bce69792e041697664c5a",
 "assets/assets/github-icon.svg": "0255bf2cd6e42c2fdbe2e189e418929f",
-"assets/assets/checkout_logo.svg": "ed9aa535268e3f55d8d755b7e60ee3e7",
-"assets/assets/no_image.png": "1398d45824f598ab354fc69edfc90245",
-"assets/assets/fonts/Roboto-Black.ttf": "301fe70f8f0f41c236317504ec05f820",
-"assets/assets/fonts/Roboto-Thin.ttf": "4f0b85f5b601a405bdc7b23aad6d2a47",
 "assets/assets/fonts/Roboto-Regular.ttf": "f36638c2135b71e5a623dca52b611173",
-"assets/assets/fonts/Roboto-BlackItalic.ttf": "c470ca2b5b4f4437a3fe71b113a289a2",
+"assets/assets/fonts/Roboto-Black.ttf": "301fe70f8f0f41c236317504ec05f820",
+"assets/assets/fonts/Roboto-BoldItalic.ttf": "0be9fa8f2863998d1e52c84165976880",
 "assets/assets/fonts/Roboto-Light.ttf": "6090d256d88dcd7f0244eaa4a3eafbba",
+"assets/assets/fonts/Roboto-Thin.ttf": "4f0b85f5b601a405bdc7b23aad6d2a47",
 "assets/assets/fonts/Roboto-Medium.ttf": "b2d307df606f23cb14e6483039e2b7fa",
+"assets/assets/fonts/Roboto-BlackItalic.ttf": "c470ca2b5b4f4437a3fe71b113a289a2",
 "assets/assets/fonts/Roboto-Italic.ttf": "465d1affcd03e9c6096f3313a47e0bf5",
 "assets/assets/fonts/Roboto-ThinItalic.ttf": "7384da64612787e3662872e9d19cbc2d",
 "assets/assets/fonts/Roboto-LightItalic.ttf": "2ffc058ddedacfeaa23542026c8108e2",
 "assets/assets/fonts/Roboto-Bold.ttf": "9ece5b48963bbc96309220952cda38aa",
 "assets/assets/fonts/Roboto-MediumItalic.ttf": "cabdb4a12e5de710afde298809306937",
-"assets/assets/fonts/Roboto-BoldItalic.ttf": "0be9fa8f2863998d1e52c84165976880",
-"assets/assets/store_badges/google-play(en).png": "db9b21a1c41f3dcd9731e1e7acfdbb57",
+"assets/assets/firebase-logo-knockout.svg": "c5532066deaf1dd61407cf33aa7eeebf",
+"assets/assets/no_image.png": "1398d45824f598ab354fc69edfc90245",
+"assets/assets/checkout_logo.svg": "ed9aa535268e3f55d8d755b7e60ee3e7",
 "assets/assets/store_badges/google-play(ar).png": "b12899a8422470a7f53d1c98afd84cf1",
-"assets/assets/store_badges/app-store(ar).svg": "2ba9eaacbc12c5def06d2459c08675a1",
 "assets/assets/store_badges/app-store(en).svg": "0f3514a45d51f95167e5fe8b6a03bb60",
-"assets/NOTICES": "8c190e0c9ec7c58b63a131b3e0e45165",
-"assets/FontManifest.json": "c4bc5e13eb41846abc4ca8e4605d1bac",
-"assets/fonts/MaterialIcons-Regular.otf": "95db9098c58fd6db106f1116bae85a0b",
-"manifest.json": "e6d3e69d2cfffc866b0dd2b974aa7180",
-"icons/Icon-512.png": "275e7ec50064b03e4cb9679248a98987",
-"icons/Icon-192.png": "9e413c6109b2473535624f3df27d70e1"
+"assets/assets/store_badges/app-store(ar).svg": "2ba9eaacbc12c5def06d2459c08675a1",
+"assets/assets/store_badges/google-play(en).png": "db9b21a1c41f3dcd9731e1e7acfdbb57",
+"assets/assets/linkedin-icon.svg": "84c7a50f79b32fc80e2e1d7a9052846f",
+"assets/assets/Figma-Wordmark-White.svg": "e7f628a67202e42b44d4cd1774b94db0",
+"assets/shaders/ink_sparkle.frag": "ec5746840d4d3d2b9a011034790919c3",
+"assets/NOTICES": "e810d46c533870c7dbd06489f43d344d",
+"main.dart.js": "b4c13dc9a5ef0bca13930de06767b29d"
 };
 
 // The application shell files that are downloaded before a service worker can
@@ -154,9 +154,11 @@ self.addEventListener("fetch", (event) => {
     .then((cache) =>  {
       return cache.match(event.request).then((response) => {
         // Either respond with the cached resource, or perform a fetch and
-        // lazily populate the cache.
+        // lazily populate the cache only if the resource was successfully fetched.
         return response || fetch(event.request).then((response) => {
-          cache.put(event.request, response.clone());
+          if (response && Boolean(response.ok)) {
+            cache.put(event.request, response.clone());
+          }
           return response;
         });
       })
