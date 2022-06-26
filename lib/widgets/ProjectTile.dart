@@ -4,12 +4,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:laith_shono/models/Project.dart';
-import 'package:laith_shono/screens/project_screen.dart';
 
 class ProjectTile extends StatefulWidget {
   final Project project;
 
-  const ProjectTile({Key? key, required this.project}) : super(key: key);
+  final void Function(Project) onProjectTab;
+
+  const ProjectTile({Key? key, required this.project, required this.onProjectTab}) : super(key: key);
   @override
   _ProjectTileState createState() => _ProjectTileState();
 }
@@ -51,7 +52,7 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
           borderRadius: borderRadius,
           child: InkWell(
             borderRadius: borderRadius,
-            onTap: navigateToProjectScreen,
+            onTap: _tab,
             child: Stack(
               children: [
                 AnimatedBuilder(
@@ -79,7 +80,7 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
                     child: isShowing
                         ? Center(
                             child: ElevatedButton(
-                              onPressed: navigateToProjectScreen,
+                              onPressed: _tab,
                               child: Text(
                                 AppLocalizations.of(context)!.view_project.toUpperCase(),
                               ),
@@ -96,21 +97,15 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
     );
   }
 
-  void navigateToProjectScreen() async {
-    await FirebaseAnalytics.instance.logEvent(
+  void _tab() async {
+    FirebaseAnalytics.instance.logEvent(
       name: 'project_clicked',
       parameters: {
         'project_title': widget.project.title,
       },
     );
 
-    await FirebaseAnalytics.instance.logScreenView(screenName: 'Project: ${widget.project.title}');
-    await Navigator.of(context).pushNamed(
-      ProjectScreen.routeName,
-      arguments: widget.project,
-    );
-    // Assuming project tiles only appear on home page, set the name back to 'Laith Shono'
-    await FirebaseAnalytics.instance.logScreenView(screenName: 'Laith Shono');
+    widget.onProjectTab(widget.project);
   }
 
   _toggleShow([event]) {

@@ -4,7 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:laith_shono/services/misc.dart';
 
 class PageNotFoundScreen extends StatelessWidget {
-  const PageNotFoundScreen({Key? key}) : super(key: key);
+  const PageNotFoundScreen({Key? key, required this.toHomePage}) : super(key: key);
+
+  /// Function to trigger when the 'Go Home' button is pressed.
+  final void Function() toHomePage;
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +65,7 @@ class PageNotFoundScreen extends StatelessWidget {
                       SizedBox(height: 20),
                       OutlinedButton(
                         child: Text(AppLocalizations.of(context)!.go_home.toUpperCase()),
-                        onPressed: () {
-                          Navigator.popUntil(context, ModalRoute.withName('/'));
-                        },
+                        onPressed: toHomePage,
                       ),
                     ],
                   ),

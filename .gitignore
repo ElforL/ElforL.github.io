@@ -31,6 +31,8 @@
 .pub/
 build/
 
+# Firebase
+saved-data/
 
 # Web related
 

@@ -8,6 +8,8 @@ class FirestoreServices {
   List<Project> projects = [];
   Map<String, dynamic>? urls;
 
+  bool initiated = false;
+
   // OCD
   String? get stackOverflowURL => urls?['stackOverflow'];
   String? get linkedInURL => urls?['LinkedIn'];
@@ -15,10 +17,12 @@ class FirestoreServices {
   String? get gitHubURL => urls?['github'];
   String? get cvURL => urls?['cv'];
 
-  load([bool? signInAnonymously]) async {
+  Future<void> load([bool? signInAnonymously]) async {
+    if (initiated) return;
     if (signInAnonymously ?? true) await FirebaseAuth.instance.signInAnonymously();
     await _loadProjects();
     await loadUrls();
+    initiated = true;
   }
 
   /// sorts the projects keeping the full apps at the start
