@@ -80,7 +80,7 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
       observers: [heroController],
       onPopPage: (route, result) {
         if (!route.didPop(result)) return false;
-        if (_selectedProject != null) _selectedProject = null;
+        if (_selectedProject != null) selectedProject = null;
         return true;
       },
     );
