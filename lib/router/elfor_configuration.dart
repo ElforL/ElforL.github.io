@@ -1,5 +1,3 @@
-import 'package:laith_shono/models/Project.dart';
-
 class ElforConfiguration {
   final bool show404;
   final bool initiated;
@@ -20,4 +18,19 @@ class ElforConfiguration {
   bool get isLoading => !show404 && !initiated;
   bool get isHome => !show404 && initiated && selectedProjectTitle == null;
   bool get isProjectPage => !show404 && initiated && selectedProjectTitle != null;
+
+  @override
+  String toString() {
+    if (isUnknown) {
+      return 'ElforConfiguration(Unknown page)';
+    } else if (isLoading) {
+      return 'ElforConfiguration(Loading page)';
+    } else if (isHome) {
+      return 'ElforConfiguration(Home page)';
+    } else if (isProjectPage) {
+      return 'ElforConfiguration(Project page: $selectedProjectTitle)';
+    } else {
+      return 'ElforConfiguration(Unknown-state > 404:$show404, initiated:$initiated, selectedProjectTitle:$selectedProjectTitle)';
+    }
+  }
 }
