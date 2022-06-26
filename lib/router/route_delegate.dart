@@ -7,6 +7,7 @@ import 'pages/home_page.dart';
 import 'pages/loading_page.dart';
 import 'pages/project_page.dart';
 import 'pages/unknown_page.dart';
+import 'pages/error_page.dart';
 
 class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
@@ -23,6 +24,7 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
 
   bool _show404 = false;
   bool _initiated = false;
+  bool _show502 = false;
 
   /// This one is used for a project selected before db init
   ///
@@ -37,19 +39,24 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
   Project? _selectedProject;
 
   _init() async {
-    await dbServices.load();
+    try {
+      await dbServices.load();
 
-    initiated = dbServices.initiated;
+      initiated = dbServices.initiated;
 
-    /// Read the documentation of [_selectedProjectTitle] to understand why this is here
-    if (_selectedProjectTitle != null) {
-      final project = getProjectOfTitle(_selectedProjectTitle!);
-      if (project != null) {
-        selectedProject = project;
-      } else {
-        show404 = true;
-        selectedProject = null;
+      /// Read the documentation of [_selectedProjectTitle] to understand why this is here
+      if (_selectedProjectTitle != null) {
+        final project = getProjectOfTitle(_selectedProjectTitle!);
+        if (project != null) {
+          selectedProject = project;
+        } else {
+          show404 = true;
+          selectedProject = null;
+        }
       }
+    } catch (e) {
+      _show502 = true;
+      notifyListeners();
     }
   }
 
@@ -98,7 +105,10 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     /// suggest creating a class for analytics that keeps track of current screen to prevent spam
 
     List<Page> stack;
-    if (_show404) {
+
+    if (_show502) {
+      stack = _errorStack;
+    } else if (_show404) {
       stack = _unknownStack;
     } else if (!_initiated) {
       stack = _loadingStack;
@@ -134,6 +144,8 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
       if (_selectedProject != null) ProjectPage(project: _selectedProject!)
     ];
   }
+
+  List<Page> get _errorStack => [ErrorPage()];
 
   @override
   ElforConfiguration? get currentConfiguration {
