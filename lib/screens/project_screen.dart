@@ -16,7 +16,7 @@ import 'package:laith_shono/widgets/socials_wrap.dart';
 
 // ignore: must_be_immutable
 class ProjectScreen extends StatelessWidget {
-  static const routeName = '/project';
+  static const routeName = 'project';
 
   ProjectScreen({
     Key? key,

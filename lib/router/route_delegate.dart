@@ -100,8 +100,43 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
   }
 
   @override
+  ElforConfiguration? get currentConfiguration {
+    if (!_initiated) {
+      return ElforConfiguration.loading();
+    } else if (_show404) {
+      return ElforConfiguration.unknown();
+    } else if (_selectedProject == null) {
+      return ElforConfiguration.home();
+    } else if (_selectedProject != null) {
+      return ElforConfiguration.project(_selectedProject!.title);
+    } else {
+      return null;
+    }
+  }
+
+  @override
   Future<void> setNewRoutePath(configuration) async {
-    // TODO: implement setNewRoutePath
+    if (configuration.isUnknown) {
+      show404 = true;
+    } else if (configuration.isHome) {
+      show404 = false;
+      selectedProject = null;
+    } else if (configuration.isProjectPage) {
+      final tempProject = getProjectOfTitle(configuration.selectedProjectTitle!);
+
+      show404 = tempProject == null;
+      selectedProject = tempProject;
+    } else {
+      debugPrint("Couldn't set a new route for config $configuration");
+    }
+  }
+
+  Project? getProjectOfTitle(String title) {
+    try {
+      return dbServices.projects.firstWhere((element) => element.title == title);
+    } on StateError catch (_) {
+      return null;
+    }
   }
 
   _clear() {

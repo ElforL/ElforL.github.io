@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:laith_shono/router/elfor_parser.dart';
 import 'package:laith_shono/router/route_delegate.dart';
 import 'package:laith_shono/services/firestore.dart';
 
@@ -40,16 +41,18 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late ElforRouterDelegate routerDelegate;
+  late ElforInformationParser elforParser;
 
   @override
   void initState() {
     routerDelegate = ElforRouterDelegate(dbServices);
+    elforParser = ElforInformationParser();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Laith Shono',
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -76,9 +79,8 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
-      home: Router(
-        routerDelegate: routerDelegate,
-      ),
+      routerDelegate: routerDelegate,
+      routeInformationParser: elforParser,
     );
   }
 }
