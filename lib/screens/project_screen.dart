@@ -2,10 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:laith_shono/main.dart';
 import 'package:laith_shono/models/Project.dart';
 import 'package:laith_shono/models/project_block.dart';
-import 'package:laith_shono/screens/404.dart';
 import 'package:laith_shono/widgets/project_screen_blocks/banner_block.dart';
 import 'package:laith_shono/widgets/project_screen_blocks/full_width_image_block.dart';
 import 'package:laith_shono/widgets/project_screen_blocks/head_block.dart';
@@ -20,70 +18,50 @@ class ProjectScreen extends StatelessWidget {
 
   ProjectScreen({
     Key? key,
-    this.project,
-    String? projectTitle,
-  })  : projectName = projectTitle ?? (project?.title ?? ''),
-        super(key: key);
+    required this.project,
+  }) : super(key: key);
 
-  Project? project;
-  final String? projectName;
+  Project project;
 
   @override
   Widget build(BuildContext context) {
-    assert(project != null || projectName != null);
+    final blocksList = project.screenBlocks;
+    List<ProjectBlock> blocks = [];
 
-    Future<Project?> future;
-    if (project == null) {
-      future = dbServices.getProject(projectName!);
-    } else {
-      future = Future.value(project);
+    for (var blockJson in blocksList) {
+      final block = ProjectBlock.fromJson(blockJson);
+      blocks.add(block);
     }
 
-    return Scaffold(
-      body: FutureBuilder(
-          future: future,
-          builder: (context, AsyncSnapshot<Project?> snapshot) {
-            if (snapshot.connectionState != ConnectionState.done) {
-              return Center(child: CircularProgressIndicator());
-            }
-
-            project = snapshot.data;
-
-            final blocksList = project!.screenBlocks;
-            List<ProjectBlock> blocks = [];
-
-            for (var blockJson in blocksList) {
-              final block = ProjectBlock.fromJson(blockJson);
-              blocks.add(block);
-            }
-
-            // ListView is more efficient but since the children are of different sizes the scroll
-            // bar keeps changing in size as the user scrolls (due to widgets being constantly built/unbuilt)
-            return Stack(
-              children: [
-                SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      for (var block in blocks) _buildBlockWidget(context, block),
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                        alignment: AlignmentDirectional.topEnd,
-                        child: SizedBox(
-                          height: 30,
-                          child: FittedBox(
-                            child: SocialsWrap(),
-                          ),
-                        ),
-                      )
-                    ],
+    // ListView is more efficient but since the children are of different sizes the scroll
+    // bar keeps changing in size as the user scrolls (due to widgets being constantly built/unbuilt)
+    final child = Stack(
+      children: [
+        SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (var block in blocks) _buildBlockWidget(context, block),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                alignment: AlignmentDirectional.topEnd,
+                child: SizedBox(
+                  height: 30,
+                  child: FittedBox(
+                    child: SocialsWrap(),
                   ),
                 ),
-                _buildTopBar(context),
-              ],
-            );
-          }),
+              )
+            ],
+          ),
+        ),
+        _buildTopBar(context),
+      ],
+    );
+
+    return Scaffold(
+      body: child,
     );
   }
 
