@@ -49,10 +49,6 @@ class ProjectScreen extends StatelessWidget {
 
             project = snapshot.data;
 
-            if (project == null) {
-              return PageNotFoundScreen();
-            }
-
             final blocksList = project!.screenBlocks;
             List<ProjectBlock> blocks = [];
 

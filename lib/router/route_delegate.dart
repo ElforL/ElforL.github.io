@@ -86,7 +86,12 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     );
   }
 
-  List<Page> get _unknownStack => [UnknownPage()];
+  List<Page> get _unknownStack => [
+        UnknownPage(() {
+          show404 = false;
+          selectedProject = null;
+        })
+      ];
 
   List<Page> get _loadingStack => [LoadingPage()];
 
