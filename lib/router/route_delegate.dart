@@ -47,12 +47,9 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
       /// Read the documentation of [_selectedProjectTitle] to understand why this is here
       if (_selectedProjectTitle != null) {
         final project = getProjectOfTitle(_selectedProjectTitle!);
-        if (project != null) {
-          selectedProject = project;
-        } else {
-          show404 = true;
-          selectedProject = null;
-        }
+
+        show404 = project == null;
+        selectedProject = project;
       }
     } catch (e) {
       _show502 = true;
@@ -82,13 +79,10 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
   }
 
   set selectedProject(Project? value) {
-    if (dbServices.initiated) {
-      if (value != null) {
-        show404 = !dbServices.projects.contains(value);
-      } else {
-        show404 = true;
-      }
+    if (value != null && dbServices.initiated) {
+      show404 = !dbServices.projects.contains(value);
     }
+
     _selectedProject = value;
     _selectedProjectTitle = value?.title;
     notifyListeners();
@@ -170,9 +164,14 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
       show404 = false;
       selectedProject = null;
     } else if (configuration.isProjectPage) {
-      show404 = false;
-      selectedProject = getProjectOfTitle(configuration.selectedProjectTitle!);
-      _selectedProjectTitle = configuration.selectedProjectTitle;
+      var project = getProjectOfTitle(configuration.selectedProjectTitle!);
+      if (dbServices.initiated) {
+        selectedProject = project;
+        show404 = project == null;
+      } else {
+        show404 = false;
+        _selectedProjectTitle = configuration.selectedProjectTitle;
+      }
     } else {
       debugPrint("Couldn't set a new route for config $configuration");
     }
