@@ -149,12 +149,7 @@ abstract class ProjectBlock {
     final String typeString = json['type'];
     ProjectBlockType? type;
 
-    for (var item in ProjectBlockType.values) {
-      if (item.toShortString() == typeString) {
-        type = item;
-        break;
-      }
-    }
+    type = getBlockType(typeString);
 
     if (type == null) throw ArgumentError('Invalid type: $typeString');
 
@@ -177,6 +172,17 @@ abstract class ProjectBlock {
       case ProjectBlockType.imageOverhang:
         return ImageOverhangProjectBlock(json['content']);
     }
+  }
+
+  static ProjectBlockType? getBlockType(String typeString) {
+    ProjectBlockType? output;
+    for (var item in ProjectBlockType.values) {
+      if (item.toShortString() == typeString) {
+        output = item;
+        break;
+      }
+    }
+    return output;
   }
 }
 
