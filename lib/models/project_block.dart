@@ -198,9 +198,9 @@ class HeadProjectBlock extends ProjectBlock {
   HeadProjectBlock(Map<String, dynamic> content) : super(ProjectBlockType.head, content);
 
   int get year => content[_yearMapKey];
-  String title(String langCode) => content[_titleMapKey][langCode];
-  String smallDescribtion(String langCode) => content[_smallDescriptionMapKey][langCode];
-  String longDescribtion(String langCode) => content[_longDescriptionMapKey][langCode];
+  String title(String langCode) => getValueWithLocale(content[_titleMapKey], langCode);
+  String smallDescribtion(String langCode) => getValueWithLocale(content[_smallDescriptionMapKey], langCode);
+  String longDescribtion(String langCode) => getValueWithLocale(content[_longDescriptionMapKey], langCode);
 
   List<String> deliverables(String langCode) {
     List<String> output = [];
@@ -208,7 +208,7 @@ class HeadProjectBlock extends ProjectBlock {
 
     for (var item in list) {
       try {
-        output.add(item[langCode]);
+        output.add(getValueWithLocale(item, langCode));
       } catch (e) {
         try {
           output.add((item as Map).values.first);
@@ -238,7 +238,7 @@ class HeadProjectBlock extends ProjectBlock {
     for (var button in btnsList) {
       try {
         output.add({
-          'text': button[langCode],
+          'text': getValueWithLocale(button, langCode),
           'url': button['url'],
         });
       } catch (e) {
@@ -273,8 +273,8 @@ class FullWidthImageProjectBlock extends ProjectBlock {
 class BannerProjectBlock extends ProjectBlock {
   BannerProjectBlock(Map<String, dynamic> content) : super(ProjectBlockType.banner, content);
 
-  String headline(String langCode) => content['headline'][langCode];
-  String text(String langCode) => content['text'][langCode];
+  String headline(String langCode) => getValueWithLocale(content['headline'], langCode);
+  String text(String langCode) => getValueWithLocale(content['text'], langCode);
 }
 
 class ImageWithPaddingProjectBlock extends ProjectBlock {
@@ -286,14 +286,14 @@ class ImageWithPaddingProjectBlock extends ProjectBlock {
 class HeadlineProjectBlock extends ProjectBlock {
   HeadlineProjectBlock(Map<String, dynamic> content) : super(ProjectBlockType.headline, content);
 
-  String text(String langCode) => content[langCode];
+  String text(String langCode) => getValueWithLocale(content, langCode);
 }
 
 class ImageOverhangProjectBlock extends ProjectBlock {
   ImageOverhangProjectBlock(Map<String, dynamic> content) : super(ProjectBlockType.imageOverhang, content);
 
-  String headline(String langCode) => content['text']['headline'][langCode];
-  String text(String langCode) => content['text']['text'][langCode];
+  String headline(String langCode) => getValueWithLocale(content['text']['headline'], langCode);
+  String text(String langCode) => getValueWithLocale(content['text']['text'], langCode);
 
   String get imageUrl => content['image']['url'];
   double get imageOverhandPercentage => content['image']['overhang_percentage'];
@@ -332,4 +332,8 @@ extension EnumToShortString on Enum {
   String toShortString() {
     return toString().split('.').last;
   }
+}
+
+getValueWithLocale(dynamic container, String langCode, [String? defaultLangCode = 'en']) {
+  return container[langCode] ?? container[defaultLangCode];
 }
