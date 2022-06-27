@@ -13,7 +13,7 @@ class Landing extends StatelessWidget {
       constraints: BoxConstraints(minHeight: height),
       width: width,
       child: Align(
-        alignment: Alignment.centerLeft,
+        alignment: AlignmentDirectional.centerStart,
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
