@@ -68,6 +68,14 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
                             : CachedNetworkImage(
                                 imageUrl: widget.project.imagePath!,
                                 fit: BoxFit.cover,
+                                progressIndicatorBuilder: (context, url, progress) {
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      value: progress.progress,
+                                      color: Colors.white,
+                                    ),
+                                  );
+                                },
                               ),
                       ),
                     );
