@@ -43,9 +43,22 @@ class TopBar extends StatelessWidget {
           _linkedInBtn(context),
           _gitHubBtn(context),
           Spacer(),
+          _localeButton(context),
           ..._navButton(context),
         ],
       ),
+    );
+  }
+
+  Widget _localeButton(BuildContext context) {
+    final isEnglish = AppLocalizations.of(context)!.localeName == 'en';
+    return IconButton(
+      icon: Icon(Icons.translate_rounded),
+      tooltip: isEnglish ? AppLocalizations.of(context)!.ar : AppLocalizations.of(context)!.en,
+      onPressed: () {
+        var newLang = isEnglish ? 'ar' : 'en';
+        MyApp.of(context)?.currentLocale = Locale(newLang);
+      },
     );
   }
 
