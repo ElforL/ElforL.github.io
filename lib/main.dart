@@ -47,11 +47,10 @@ class _MyAppState extends State<MyApp> {
   late ElforRouterDelegate routerDelegate;
   late ElforInformationParser elforParser;
 
-  late Locale _currentLocale;
+  Locale _currentLocale = Locale('en');
 
   @override
   void initState() {
-    currentLocale = window.locale;
     routerDelegate = ElforRouterDelegate(dbServices);
     elforParser = ElforInformationParser();
     super.initState();
