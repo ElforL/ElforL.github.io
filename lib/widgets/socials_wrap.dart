@@ -33,8 +33,6 @@ class SocialsWrap extends StatelessWidget {
         final githubURL = dbServices.gitHubURL;
         final stackOFURL = dbServices.stackOverflowURL;
         final linkedInURL = dbServices.linkedInURL;
-        final cvURL = dbServices.cvURL;
-        final _showCV = cvURL != null;
 
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
