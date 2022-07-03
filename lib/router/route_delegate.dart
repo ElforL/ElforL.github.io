@@ -18,6 +18,9 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     _init();
   }
 
+  @override
+  GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
+
   /// Needed for hero widgets to work
   late HeroController heroController;
   final FirestoreServices dbServices;
@@ -37,25 +40,6 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
   /// in [_init] After [dbServices.load] is finished, it checks if [_selectedProjectTitle] is not null and looks for the project
   String? _selectedProjectTitle;
   Project? _selectedProject;
-
-  _init() async {
-    try {
-      await dbServices.load();
-
-      initiated = dbServices.initiated;
-
-      /// Read the documentation of [_selectedProjectTitle] to understand why this is here
-      if (_selectedProjectTitle != null) {
-        final project = getProjectOfTitle(_selectedProjectTitle!);
-
-        show404 = project == null;
-        selectedProject = project;
-      }
-    } catch (e) {
-      _show502 = true;
-      notifyListeners();
-    }
-  }
 
   set show404(bool value) {
     _show404 = value;
@@ -88,8 +72,24 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     notifyListeners();
   }
 
-  @override
-  GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
+  _init() async {
+    try {
+      await dbServices.load();
+
+      initiated = dbServices.initiated;
+
+      /// Read the documentation of [_selectedProjectTitle] to understand why this is here
+      if (_selectedProjectTitle != null) {
+        final project = getProjectOfTitle(_selectedProjectTitle!);
+
+        show404 = project == null;
+        selectedProject = project;
+      }
+    } catch (e) {
+      _show502 = true;
+      notifyListeners();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
