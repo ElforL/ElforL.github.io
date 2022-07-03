@@ -2,17 +2,20 @@ class ElforConfiguration {
   final bool show404;
   final bool initiated;
   final String? selectedProjectTitle;
+  final String? langCode;
 
   ElforConfiguration(
     this.show404,
     this.initiated,
-    this.selectedProjectTitle,
-  );
+    this.selectedProjectTitle, [
+    this.langCode,
+  ]);
 
-  factory ElforConfiguration.loading() => ElforConfiguration(false, false, null);
-  factory ElforConfiguration.home() => ElforConfiguration(false, true, null);
-  factory ElforConfiguration.project(String projectTitle) => ElforConfiguration(false, true, projectTitle);
-  factory ElforConfiguration.unknown() => ElforConfiguration(true, true, null);
+  factory ElforConfiguration.loading([String? langCode]) => ElforConfiguration(false, false, null, langCode);
+  factory ElforConfiguration.home([String? langCode]) => ElforConfiguration(false, true, null, langCode);
+  factory ElforConfiguration.project(String projectTitle, [String? langCode]) =>
+      ElforConfiguration(false, true, projectTitle, langCode);
+  factory ElforConfiguration.unknown([String? langCode]) => ElforConfiguration(true, true, null, langCode);
 
   bool get isUnknown => show404;
   bool get isLoading => !show404 && !initiated;

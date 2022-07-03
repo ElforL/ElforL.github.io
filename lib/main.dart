@@ -49,17 +49,37 @@ class _MyAppState extends State<MyApp> {
 
   Locale _currentLocale = Locale('en');
 
+  late void Function() routerListener;
+
+  set currentLocale(Locale locale) {
+    if (AppLocalizations.supportedLocales.contains(locale)) {
+      if (locale != _currentLocale)
+        setState(() {
+          _currentLocale = locale;
+          routerDelegate.langCode = _currentLocale.languageCode;
+        });
+    } else {
+      debugPrint('Unsupported locale: $locale');
+    }
+  }
+
   @override
   void initState() {
     routerDelegate = ElforRouterDelegate(dbServices);
     elforParser = ElforInformationParser();
+
+    routerListener = () {
+      currentLocale = Locale(routerDelegate.langCode ?? 'en');
+    };
+    routerDelegate.addListener(routerListener);
     super.initState();
   }
 
-  set currentLocale(Locale locale) {
-    setState(() {
-      _currentLocale = locale;
-    });
+  @override
+  void dispose() {
+    routerDelegate.removeListener(routerListener);
+    routerDelegate.dispose();
+    super.dispose();
   }
 
   @override

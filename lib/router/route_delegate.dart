@@ -41,6 +41,16 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
   String? _selectedProjectTitle;
   Project? _selectedProject;
 
+  String? _localeLangCode;
+
+  String? get langCode => _localeLangCode;
+
+  set langCode(String? newLang) {
+    _localeLangCode = newLang;
+
+    notifyListeners();
+  }
+
   set show404(bool value) {
     _show404 = value;
     if (value) {
@@ -144,13 +154,13 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
   @override
   ElforConfiguration? get currentConfiguration {
     if (!_initiated) {
-      return ElforConfiguration.loading();
+      return ElforConfiguration.loading(langCode);
     } else if (_show404) {
-      return ElforConfiguration.unknown();
+      return ElforConfiguration.unknown(langCode);
     } else if (_selectedProject == null) {
-      return ElforConfiguration.home();
+      return ElforConfiguration.home(langCode);
     } else if (_selectedProject != null) {
-      return ElforConfiguration.project(_selectedProject!.title);
+      return ElforConfiguration.project(_selectedProject!.title, langCode);
     } else {
       return null;
     }
@@ -158,6 +168,8 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
 
   @override
   Future<void> setNewRoutePath(configuration) async {
+    langCode = configuration.langCode;
+
     if (configuration.isUnknown) {
       show404 = true;
     } else if (configuration.isHome) {
