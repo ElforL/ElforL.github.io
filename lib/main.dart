@@ -10,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laith_shono/router/elfor_parser.dart';
 import 'package:laith_shono/router/route_delegate.dart';
+import 'package:laith_shono/services/analytics_services.dart';
 import 'package:laith_shono/services/firestore.dart';
 
 import 'firebase_options.dart';
@@ -23,7 +24,7 @@ void main() async {
 
   if (!kReleaseMode) {
     try {
-      await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(false);
+      await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
 
       String host = !kIsWeb && Platform.isAndroid ? '10.0.2.2' : 'localhost';
 
@@ -45,6 +46,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late ElforRouterDelegate routerDelegate;
   late ElforInformationParser elforParser;
+  final AnalyticsServices analyticsServices = AnalyticsServices();
 
   Locale _currentLocale = Locale('en');
 
@@ -64,7 +66,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    routerDelegate = ElforRouterDelegate(dbServices);
+    routerDelegate = ElforRouterDelegate(dbServices, analyticsServices);
     elforParser = ElforInformationParser();
 
     routerListener = () {

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:laith_shono/models/Project.dart';
+import 'package:laith_shono/services/analytics_services.dart';
 import 'package:laith_shono/services/firestore.dart';
 
 import 'elfor_configuration.dart';
@@ -13,7 +14,7 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
   final GlobalKey<NavigatorState> _navigatorKey;
 
-  ElforRouterDelegate(this.dbServices) : _navigatorKey = GlobalKey<NavigatorState>() {
+  ElforRouterDelegate(this.dbServices, this.analyticsServices) : _navigatorKey = GlobalKey<NavigatorState>() {
     heroController = HeroController();
     _init();
   }
@@ -24,6 +25,7 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
   /// Needed for hero widgets to work
   late HeroController heroController;
   final FirestoreServices dbServices;
+  final AnalyticsServices analyticsServices;
 
   bool _show404 = false;
   bool _initiated = false;
@@ -103,11 +105,6 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
 
   @override
   Widget build(BuildContext context) {
-    /// TODO Log current screen for Analytics
-    /// use this 👇 to see if it should be in different place
-    /// print('Building in delgate');
-    /// suggest creating a class for analytics that keeps track of current screen to prevent spam
-
     List<Page> stack;
 
     if (_show502) {
@@ -119,6 +116,9 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     } else {
       stack = _initiatedStack;
     }
+
+    analyticsServices.updatePage(stack.last);
+
     return Navigator(
       key: navigatorKey,
       pages: stack,
