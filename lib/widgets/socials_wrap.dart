@@ -9,7 +9,7 @@ import 'package:laith_shono/services/misc.dart';
 class SocialsWrap extends StatelessWidget {
   SocialsWrap({Key? key}) : super(key: key);
 
-  static const double _splashRadius = 0.001;
+  static const double _splashRadius = 25;
 
   @override
   Widget build(BuildContext context) {
