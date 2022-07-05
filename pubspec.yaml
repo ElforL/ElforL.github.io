@@ -2,7 +2,7 @@ name: laith_shono
 description: Laith Shono. Software developer based in Riyadh
 
 publish_to: 'none' 
-version: 3.3.0+11
+version: 3.4.0+12
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
