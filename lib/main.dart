@@ -24,7 +24,7 @@ void main() async {
 
   if (!kReleaseMode) {
     try {
-      await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
+      await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(false);
 
       String host = !kIsWeb && Platform.isAndroid ? '10.0.2.2' : 'localhost';
 
