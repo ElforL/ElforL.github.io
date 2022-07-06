@@ -14,6 +14,9 @@ class ElforInformationParser extends RouteInformationParser<ElforConfiguration> 
         AppLocalizations.supportedLocales.any((locale) => locale.languageCode == segments.first)) {
       langCode = segments.first;
       segments.removeAt(0);
+
+      // Fixes #18
+      if (segments.first.isEmpty) segments.removeAt(0);
     }
 
     if (segments.isEmpty) {
