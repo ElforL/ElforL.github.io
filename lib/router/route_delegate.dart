@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:laith_shono/models/Project.dart';
+import 'package:laith_shono/services/analytics_services.dart';
 import 'package:laith_shono/services/firestore.dart';
 
 import 'elfor_configuration.dart';
@@ -13,14 +14,18 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
   final GlobalKey<NavigatorState> _navigatorKey;
 
-  ElforRouterDelegate(this.dbServices) : _navigatorKey = GlobalKey<NavigatorState>() {
+  ElforRouterDelegate(this.dbServices, this.analyticsServices) : _navigatorKey = GlobalKey<NavigatorState>() {
     heroController = HeroController();
     _init();
   }
 
+  @override
+  GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
+
   /// Needed for hero widgets to work
   late HeroController heroController;
   final FirestoreServices dbServices;
+  final AnalyticsServices analyticsServices;
 
   bool _show404 = false;
   bool _initiated = false;
@@ -38,23 +43,14 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
   String? _selectedProjectTitle;
   Project? _selectedProject;
 
-  _init() async {
-    try {
-      await dbServices.load();
+  String? _localeLangCode;
 
-      initiated = dbServices.initiated;
+  String? get langCode => _localeLangCode;
 
-      /// Read the documentation of [_selectedProjectTitle] to understand why this is here
-      if (_selectedProjectTitle != null) {
-        final project = getProjectOfTitle(_selectedProjectTitle!);
+  set langCode(String? newLang) {
+    _localeLangCode = newLang;
 
-        show404 = project == null;
-        selectedProject = project;
-      }
-    } catch (e) {
-      _show502 = true;
-      notifyListeners();
-    }
+    notifyListeners();
   }
 
   set show404(bool value) {
@@ -88,16 +84,27 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     notifyListeners();
   }
 
-  @override
-  GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
+  _init() async {
+    try {
+      await dbServices.load();
+
+      initiated = dbServices.initiated;
+
+      /// Read the documentation of [_selectedProjectTitle] to understand why this is here
+      if (_selectedProjectTitle != null) {
+        final project = getProjectOfTitle(_selectedProjectTitle!);
+
+        show404 = project == null;
+        selectedProject = project;
+      }
+    } catch (e) {
+      _show502 = true;
+      notifyListeners();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    /// TODO Log current screen for Analytics
-    /// use this 👇 to see if it should be in different place
-    /// print('Building in delgate');
-    /// suggest creating a class for analytics that keeps track of current screen to prevent spam
-
     List<Page> stack;
 
     if (_show502) {
@@ -109,6 +116,9 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     } else {
       stack = _initiatedStack;
     }
+
+    analyticsServices.updatePage(stack.last);
+
     return Navigator(
       key: navigatorKey,
       pages: stack,
@@ -144,13 +154,13 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
   @override
   ElforConfiguration? get currentConfiguration {
     if (!_initiated) {
-      return ElforConfiguration.loading();
+      return ElforConfiguration.loading(langCode);
     } else if (_show404) {
-      return ElforConfiguration.unknown();
+      return ElforConfiguration.unknown(langCode);
     } else if (_selectedProject == null) {
-      return ElforConfiguration.home();
+      return ElforConfiguration.home(langCode);
     } else if (_selectedProject != null) {
-      return ElforConfiguration.project(_selectedProject!.title);
+      return ElforConfiguration.project(_selectedProject!.title, langCode);
     } else {
       return null;
     }
@@ -158,6 +168,8 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
 
   @override
   Future<void> setNewRoutePath(configuration) async {
+    langCode = configuration.langCode;
+
     if (configuration.isUnknown) {
       show404 = true;
     } else if (configuration.isHome) {

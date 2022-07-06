@@ -1,8 +1,8 @@
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 Future<bool> launchURL(String url) async {
-  if (await canLaunch(url)) {
-    return launch(url);
+  if (await canLaunchUrlString(url)) {
+    return launchUrlString(url);
   } else {
     throw 'Could not launch $url';
   }

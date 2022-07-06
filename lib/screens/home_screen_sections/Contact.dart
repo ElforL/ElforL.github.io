@@ -97,6 +97,14 @@ class _ContactFormState extends State<ContactForm> {
   }
 
   @override
+  void dispose() {
+    _emailController.dispose();
+    _subjectController.dispose();
+    _messageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
@@ -104,6 +112,7 @@ class _ContactFormState extends State<ContactForm> {
         children: [
           // EMAIL
           TextFormField(
+            textDirection: TextDirection.ltr,
             controller: _emailController,
             decoration: _decoration.copyWith(labelText: AppLocalizations.of(context)!.email_address),
             validator: (value) {

@@ -9,7 +9,7 @@ import 'package:laith_shono/services/misc.dart';
 class SocialsWrap extends StatelessWidget {
   SocialsWrap({Key? key}) : super(key: key);
 
-  static const double _splashRadius = 0.001;
+  static const double _splashRadius = 25;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +33,6 @@ class SocialsWrap extends StatelessWidget {
         final githubURL = dbServices.gitHubURL;
         final stackOFURL = dbServices.stackOverflowURL;
         final linkedInURL = dbServices.linkedInURL;
-        final cvURL = dbServices.cvURL;
-        final _showCV = cvURL != null;
 
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,

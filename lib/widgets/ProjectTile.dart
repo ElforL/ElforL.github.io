@@ -53,6 +53,9 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
           child: InkWell(
             borderRadius: borderRadius,
             onTap: _tab,
+            onFocusChange: (value) {
+              _toggleShow(null, value);
+            },
             child: Stack(
               children: [
                 AnimatedBuilder(
@@ -68,6 +71,14 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
                             : CachedNetworkImage(
                                 imageUrl: widget.project.imagePath!,
                                 fit: BoxFit.cover,
+                                progressIndicatorBuilder: (context, url, progress) {
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      value: progress.progress,
+                                      color: Colors.white,
+                                    ),
+                                  );
+                                },
                               ),
                       ),
                     );
@@ -108,7 +119,7 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
     widget.onProjectTab(widget.project);
   }
 
-  _toggleShow([event]) {
+  _toggleShow([event, bool? newValue]) {
     setState(() {
       if (event is PointerEnterEvent) {
         isShowing = true;
@@ -117,7 +128,7 @@ class _ProjectTileState extends State<ProjectTile> with TickerProviderStateMixin
         isShowing = false;
         _animationController.reverse(from: 1);
       } else {
-        isShowing = !isShowing;
+        isShowing = newValue ?? !isShowing;
         if (isShowing)
           _animationController.forward();
         else
