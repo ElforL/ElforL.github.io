@@ -23,7 +23,6 @@ class AnalyticsServices {
     }
 
     if (screenName != null) {
-      debugPrint('Updating analytics screen...');
       await FirebaseAnalytics.instance.logScreenView(screenName: screenName);
       currentPage = page;
     }
