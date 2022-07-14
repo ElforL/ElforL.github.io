@@ -10,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laith_shono/router/elfor_parser.dart';
 import 'package:laith_shono/router/route_delegate.dart';
+import 'package:laith_shono/router/scroll_section.dart';
 import 'package:laith_shono/services/analytics_services.dart';
 import 'package:laith_shono/services/firestore.dart';
 
@@ -47,6 +48,12 @@ class _MyAppState extends State<MyApp> {
   late ElforRouterDelegate routerDelegate;
   late ElforInformationParser elforParser;
   final AnalyticsServices analyticsServices = AnalyticsServices();
+  final ValueNotifier<ScrollSection> scrollSectionNotifier = ValueNotifier(
+    ScrollSection(
+      selectedSection: HomeSection.landing,
+      selectionSource: SelectionSource.fromScroll,
+    ),
+  );
 
   Locale _currentLocale = Locale('en');
 
@@ -66,7 +73,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    routerDelegate = ElforRouterDelegate(dbServices, analyticsServices);
+    routerDelegate = ElforRouterDelegate(
+      dbServices,
+      analyticsServices,
+      scrollSectionNotifier,
+    );
     elforParser = ElforInformationParser();
 
     routerListener = () {

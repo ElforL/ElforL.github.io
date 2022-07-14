@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:laith_shono/main.dart';
+import 'package:laith_shono/router/scroll_section.dart';
 import 'package:laith_shono/services/misc.dart';
 
 class TopBar extends StatelessWidget {
@@ -10,11 +11,13 @@ class TopBar extends StatelessWidget {
     Key? key,
     required this.topBarButtons,
     required this.scrollDuration,
+    required this.scrollSectionNotifier,
   }) : super(key: key);
 
+  final ValueNotifier<ScrollSection> scrollSectionNotifier;
   final Duration scrollDuration;
 
-  final Map<String, GlobalKey> topBarButtons;
+  final Map<HomeSection, GlobalKey> topBarButtons;
   final githubPageURL = dbServices.gitHubURL;
   final linkedInURL = dbServices.linkedInURL;
 
@@ -68,25 +71,32 @@ class TopBar extends StatelessWidget {
         for (var i = 0; i < topBarButtons.length; i++)
           TopBarNavButton(
             child: Text(
-              topBarButtons.keys.elementAt(i).toString().toUpperCase(),
+              _getTextFromHomeSection(context, topBarButtons.keys.elementAt(i)),
               style: Theme.of(context).textTheme.button?.copyWith(
                     fontWeight: FontWeight.w500,
                     letterSpacing: 1.25,
                   ),
             ),
-            onPressed: () {
-              if (topBarButtons.entries.elementAt(i).value.currentContext != null)
-                Scrollable.ensureVisible(
-                  topBarButtons.entries.elementAt(i).value.currentContext!,
-                  duration: scrollDuration,
-                );
-            },
+            onPressed: () => setSection(i),
           )
       ];
     } else {
       return [
         _mobileIconButton(context),
       ];
+    }
+  }
+
+  String _getTextFromHomeSection(BuildContext context, HomeSection section) {
+    switch (section) {
+      case HomeSection.skills:
+        return AppLocalizations.of(context)!.skills.toUpperCase();
+      case HomeSection.projects:
+        return AppLocalizations.of(context)!.projects.toUpperCase();
+      case HomeSection.contact:
+        return AppLocalizations.of(context)!.contact.toUpperCase();
+      case HomeSection.landing:
+        return '⬆';
     }
   }
 
@@ -115,18 +125,14 @@ class TopBar extends StatelessWidget {
                       title: Center(
                         child: FittedBox(
                           child: Text(
-                            topBarButtons.keys.elementAt(i),
+                            _getTextFromHomeSection(context, topBarButtons.keys.elementAt(i)),
                             style: Theme.of(context).textTheme.subtitle1!.apply(color: Colors.black),
                           ),
                         ),
                       ),
                       onTap: () {
                         Navigator.pop(context);
-                        if (topBarButtons.entries.elementAt(i).value.currentContext != null)
-                          Scrollable.ensureVisible(
-                            topBarButtons.entries.elementAt(i).value.currentContext!,
-                            duration: scrollDuration,
-                          );
+                        setSection(i);
                       },
                     )
                 ],
@@ -136,6 +142,15 @@ class TopBar extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<void> setSection(int i) async {
+    if (topBarButtons.entries.elementAt(i).value.currentContext != null) {
+      scrollSectionNotifier.value = ScrollSection(
+        selectedSection: topBarButtons.keys.elementAt(i),
+        selectionSource: SelectionSource.userClick,
+      );
+    }
   }
 
   IconButton _gitHubBtn(BuildContext context) {

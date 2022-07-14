@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:laith_shono/models/Project.dart';
+import 'package:laith_shono/router/scroll_section.dart';
 import 'package:laith_shono/services/analytics_services.dart';
 import 'package:laith_shono/services/firestore.dart';
 
@@ -14,7 +15,11 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
   final GlobalKey<NavigatorState> _navigatorKey;
 
-  ElforRouterDelegate(this.dbServices, this.analyticsServices) : _navigatorKey = GlobalKey<NavigatorState>() {
+  ElforRouterDelegate(
+    this.dbServices,
+    this.analyticsServices,
+    this.scrollSectionNotifier,
+  ) : _navigatorKey = GlobalKey<NavigatorState>() {
     heroController = HeroController();
     _init();
   }
@@ -30,6 +35,8 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
   bool _show404 = false;
   bool _initiated = false;
   bool _show502 = false;
+
+  ValueNotifier<ScrollSection> scrollSectionNotifier;
 
   /// This one is used for a project selected before db init
   ///
@@ -144,6 +151,7 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     return [
       HomePage(
         onProjectTab: (Project project) => selectedProject = project,
+        scrollSectionNotifier: scrollSectionNotifier,
       ),
       if (_selectedProject != null) ProjectPage(project: _selectedProject!)
     ];
