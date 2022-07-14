@@ -1,21 +1,26 @@
+import 'package:laith_shono/router/scroll_section.dart';
+
 class ElforConfiguration {
   final bool show404;
   final bool initiated;
   final String? selectedProjectTitle;
   final String? langCode;
+  final ScrollSection? scrollSection;
 
   ElforConfiguration(
     this.show404,
     this.initiated,
-    this.selectedProjectTitle, [
+    this.selectedProjectTitle,
+    this.scrollSection, [
     this.langCode,
   ]);
 
-  factory ElforConfiguration.loading([String? langCode]) => ElforConfiguration(false, false, null, langCode);
-  factory ElforConfiguration.home([String? langCode]) => ElforConfiguration(false, true, null, langCode);
+  factory ElforConfiguration.loading([String? langCode]) => ElforConfiguration(false, false, null, null, langCode);
+  factory ElforConfiguration.home(ScrollSection scrollSection, [String? langCode]) =>
+      ElforConfiguration(false, true, null, scrollSection, langCode);
   factory ElforConfiguration.project(String projectTitle, [String? langCode]) =>
-      ElforConfiguration(false, true, projectTitle, langCode);
-  factory ElforConfiguration.unknown([String? langCode]) => ElforConfiguration(true, true, null, langCode);
+      ElforConfiguration(false, true, projectTitle, null, langCode);
+  factory ElforConfiguration.unknown([String? langCode]) => ElforConfiguration(true, true, null, null, langCode);
 
   bool get isUnknown => show404;
   bool get isLoading => !show404 && !initiated;

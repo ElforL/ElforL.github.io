@@ -15,13 +15,24 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
   final GlobalKey<NavigatorState> _navigatorKey;
 
+  late void Function() scrollListener;
+
   ElforRouterDelegate(
     this.dbServices,
     this.analyticsServices,
     this.scrollSectionNotifier,
   ) : _navigatorKey = GlobalKey<NavigatorState>() {
     heroController = HeroController();
+    scrollSectionNotifier.addListener(scrollListener = () {
+      notifyListeners();
+    });
     _init();
+  }
+
+  @override
+  void dispose() {
+    scrollSectionNotifier.removeListener(scrollListener);
+    super.dispose();
   }
 
   @override
@@ -166,7 +177,7 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     } else if (_show404) {
       return ElforConfiguration.unknown(langCode);
     } else if (_selectedProject == null) {
-      return ElforConfiguration.home(langCode);
+      return ElforConfiguration.home(scrollSectionNotifier.value, langCode);
     } else if (_selectedProject != null) {
       return ElforConfiguration.project(_selectedProject!.title, langCode);
     } else {
@@ -183,6 +194,7 @@ class ElforRouterDelegate extends RouterDelegate<ElforConfiguration>
     } else if (configuration.isHome) {
       show404 = false;
       selectedProject = null;
+      scrollSectionNotifier.value = configuration.scrollSection!;
     } else if (configuration.isProjectPage) {
       var project = getProjectOfTitle(configuration.selectedProjectTitle!);
       if (dbServices.initiated) {
